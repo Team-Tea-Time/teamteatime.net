@@ -1,10 +1,10 @@
-@extends(Config::get('core.default'))
+@extends('layouts.default')
 
 @section('title')
 Edit {{ $post->title }}
 @stop
 
-@section('top')
+@section('splash')
 <h1>Edit <em>{{ $post->title }}</em></h1>
 @stop
 
