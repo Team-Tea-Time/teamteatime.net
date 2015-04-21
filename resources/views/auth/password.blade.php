@@ -1,4 +1,10 @@
-@extends('app')
+@extends('layouts.default')
+
+@section('title', "Reset password")
+
+@section('splash')
+<h1>Reset your password</h1>
+@stop
 
 @section('content')
 <div class="container-fluid">

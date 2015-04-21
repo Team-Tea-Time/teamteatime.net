@@ -1,4 +1,10 @@
-@extends('app')
+@extends('layouts.default')
+
+@section('title', "Sign up")
+
+@section('splash')
+<h1>Sign up</h1>
+@stop
 
 @section('content')
 <div class="container-fluid">

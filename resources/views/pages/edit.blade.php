@@ -1,11 +1,10 @@
-@extends(Config::get('core.default'))
+@extends('layouts.default')
 
-@section('title')
-Edit {{ $page->title }}
-@stop
+@section('title', "Edit {$page->title}")
 
-@section('top')
-<h1>Edit <em>{{ $page->title }}</em></h1>
+@section('splash')
+<h1>{{ $page->title }}</h1>
+<span>You're editing this page</span>
 @stop
 
 @section('content')
@@ -22,14 +21,8 @@ Edit {{ $page->title }}
         'button' => 'Save Page',
         'defaults' => [
             'title' => $page->title,
-            'nav_title' => $page->nav_title,
             'slug' => $page->slug,
-            'icon' => $page->icon,
-            'body' => $page->body,
-            'css' => $page->css,
-            'js' => $page->js,
-            'show_title' => ($page->show_title == true),
-            'show_nav' => ($page->show_nav == true),
+            'content' => $page->content
     ], ];
     ?>
     @include('pages.form')
@@ -37,20 +30,5 @@ Edit {{ $page->title }}
 @stop
 
 @section('bottom')
-@auth('edit')
     @include('pages.delete')
-@endauth
-@stop
-
-@section('css')
-{!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css') !!}
-@stop
-
-@section('js')
-{!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js') !!}
-<script type="text/javascript">
-$(document).ready(function () {
-    $(".make-switch").bootstrapSwitch();
-});
-</script>
 @stop

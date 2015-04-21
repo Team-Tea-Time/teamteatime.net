@@ -1,0 +1,21 @@
+{
+  "name": "teamteatime.net",
+  "version": "0.0.0",
+  "authors": [
+    "Rick Mann <hello@ricko.me>"
+  ],
+  "license": "MIT",
+  "homepage": "http://teamteatime.net/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4",
+    "bootswatch-sass": "~3.3.1",
+    "bootstrap-markdown": "~2.8.0"
+  }
+}

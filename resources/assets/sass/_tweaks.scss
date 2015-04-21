@@ -1,0 +1,22 @@
+.modal-backdrop {
+    z-index: 1030;
+}
+
+#wrap {
+    .btn {
+        border: none;
+        font-weight: 800;
+    }
+
+    .btn-success {
+        background-image: -webkit-radial-gradient(circle, #61d0b6 80%, #5ec9ac 81%);
+        background-image: -o-radial-gradient(circle, #61d0b6 80%, #5ec9ac 81%);
+        background-image: radial-gradient(circle, #61d0b6 80%, #5ec9ac 81%);
+    }
+
+    #splash .container .page-header {
+        margin: 0;
+        padding: 0;
+        border-bottom: none;
+    }
+}

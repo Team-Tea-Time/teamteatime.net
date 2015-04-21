@@ -1,10 +1,10 @@
-@extends(Config::get('core.default'))
+@extends('layouts.default')
 
 @section('title')
 Create Post
 @stop
 
-@section('top')
+@section('splash')
 <h1>Create Post</h1>
 @stop
 

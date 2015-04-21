@@ -1,10 +1,10 @@
-@extends(Config::get('core.default'))
+@extends('layouts.default')
 
 @section('title')
 Create Page
 @stop
 
-@section('top')
+@section('splash')
 <h1>Create Page</h1>
 @stop
 
@@ -16,14 +16,8 @@ Create Page
         'button' => 'Create New Page',
         'defaults' => [
             'title' => '',
-            'nav_title' => '',
             'slug' => '',
-            'icon' => '',
-            'body' => '',
-            'css' => '',
-            'js' => '',
-            'show_title' => true,
-            'show_nav' => true,
+            'content' => ''
     ], ];
     ?>
     @include('pages.form')
