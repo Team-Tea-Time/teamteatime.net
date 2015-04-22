@@ -2,7 +2,6 @@
 
 use App;
 use App\Http\Controllers\Controller;
-use App\Repositories\Pages;
 use Auth;
 use Input;
 use Redirect;
@@ -14,6 +13,7 @@ class PageController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->repository = App::make('App\Repositories\Pages');
     }
 
     /*
@@ -22,9 +22,16 @@ class PageController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function _list()
+    {
+        $pages = $this->repository->get(['sorted' => false]);
+
+        return View::make('pages.list', ['pages' => $pages]);
+    }
+
     public function index()
     {
-        $page = Pages::findBySlug(config('pages.default'));
+        $page = $this->repository->findBySlug(config('pages.default'));
 
         return View::make('pages.show', ['page' => $page]);
     }
@@ -38,22 +45,21 @@ class PageController extends Controller
     {
         $input = array_merge($this->getInput(), ['user_id' => Auth::user()->id]);
 
-        $page = Pages::create($input);
+        $page = $this->repository->create($input);
 
-        return Redirect::route('pages.show', ['pages' => $page->slug])
-            ->with('success', 'Your page has been created successfully.');
+        return Redirect::to($page->route)->with('success', 'Your page has been created successfully.');
     }
 
     public function show($slug)
     {
-        $page = Pages::findBySlug($slug);
+        $page = $this->repository->findBySlug($slug);
 
         return View::make('pages.show', ['page' => $page]);
     }
 
     public function edit($id)
     {
-        $page = Pages::find($id);
+        $page = $this->repository->find($id);
 
         return View::make('pages.edit', ['page' => $page]);
     }
@@ -62,17 +68,16 @@ class PageController extends Controller
     {
         $input = $this->getInput();
 
-        $page = Pages::find($id);
+        $page = $this->repository->find($id);
         $page->fill($input);
         $page->save();
 
-        return Redirect::route('pages.show', ['slug' => $page->slug])
-            ->with('success', 'Your page has been updated successfully.');
+        return Redirect::to($page->route)->with('success', 'Your page has been updated successfully.');
     }
 
     public function destroy($id)
     {
-        $page = Pages::find($id);
+        $page = $this->repository->find($id);
         $page->delete();
 
         return Redirect::to('/')->with('success', 'Your page has been deleted successfully.');
@@ -87,9 +92,9 @@ class PageController extends Controller
     protected function getInput()
     {
         return [
-            'title'      => Input::get('title'),
-            'slug'       => Input::get('slug'),
-            'content'    => Input::get('content')
+            'title'     => Input::get('title'),
+            'slug'      => Input::get('slug'),
+            'content'   => Input::get('content')
         ];
     }
 

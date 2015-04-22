@@ -8,7 +8,6 @@ body {
     height: auto !important;
     height: 100%;
     margin: 0 auto -60px;
-    font-size: 1.5rem;
 }
 
 #body {
@@ -27,6 +26,7 @@ body {
         font-size: 2rem;
         color: #fff;
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        text-align: center;
 
         .container {
             position: relative;

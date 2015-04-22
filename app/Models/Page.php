@@ -11,4 +11,14 @@ class Page extends Eloquent
 
     protected $fillable = ['user_id', 'title', 'slug', 'content'];
 
+    public function getRouteAttribute()
+    {
+        return route('pages.show', ['slug' => $this->slug]);
+    }
+
+    public function getEditRouteAttribute()
+    {
+        return route('pages.edit', ['pages' => $this->id]);
+    }
+
 }

@@ -11,23 +11,16 @@ Create Post
 @section('content')
 <div class="well">
     <?php
-    $form = ['url' => URL::route('blog.posts.store'),
+    $form = ['url' => URL::route('blog.post.store'),
         'method' => 'POST',
         'button' => 'Create New Post',
         'defaults' => [
             'title' => '',
             'summary' => '',
             'body' => '',
+            'tags' => ''
     ], ];
     ?>
-    @include('posts.form')
+    @include('blog.form')
 </div>
-@stop
-
-@section('css')
-{!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/css/bootstrap-markdown.min.css') !!}
-@stop
-
-@section('js')
-{!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js') !!}
 @stop
