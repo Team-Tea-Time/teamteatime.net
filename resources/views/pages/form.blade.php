@@ -26,6 +26,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
             <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> {!! $form['button'] !!}</button>
+            <a href="/pages" class="btn btn-default pull-right">Cancel</a>
         </div>
     </div>
 {!! Form::close() !!}

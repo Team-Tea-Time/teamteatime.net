@@ -10,12 +10,12 @@ $router->controllers([
 $router->get('/', ['as' => 'index', 'uses' => 'PageController@index']);
 
 // Blog
-$router->get('blog', ['as' => 'blog', function () {
-    return Redirect::route('blog.posts.index');
-}]);
-$router->resource('blog/post', 'BlogPostController');
-$router->get('blog/{year}/{id}-{slug}', ['as' => 'blog.posts.show', 'uses' => 'BlogPostController@show']);
+$router->resource('blog/post', 'BlogController');
+$router->get('blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
+$router->get('blog/posts', ['as' => 'blog.list', 'uses' => 'BlogController@_list']);
+$router->get('blog/{year}/{id}-{slug}', ['as' => 'blog.post.show', 'uses' => 'BlogController@show']);
 
 // Pages
 $router->resource('pages', 'PageController');
+$router->get('pages', ['as' => 'pages.list', 'uses' => 'PageController@_list']);
 $router->get('{slug}', ['as' => 'pages.show', 'uses' => 'PageController@show'])->where('slug', '(.*)');

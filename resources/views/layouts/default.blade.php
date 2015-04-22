@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>@yield('title')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title') - TeamTeaTime</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
     <script src="{{ elixir('js/all.js') }}"></script>
@@ -38,6 +39,8 @@
                                         {{ Auth::user()->email }} <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a href="/pages"><i class="fa fa-files-o fa-fw"></i> Pages</li>
+                                        <li><a href="/blog/posts"><i class="fa fa-font fa-fw"></i> Blog Posts</li>
                                         <li class="divider"></li>
                                         <li>
                                             <a href="{!! URL::to('auth/logout') !!}">
@@ -65,8 +68,6 @@
             @include('partials.notifications')
             @section('content')
             @show
-            @section('bottom')
-            @show
             </div>
         </div>
         <div id="footer">
@@ -81,6 +82,8 @@
             </div>
         </div>
     </div>
+    @section('bottom')
+    @show
     <script>
     $(document).ready(function() {
         $('#main-nav li a').each(function() {
@@ -90,19 +93,21 @@
             }
         });
 
-        $('[data-method]').not(".disabled").append(function() {
-            var methodForm = "\n"
-            methodForm += "<form action='" + $(this).attr('href') + "' method='POST' style='display:none'>\n"
-            methodForm += " <input type='hidden' name='_method' value='" + $(this).attr('data-method') + "'>\n"
+        $('[data-method]:not(.disabled)').on('click', function(event) {
+            var data = {
+                _method: $(this).attr('data-method')
+            };
+
             if ($(this).attr('data-token')) {
-                methodForm += "<input type='hidden' name='_token' value='" + $(this).attr('data-token') + "'>\n"
+                data._token = $(this).attr('data-token');
             }
-            methodForm += "</form>\n"
-            return methodForm
-        })
-        .removeAttr('href')
-        .on('click', function() {
-            $(this).find("form").submit();
+
+            $.post($(this).attr('href'), data)
+            .done(function(data) {
+                window.location.replace($(this).attr('href'));
+            });
+
+            event.preventDefault();
         });
     });
     </script>

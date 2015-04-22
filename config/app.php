@@ -145,6 +145,8 @@ return [
         'App\Providers\ConfigServiceProvider',
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
+        'Conner\Tagging\TaggingServiceProvider',
+        'GrahamCampbell\Markdown\MarkdownServiceProvider',
 
     ],
 
@@ -174,7 +176,7 @@ return [
         'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
         'Event'     => 'Illuminate\Support\Facades\Event',
         'File'      => 'Illuminate\Support\Facades\File',
-        'Form'		=> 'Illuminate\Html\FormFacade', 
+        'Form'		=> 'Illuminate\Html\FormFacade',
         'Hash'      => 'Illuminate\Support\Facades\Hash',
         'HTML'		=> 'Illuminate\Html\HtmlFacade',
         'Input'     => 'Illuminate\Support\Facades\Input',
@@ -182,6 +184,7 @@ return [
         'Lang'      => 'Illuminate\Support\Facades\Lang',
         'Log'       => 'Illuminate\Support\Facades\Log',
         'Mail'      => 'Illuminate\Support\Facades\Mail',
+        'Markdown'  => 'GrahamCampbell\Markdown\Facades\Markdown',
         'Password'  => 'Illuminate\Support\Facades\Password',
         'Queue'     => 'Illuminate\Support\Facades\Queue',
         'Redirect'  => 'Illuminate\Support\Facades\Redirect',
