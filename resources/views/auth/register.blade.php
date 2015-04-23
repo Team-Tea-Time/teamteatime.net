@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+@if(config('auth.registration.enabled'))
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -68,4 +69,7 @@
 		</div>
 	</div>
 </div>
+@else
+<div class="alert alert-danger text-center">Registration is currently disabled.</div>
+@endif
 @endsection
