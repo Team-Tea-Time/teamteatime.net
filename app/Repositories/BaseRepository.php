@@ -28,7 +28,7 @@ class BaseRepository
     {
         $options += [
             'newest_first'  => true,
-            'sorted'        => true,
+            'sorted'        => false,
             'paginated'     => true
         ];
 
@@ -44,10 +44,10 @@ class BaseRepository
 
         if ( $options['paginated'] )
         {
-            $this->model = $this->model->paginate( $this->pageLimit );
+            return $this->model->paginate( $this->pageLimit );
         }
 
-        return $this->model;
+        return $this->model->get();
     }
 
     public function has( $relationship )
@@ -59,6 +59,25 @@ class BaseRepository
     public function where( $column, $operator, $value )
     {
         $this->model = $this->model->where( $column, $operator, $value );
+        return $this;
+    }
+
+    public function withTags( $tags, $all = false )
+    {
+        if ( !is_array( $tags ) )
+        {
+            $tags = [ $tags ];
+        }
+
+        if ( $all )
+        {
+            $this->model = $this->model->withAllTags( $tags );
+        }
+        else
+        {
+            $this->model = $this->model->withAnyTag( $tags );
+        }
+
         return $this;
     }
 
@@ -98,9 +117,9 @@ class BaseRepository
         return $this->model;
     }
 
-    public function check404($page)
+    public function check404($model)
     {
-        if (is_null($page))
+        if (is_null($model))
         {
             App::abort(404, 'Page Not Found');
         }

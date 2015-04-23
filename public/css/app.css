@@ -1879,9 +1879,9 @@ hr {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.1;
-  color: #444; }
+  color: #50be99; }
   h1 small, h1 .small, h2 small, h2 .small, h3 small, h3 .small, h4 small, h4 .small, h5 small, h5 .small, h6 small, h6 .small, .h1 small, .h1 .small, .h2 small, .h2 .small, .h3 small, .h3 .small, .h4 small, .h4 .small, .h5 small, .h5 .small, .h6 small, .h6 .small {
     font-weight: normal;
     line-height: 1;
@@ -7671,6 +7671,9 @@ select, select.form-control {
   border-bottom: none; }
 #wrap #body {
   font-size: 1.7rem; }
+
+.middle {
+  vertical-align: middle; }
 
 html, body {
   height: 100%; }
