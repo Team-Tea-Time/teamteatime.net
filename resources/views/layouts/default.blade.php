@@ -73,7 +73,12 @@
         <div id="footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 text-right">
+                    <div class="col-xs-8">
+                        <p class="text-muted credit">
+                            Built on <a href="http://laravel.com/">Laravel 5</a> with inspiration from <a href="https://github.com/BootstrapCMS/CMS">BootstrapCMS</a>
+                        </p>
+                    </div>
+                    <div class="col-xs-4 text-right">
                         <p class="text-muted credit">
                             Generated in {{ round((microtime(1) - LARAVEL_START), 4) }} sec.
                         </p>
