@@ -22,10 +22,11 @@
         <hr>
     @endif
 
-    @if($post->tagNames())
+    @if($post->tagged)
     <p class="text-center">
-        @foreach($post->tagNames() as $tag)
-        <span class="label label-default">{{ $tag }}</span>
+        <i class="fa fa-tags fa-fw middle text-muted"></i>
+        @foreach($post->tagged as $tag)
+        <a href="{{ URL::route('blog.tag.index', ['tag' => $tag->tag_slug]) }}" class="label label-primary">{{ $tag->tag_name }}</a>
         @endforeach
     </p>
     @endif

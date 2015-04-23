@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Pages')
+@section('title', 'Blog Posts')
 
 @section('splash')
 <h1><i class="fa fa-font fa-fw"></i> Blog Posts</h1>

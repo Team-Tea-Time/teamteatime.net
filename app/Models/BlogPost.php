@@ -2,6 +2,7 @@
 
 use App\Libraries\Utils;
 use App\Models\Traits\Ago as AgoTrait;
+use App\Models\Traits\Archivable as ArchivableTrait;
 use App\Models\Traits\Ownable as OwnableTrait;
 use App\Models\Traits\Taggable as TaggableTrait;
 use Eloquent;
@@ -10,7 +11,7 @@ use Markdown;
 class BlogPost extends Eloquent
 {
 
-    use AgoTrait, OwnableTrait, TaggableTrait;
+    use AgoTrait, ArchivableTrait, OwnableTrait, TaggableTrait;
 
     protected $fillable = ['user_id', 'title', 'body'];
 

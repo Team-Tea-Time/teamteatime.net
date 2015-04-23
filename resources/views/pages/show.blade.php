@@ -5,7 +5,12 @@
 @section('splash')
 <h1>{{ $page->title }}</h1>
 @if(Auth::check())
-<span><strong>Created by {!! $page->owner->name !!}</strong> {!! $page->createdAgo !!}. Last updated {!! $page->createdAgo !!}.</span>
+<span>
+    <strong>Created by {!! $page->owner->name !!}</strong> {!! $page->createdAgo !!}.
+    @if($page->created_at != $page->updated_at)
+    Last updated {!! $page->updatedAgo !!}.
+    @endif
+</span>
 @endif
 @stop
 
