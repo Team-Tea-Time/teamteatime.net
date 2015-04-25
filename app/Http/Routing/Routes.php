@@ -10,6 +10,7 @@ $router->controllers([
 $router->get('/', ['as' => 'index', 'uses' => 'PageController@index']);
 
 // Blog
+$router->model('post', 'App\Models\BlogPost');
 $router->resource('blog/post', 'BlogController');
 $router->get('blog/posts', ['as' => 'blog.list', 'uses' => 'BlogController@_list']);
 $router->get('blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
@@ -18,6 +19,7 @@ $router->get('blog/archive/{year}/{month?}', ['as' => 'blog.archive.index', 'use
 $router->get('blog/{year}/{id}-{slug}', ['as' => 'blog.post.show', 'uses' => 'BlogController@show']);
 
 // Pages
+$router->model('pages', 'App\Models\Page');
 $router->resource('pages', 'PageController');
 $router->get('pages', ['as' => 'pages.list', 'uses' => 'PageController@_list']);
 $router->get('{slug}', ['as' => 'pages.show', 'uses' => 'PageController@show'])->where('slug', '(.*)');

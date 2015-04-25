@@ -2,6 +2,7 @@
 
 use App;
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Auth;
 use Input;
 use Redirect;
@@ -57,30 +58,25 @@ class PageController extends Controller
         return View::make('pages.show', ['page' => $page]);
     }
 
-    public function edit($id)
+    public function edit(Page $page)
     {
-        $page = $this->repository->find($id);
-
         return View::make('pages.edit', ['page' => $page]);
     }
 
-    public function update($id)
+    public function update(Page $page)
     {
         $input = $this->getInput();
-
-        $page = $this->repository->find($id);
         $page->fill($input);
         $page->save();
 
         return Redirect::to($page->route)->with('success', 'Your page has been updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        $page = $this->repository->find($id);
         $page->delete();
 
-        return Redirect::to('/')->with('success', 'Your page has been deleted successfully.');
+        return Redirect::to('pages')->with('success', 'Your page has been deleted successfully.');
     }
 
     /*

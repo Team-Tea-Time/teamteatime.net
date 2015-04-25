@@ -22,5 +22,8 @@
     "to-markdown": "~0.0.3",
     "bootstrap-tagsinput": "~0.4.2",
     "bootstrap3-typeahead": "~3.1.1"
+  },
+  "resolutions": {
+    "bootstrap-sass-official": "~3.2.0"
   }
 }

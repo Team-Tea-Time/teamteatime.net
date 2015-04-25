@@ -99,18 +99,10 @@
         });
 
         $('[data-method]:not(.disabled)').on('click', function(event) {
-            var data = {
-                _method: $(this).attr('data-method')
-            };
-
-            if ($(this).attr('data-token')) {
-                data._token = $(this).attr('data-token');
-            }
-
-            $.post($(this).attr('href'), data)
-            .done(function(data) {
-                window.location.replace($(this).attr('href'));
-            });
+            $('<form action="' + $(this).data('route') + '" method="POST">' +
+            '<input type="hidden" name="_method" value="' + $(this).data('method') + '">' +
+            '<input type="hidden" name="_token" value="{!! Session::getToken() !!}"' +
+            '</form>').submit();
 
             event.preventDefault();
         });
