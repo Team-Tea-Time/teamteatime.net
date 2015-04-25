@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-<div class="col-md-8 col-md-offset-2">
+<div id="blog-post" class="col-md-8 col-md-offset-2">
     @if(Auth::check())
         <div class="text-right">
             <a class="btn btn-info" href="{{ $post->editRoute }}"><i class="fa fa-pencil-square-o"></i> Edit Post</a>
@@ -31,10 +31,12 @@
     </p>
     @endif
 
-    {!! $post->bodyParsed !!}
+    <div class="body">
+        {!! $post->bodyParsed !!}
+    </div>
 
     <hr>
-    
+
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES * * */
