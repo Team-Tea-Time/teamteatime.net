@@ -39,8 +39,8 @@
                                         {{ Auth::user()->email }} <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/pages"><i class="fa fa-files-o fa-fw"></i> Pages</li>
-                                        <li><a href="/blog/posts"><i class="fa fa-font fa-fw"></i> Blog Posts</li>
+                                        <li><a href="/pages"><i class="fa fa-files-o fa-fw"></i> Pages</a></li>
+                                        <li><a href="/blog/posts"><i class="fa fa-font fa-fw"></i> Blog Posts</a></li>
                                         <li class="divider"></li>
                                         <li>
                                             <a href="{!! URL::to('auth/logout') !!}">
