@@ -140,6 +140,7 @@ return [
         /*
          * Application Service Providers...
          */
+        'Barryvdh\Debugbar\ServiceProvider',
         'App\Providers\AppServiceProvider',
         'App\Providers\BusServiceProvider',
         'App\Providers\ConfigServiceProvider',
@@ -173,6 +174,7 @@ return [
         'Cookie'    => 'Illuminate\Support\Facades\Cookie',
         'Crypt'     => 'Illuminate\Support\Facades\Crypt',
         'DB'        => 'Illuminate\Support\Facades\DB',
+        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
         'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
         'Event'     => 'Illuminate\Support\Facades\Event',
         'File'      => 'Illuminate\Support\Facades\File',

@@ -24,7 +24,7 @@ class BaseRepository
         return $this->model->where( 'id', '=', $id )->first();
     }
 
-    public function get( $options = array() )
+    public function get($options = array() )
     {
         $options += [
             'newest_first'  => true,
@@ -32,80 +32,80 @@ class BaseRepository
             'paginated'     => true
         ];
 
-        if ( $options['newest_first'] )
+        if ($options['newest_first'])
         {
-            $this->model = $this->model->orderBy( 'created_at', 'DESC' );
+            $this->model = $this->model->orderBy('created_at', 'DESC');
         }
 
-        if ( $options['sorted'] )
+        if ($options['sorted'])
         {
             $this->model = $this->model->sort();
         }
 
-        if ( $options['paginated'] )
+        if ($options['paginated'])
         {
-            return $this->model->paginate( $this->pageLimit );
+            return $this->model->paginate($this->pageLimit);
         }
 
         return $this->model->get();
     }
 
-    public function has( $relationship )
+    public function has($relationship)
     {
-        $this->model = $this->model->has( $relationship );
+        $this->model = $this->model->has($relationship);
         return $this;
     }
 
-    public function where( $column, $operator, $value )
+    public function where($column, $operator, $value)
     {
         $this->model = $this->model->where( $column, $operator, $value );
         return $this;
     }
 
-    public function withTags( $tags, $all = false )
+    public function withTags($tags, $all = false)
     {
-        if ( !is_array( $tags ) )
+        if (!is_array($tags))
         {
-            $tags = [ $tags ];
+            $tags = [$tags];
         }
 
-        if ( $all )
+        if ($all)
         {
-            $this->model = $this->model->withAllTags( $tags );
+            $this->model = $this->model->withAllTags($tags);
         }
         else
         {
-            $this->model = $this->model->withAnyTag( $tags );
+            $this->model = $this->model->withAnyTag($tags);
         }
 
         return $this;
     }
 
-    public function byUser( $userID = 0 )
+    public function byUser($userID = 0)
     {
-        $userID = ( $userID > 0 ) ? $userID : Auth::user()->id;
+        $userID = ($userID > 0) ? $userID : Auth::user()->id;
 
-        $this->model = $this->model->where( 'user_id', '=', Auth::user()->id );
+        $this->model = $this->model->where('user_id', '=', Auth::user()->id);
 
         return $this;
     }
 
-    public function byFilters( $filters = array() )
+    public function byFilters($filters = array())
     {
         // Tags have their own method
-        if ( isset( $filters['tags'] ) )
+        if (isset($filters['tags']))
         {
-            if ( !empty( $filters['tags'] ) )
+            if (!empty($filters['tags']))
             {
-                $this->model = $this->model->withAnyTag( $filters['tags'] );
+                $this->model = $this->model->withAnyTag($filters['tags']);
             }
 
-            unset( $filters['tags'] );
+            unset($filters['tags']);
         }
 
-        foreach ( $filters as $column => $value )
+        foreach ($filters as $column => $value)
         {
-            $this->model = $this->model->where( $column, 'LIKE', "%{$value}%" );
+            $this->model = $this->model->where($column, 'LIKE', "%{$value}%");
         }
 
         return $this;
@@ -113,7 +113,7 @@ class BaseRepository
 
     public function create($input)
     {
-        $this->model->create($input);
+        $this->model = $this->model->create($input);
         return $this->model;
     }
 

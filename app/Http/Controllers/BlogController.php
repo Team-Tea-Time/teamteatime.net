@@ -2,8 +2,10 @@
 
 use App;
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use Auth;
 use Input;
+use Log;
 use Redirect;
 use View;
 
@@ -85,26 +87,28 @@ class BlogController extends Controller
         return Redirect::to($post->route)->with('success', 'Your blog post has been created successfully.');
     }
 
-    public function show($year, $id, $slug)
+    public function show($year, $id = 0, $slug = '')
     {
+        if (!$id)
+        {
+            App::abort(404);
+        }
+
         $post = $this->repository->find($id);
 
         return View::make('blog.show', ['post' => $post]);
     }
 
-    public function edit($id)
+    public function edit(BlogPost $post)
     {
-        $post = $this->repository->find($id);
         $tags = $this->repository->getAllTags();
 
         return View::make('blog.edit', ['post' => $post, 'tags' => $tags]);
     }
 
-    public function update($id)
+    public function update(BlogPost $post)
     {
         $input = $this->getInput();
-
-        $post = $this->repository->find($id);
         $post->fill($input);
         $post->save();
 
@@ -116,12 +120,11 @@ class BlogController extends Controller
         return Redirect::to($post->route)->with('success', 'Your blog post has been updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(BlogPost $post)
     {
-        $post = $this->repository->find($id);
         $post->delete();
-
-        return Redirect::to('/')->with('success', 'Your blog post has been deleted successfully.');
+        
+        return Redirect::to('blog/posts')->with('success', 'Your blog post has been deleted successfully.');
     }
 
     /*
