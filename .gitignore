@@ -1,0 +1,5 @@
+*.db
+*.db.lock
+uploads/
+/ponzu-server
+/ponzu-server.exe
