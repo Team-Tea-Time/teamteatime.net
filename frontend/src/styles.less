@@ -11,12 +11,15 @@ h1, h2, h3, h4 {
 }
 
 #content {
-  padding: 3rem 0;
+  section {
+    animation-duration: 0.8s;
+    animation-name: fade;
+  }
 
   section.dark {
     margin: 3rem 0;
     padding: 3rem 0;
-    background: @gray-color;
+    background: @dark-color;
     color: #fff;
   }
 }
@@ -24,4 +27,14 @@ h1, h2, h3, h4 {
 .container {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+// Animations
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -7,7 +7,7 @@
   padding: 20px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 1000;
-  transition: all 0.3s;
+  transition: background 0.3s;
 
   .navbar-section {
     justify-content: flex-start;
@@ -19,13 +19,20 @@
     font-weight: 500;
     font-size: 2.4rem;
     color: #fff;
+    transition: color 0.3s;
+
+    &:focus {
+      box-shadow: none;
+    }
 
     .logo {
       display: inline-block;
-      width: 36px;
-      height: 36px;
-      background: url('../assets/logo_white.png') no-repeat 0 0;
+      width: 46px;
+      height: 39px;
+      background: url('../assets/logo_white.svg') no-repeat 0 0;
+      background-size: 46px 39px;
       vertical-align: middle;
+      transition: background 1s;
     }
 
     .name {
@@ -37,9 +44,15 @@
   .btn.btn-link {
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
 
     &:hover {
       color: #fff;
+    }
+
+    &:focus {
+      color: #fff;
+      box-shadow: none;
     }
   }
 
@@ -48,14 +61,14 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
     .navbar-brand {
-      color: @gray-color;
+      color: @dark-color;
 
       &:hover {
-        color: lighten(@gray-color, 15%);
+        color: lighten(@dark-color, 15%);
       }
 
       .logo {
-        background-image: url('../assets/logo.png');
+        background-image: url('../assets/logo.svg');
       }
     }
 
@@ -65,31 +78,6 @@
       &:hover {
         color: @link-color-dark;
       }
-    }
-  }
-}
-
-#splash {
-  height: 270px;
-  padding-top: 70px;
-  background: #6fe3ab;
-  background: -webkit-gradient(left top,right bottom,color-stop(0,#6fe3ab),color-stop(100%,@primary-color));
-  background: linear-gradient(135deg,#6fe3ab 0,@primary-color 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6fe3ab', endColorstr='@primary-color', GradientType=1);
-  font-size: 2rem;
-  color: #fff;
-  box-shadow: 0 2px 3px rgba(0,0,0,.1);
-  text-align: center;
-
-  .container {
-    position: relative;
-    top: 48%;
-    -webkit-transform: translate(0,-50%);
-    -ms-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-
-    h1 {
-      margin: 0;
     }
   }
 }

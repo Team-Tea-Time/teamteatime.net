@@ -1,29 +1,16 @@
 <header id="top-bar" [ngClass]="{ navbar: true, solid: !atTop }">
   <section class="container grid-960">
     <section class="navbar-section">
-      <a href="#" class="navbar-brand mr-10">
+      <a routerLink="/" class="navbar-brand mr-10">
         <span class="logo"></span>
         <span class="name hide-xs">Team Tea Time</span>
       </a>
-      <a href="#" class="btn btn-link">Projects</a>
-      <a href="#" class="btn btn-link">Contact</a>
+      <a routerLink="/projects" class="btn btn-link">Projects</a>
+      <a routerLink="/contact" class="btn btn-link">Contact</a>
     </section>
   </section>
 </header>
-<section id="splash">
-  <section class="container">
-    <h1>{{ title }}</h1>
-  </section>
-</section>
+<app-splash [title]="title"></app-splash>
 <section id="content">
-  <section class="container grid-960">
-    <h2>Regular section</h2>
-    <p>...</p>
-  </section>
-  <section class="dark">
-    <section class="container grid-960">
-      <h2>Dark section</h2>
-      <p>...</p>
-    </section>
-  </section>
+  <router-outlet></router-outlet>
 </section>
