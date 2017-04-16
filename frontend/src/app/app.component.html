@@ -5,8 +5,14 @@
         <span class="logo"></span>
         <span class="name hide-xs">Team Tea Time</span>
       </a>
-      <a routerLink="/projects" class="btn btn-link">Projects</a>
-      <a routerLink="/contact" class="btn btn-link">Contact</a>
+      <a
+        *ngFor="let link of links"
+        [routerLink]="link.path"
+        class="btn btn-link"
+        routerLinkActive="active"
+      >
+        {{link.label}}
+      </a>
     </section>
   </section>
 </header>

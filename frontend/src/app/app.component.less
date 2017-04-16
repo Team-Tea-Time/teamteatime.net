@@ -27,10 +27,10 @@
 
     .logo {
       display: inline-block;
-      width: 46px;
-      height: 39px;
+      width: 42px;
+      height: 36px;
       background: url('../assets/logo_white.svg') no-repeat 0 0;
-      background-size: 46px 39px;
+      background-size: 42px 36px;
       vertical-align: middle;
       transition: background 1s;
     }
@@ -42,11 +42,12 @@
   }
 
   .btn.btn-link {
+    position: relative;
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.8);
     transition: color 0.3s;
 
-    &:hover {
+    &:hover, &.active {
       color: #fff;
     }
 
@@ -75,7 +76,7 @@
     .btn.btn-link {
       color: @link-color;
 
-      &:hover {
+      &:hover, &.active {
         color: @link-color-dark;
       }
     }

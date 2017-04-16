@@ -1,0 +1,22 @@
+<section class="container grid-960">
+  <div *ngFor="let post of posts" class="post">
+    <h2>
+      <a [routerLink]="['/blog', post.id, slugify(post.title)]">
+        {{post.title}}
+      </a>
+    </h2>
+    <p class="created">
+      Published <span momentAgo [timestamp]="post.timestamp"></span>
+    </p>
+    <div class="body">
+      <span [innerHtml]="post.body | safeHtml"></span>
+    </div>
+    <div class="tags">
+      <span *ngFor="let tag of post.tags" class="label">{{tag}}</span>
+    </div>
+    <a [routerLink]="['/blog', post.id, slugify(post.title)]" class="btn btn-sm">
+      Read full post
+    </a>
+    <hr />
+  </div>
+</section>

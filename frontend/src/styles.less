@@ -10,7 +10,19 @@ h1, h2, h3, h4 {
   font-family: Rajdhani, sans-serif;
 }
 
+hr {
+  height: 1px;
+  margin: 2rem 0;
+  border: none;
+  background: @gray-color-light;
+}
+
 #content {
+  a:not(.btn):hover {
+    text-decoration: none;
+    border-bottom: 2px solid @link-color-dark;
+  }
+
   section {
     animation-duration: 0.8s;
     animation-name: fade;

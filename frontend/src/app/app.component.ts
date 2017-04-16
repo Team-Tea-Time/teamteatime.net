@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import debounce from 'debounce';
+import { SplashService } from './services/splash.service';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+
+import debounce from 'debounce';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +18,17 @@ import 'rxjs/add/operator/mergeMap';
 export class AppComponent implements OnInit {
   title = 'Loading...';
   atTop = true;
+  links = [
+    { path: '/blog', label: 'Blog' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' }
+  ];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private titleService: Title,
+    private splashService: SplashService
   ) { }
 
   ngOnInit() {
@@ -34,13 +42,23 @@ export class AppComponent implements OnInit {
       .filter(route => route.outlet === 'primary')
       .mergeMap(route => route.data)
       .subscribe(event => {
-        this.titleService.setTitle(`${event['title']} - Team Tea Time`);
-        this.title = event['title'];
+        if (!event['title']) {
+          this.splashService.getTitle().subscribe(title => {
+            this.setTitle(title);
+          });
+        } else {
+          this.setTitle(event['title']);
+        }
       });
 
     // Monitor scroll position to keep atTop up to date
     window.onscroll = debounce(event => {
       this.atTop = !(window.pageYOffset || document.documentElement.scrollTop);
     }, 15);
+  }
+
+  setTitle(title: string) {
+    this.titleService.setTitle(`${title} - Team Tea Time`);
+    this.title = title;
   }
 }

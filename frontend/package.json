@@ -1,10 +1,10 @@
-{
+  {
   "name": "frontend",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,7 +22,9 @@
     "@angular/router": "^4.0.2",
     "core-js": "^2.4.1",
     "debounce": "^1.0.0",
+    "moment": "^2.18.1",
     "rxjs": "^5.1.0",
+    "slugify": "^1.1.0",
     "spectre.css": "^0.2.13",
     "zone.js": "^0.8.4"
   },

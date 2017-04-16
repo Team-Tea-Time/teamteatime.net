@@ -1,0 +1,10 @@
+<section *ngIf="post" id="post" class="container grid-960">
+  <div class="created">
+    Published by {{post.author}} <span momentAgo [timestamp]="post.timestamp"></span>
+  </div>
+  <div class="body" [innerHtml]="post.body | safeHtml">
+  </div>
+  <div class="tags">
+    <span *ngFor="let tag of post.tags" class="label">{{tag}}</span>
+  </div>
+</section>

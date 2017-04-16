@@ -1,0 +1,27 @@
+@import '../../../../variables';
+
+#splash {
+  height: 278px;
+  padding-top: 78px;
+  margin-bottom: 3rem;
+  background: #6fe3ab;
+  background: -webkit-gradient(left top,right bottom,color-stop(0,#6fe3ab),color-stop(100%,@primary-color));
+  background: linear-gradient(135deg,#6fe3ab 0,@primary-color 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6fe3ab', endColorstr='@primary-color', GradientType=1);
+  font-size: 2rem;
+  color: #fff;
+  box-shadow: 0 2px 3px rgba(0,0,0,.1);
+  text-align: center;
+
+  .container {
+    position: relative;
+    top: 48%;
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
