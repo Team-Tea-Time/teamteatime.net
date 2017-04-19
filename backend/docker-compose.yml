@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  express:
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - /app/node_modules/
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+  mongo:
+    image: "mongo:3.4.3"
+    ports:
+      - "27017:27017"
