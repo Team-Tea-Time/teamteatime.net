@@ -1,15 +1,17 @@
-import http from 'http';
 import express from 'express';
+import bodyParser from 'body-parser';
+
+import './env';
+import router from './router';
 
 let app = express();
-app.server = http.createServer(app);
 
-app.get('/', function (req, res) {
-  res.send('Hello World!!');
-})
+app.use(bodyParser.json());
+app.use('/api', router);
 
-app.server.listen(process.env.PORT || '8080');
-
-console.log(`Started on port ${app.server.address().port}`);
+let server = app.listen(process.env.PORT || 8080, () => {
+  let port = server.address().port;
+  console.log("Started on port", port);
+});
 
 export default app;
