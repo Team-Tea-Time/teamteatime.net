@@ -1,5 +1,14 @@
+import user from '../models/user';
+
 class UsersController {
-  get (req, res) {
+  list(req, res) {
+    user.find({}).exec((err, users) => {
+      if (err) throw err;
+      res.json(users);
+    })
+  }
+
+  get(req, res) {
     res.json(req.params);
   }
 }

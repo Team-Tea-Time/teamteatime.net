@@ -4,7 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -w src --exec \"yarn run test && babel-node src --presets env\"",
+    "util": "babel-node src cli",
+    "dev": "nodemon --legacy-watch -w src --exec \"yarn run test && babel-node src\"",
     "build": "babel src -s -D -d dist --presets env",
     "test": "eslint src"
   },
@@ -23,11 +24,14 @@
     }
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "minimist": "^1.2.0",
     "mongodb": "^2.2.26",
-    "mongoose": "^4.9.5"
+    "mongoose": "^4.9.6",
+    "mongoose-bcrypt": "^1.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
