@@ -1,7 +1,8 @@
 import express from 'express';
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
+import busboy from 'express-busboy';
+import logger from 'morgan';
 
 import './env';
 import router from './router';
@@ -24,7 +25,12 @@ if (argv && argv[0] === 'cli') {
   });
 } else {
   app = express();
-  app.use(bodyParser.json());
+
+  if (process.env.DEBUG == 'true') {
+    app.use(logger('dev'));
+  }
+
+  busboy.extend(app);
   app.use('/api', router);
 
   let server = app.listen(process.env.PORT || 8080, () => {

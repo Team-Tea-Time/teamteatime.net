@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import mongooseBcrypt from 'mongoose-bcrypt';
+import bcrypt from 'mongoose-bcrypt';
 
 let Schema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
@@ -9,14 +9,21 @@ let Schema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-Schema.plugin(mongooseBcrypt, { rounds: 10 });
+Schema.plugin(bcrypt, { rounds: 10 });
 
 Schema.pre('save', function (next) {
   if (this.isModified()) {
-    this.updated_at = Date.now
+    this.updated_at = Date.now;
   }
 
   next();
+});
+
+Schema.set('toJSON', {
+  transform: function (doc, ret) {
+    delete ret.password;
+    return ret;
+  }
 });
 
 export default mongoose.model('User', Schema);

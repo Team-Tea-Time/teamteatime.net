@@ -25,13 +25,15 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
-    "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "express-busboy": "^6.0.1",
+    "jsonwebtoken": "^7.4.0",
     "minimist": "^1.2.0",
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.6",
-    "mongoose-bcrypt": "^1.4.2"
+    "mongoose-bcrypt": "^1.4.2",
+    "morgan": "^1.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
