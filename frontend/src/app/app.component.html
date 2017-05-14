@@ -7,8 +7,8 @@
       </a>
       <a
         *ngFor="let link of links"
-        [routerLink]="link.path"
         class="btn btn-link"
+        [routerLink]="link.path"
         routerLinkActive="active"
       >
         {{link.label}}

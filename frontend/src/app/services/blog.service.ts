@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BlogService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private postsUrl = '/api/contents?type=Post';
+  private postsUrl = '/api/posts';
 
   constructor(private http: Http) { }
 

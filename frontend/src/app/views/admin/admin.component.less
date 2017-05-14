@@ -1,0 +1,23 @@
+@import '../../../variables';
+
+#admin-navigation {
+  margin: -33px 0 33px 0;
+  line-height: 5rem;
+  background: @dark-color;
+  color: lighten(@dark-color, 20%);
+
+  .prefix {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  a.btn {
+    border: none;
+    color: rgba(255, 255, 255, 0.65);
+    box-shadow: none;
+
+    &:hover, &.active {
+      color: #fff;
+    }
+  }
+}

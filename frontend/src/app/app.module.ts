@@ -11,6 +11,8 @@ import { SplashComponent } from './views/partials/splash/splash.component';
 import { ProjectsComponent } from './views/projects/projects.component';
 import { BlogComponent } from './views/blog/blog.component';
 import { PostDetailComponent } from './views/blog/post-detail/post-detail.component';
+import { AdminComponent } from './views/admin/admin.component';
+import { AdminPostsComponent } from './views/admin/posts/posts.component';
 
 import { BlogService } from './services/blog.service';
 import { SplashService } from './services/splash.service';
@@ -24,6 +26,9 @@ const routes: Routes = [
   { path: 'blog/:id/:slug', component: PostDetailComponent },
   { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
   { path: 'projects', component: ProjectsComponent, data: { title: "Tea Time Projects" } },
+  { path: 'admin', component: AdminComponent, data: { title: "Admin Dashboard" }, children: [
+    { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } }
+  ] },
   { path: '**', component: NotFoundComponent, data: { title: "Not found" } }
 ];
 
@@ -37,7 +42,9 @@ const routes: Routes = [
     BlogComponent,
     MomentAgoDirective,
     SafeHtmlPipe,
-    PostDetailComponent
+    PostDetailComponent,
+    AdminPostsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

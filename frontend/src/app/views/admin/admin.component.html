@@ -1,0 +1,15 @@
+<section id="admin-navigation" class="navbar-section">
+  <section class="container grid-960">
+    <span class="prefix">Admin</span>
+    <a
+      *ngFor="let link of links"
+      class="btn btn-link"
+      [routerLink]="link.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{link.label}}
+    </a>
+  </section>
+</section>
+<router-outlet></router-outlet>
