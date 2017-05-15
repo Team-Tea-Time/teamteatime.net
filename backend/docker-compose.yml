@@ -1,11 +1,11 @@
-version: '2'
+version: '2.1'
 
 services:
   express:
     build:
-      context: .
+      context: ${PWD-.}
     volumes:
-      - .:/app
+      - ${PWD-.}:/app
       - /app/node_modules/
     ports:
       - "8080:8080"
