@@ -10,6 +10,9 @@
     >
       {{link.label}}
     </a>
+    <span class="end">
+      Hello, {{user.name}} (<span class="action" (click)="logout()">log out</span>)
+    </span>
   </section>
 </section>
 <router-outlet></router-outlet>
