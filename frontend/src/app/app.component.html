@@ -13,6 +13,9 @@
       >
         {{link.label}}
       </a>
+      <a [ngClass]="{ hide: !authService.getAuth() }" [routerLink]="['/admin']" class="btn btn-link link-admin">
+        Admin
+      </a>
     </section>
   </section>
 </header>

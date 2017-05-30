@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
+import { AuthService } from './services/auth.service';
 import { SplashService } from './services/splash.service';
 
 import 'rxjs/add/operator/filter';
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
-    private splashService: SplashService
+    private splashService: SplashService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {

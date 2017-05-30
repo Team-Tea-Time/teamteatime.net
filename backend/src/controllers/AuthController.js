@@ -25,9 +25,24 @@ class AuthController {
           expiresIn: '7d'
         });
 
-        res.json({ token });
+        res.json({
+          user: document,
+          token
+        });
       });
     });
+  }
+
+  verify(req, res) {
+    let token = req.body.token;
+
+    jwt.verify(token, process.env.JWT_SECRET)
+      .then(() => {
+        return res.status(200);
+      })
+      .catch(() => {
+        return res.status(401);
+      })
   }
 
   isEmail(string) {
