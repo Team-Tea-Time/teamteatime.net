@@ -1,16 +1,32 @@
 <section class="container grid-960">
   <form (ngSubmit)="submit()">
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{ 'has-error': errors.title }">
       <label class="form-label" for="title">Title</label>
-      <input class="form-input" type="text" id="title" placeholder="Title" [(ngModel)]="model.title" name="title" />
+      <input
+        class="form-input"
+        type="text"
+        id="title"
+        placeholder="Title"
+        name="title"
+        [(ngModel)]="model.title"
+      />
+      <p class="form-input-hint" *ngIf="errors.title">{{errors.title.msg}}</p>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{ 'has-error': errors.body }">
       <label class="form-label" for="body">Body</label>
-      <textarea class="form-input" id="body" placeholder="Body" rows="6" [(ngModel)]="model.body" name="body"></textarea>
+      <textarea
+        class="form-input"
+        id="body"
+        placeholder="Body"
+        rows="6"
+        name="body"
+        [(ngModel)]="model.body"
+      ></textarea>
+      <p class="form-input-hint" *ngIf="errors.body">{{errors.body.msg}}</p>
     </div>
     <div class="form-group">
       <label class="form-label" for="tags">Tags</label>
-      <input class="form-input" type="text" id="tags" placeholder="Tags" [(ngModel)]="model.tags" name="tags" />
+      <tag-input [(ngModel)]="model.tags" name="tags" [modelAsStrings]="true"></tag-input>
     </div>
 
     <div class="text-center">

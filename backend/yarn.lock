@@ -2,6 +2,38 @@
 # yarn lockfile v1
 
 
+"@types/bluebird@~3.0.36":
+  version "3.0.37"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
+
+"@types/express-serve-static-core@*":
+  version "4.0.45"
+  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.45.tgz#71bb1f87d7187482d0d8851f5b294458e1c78667"
+  dependencies:
+    "@types/node" "*"
+
+"@types/express@~4.0.34":
+  version "4.0.35"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.0.35.tgz#6267c7b60a51fac473467b3c4a02cd1e441805fe"
+  dependencies:
+    "@types/express-serve-static-core" "*"
+    "@types/serve-static" "*"
+
+"@types/mime@*":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-0.0.29.tgz#fbcfd330573b912ef59eeee14602bface630754b"
+
+"@types/node@*":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.23.tgz#ededfd92e61046c32fcad56ea7e1101733fad4a4"
+
+"@types/serve-static@*":
+  version "1.7.31"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.7.31.tgz#15456de8d98d6b4cff31be6c6af7492ae63f521a"
+  dependencies:
+    "@types/express-serve-static-core" "*"
+    "@types/mime" "*"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -662,7 +694,7 @@ bluebird@2.10.2:
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
 
-bluebird@^3.5.0:
+bluebird@^3.4.0, bluebird@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
@@ -1214,6 +1246,16 @@ express-busboy@^6.0.1:
     mkdirp "~0.5.0"
     qs "^6.4.0"
     uuid "~1.4.1"
+
+express-validator@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-3.2.0.tgz#9537abeb0f66e439f9e30b4ed16c4c6c231318e2"
+  dependencies:
+    "@types/bluebird" "~3.0.36"
+    "@types/express" "~4.0.34"
+    bluebird "^3.4.0"
+    lodash "^4.16.0"
+    validator "~6.2.0"
 
 express@^4.15.2:
   version "4.15.2"
@@ -1927,7 +1969,7 @@ lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.0, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2959,6 +3001,10 @@ v8flags@^2.0.10:
   resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-2.1.1.tgz#aab1a1fa30d45f88dd321148875ac02c0b55e5b4"
   dependencies:
     user-home "^1.1.1"
+
+validator@~6.2.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-6.2.1.tgz#bc575b78d15beb2e338a665ba9530c7f409ef667"
 
 vary@~1.1.0:
   version "1.1.1"

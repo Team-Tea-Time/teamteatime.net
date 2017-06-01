@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, RequestOptions } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TagInputModule } from 'ng2-tag-input';
 
 import { AppComponent } from './app.component';
 import { FrontComponent } from './views/front/front.component';
@@ -73,9 +76,11 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    TagInputModule
   ],
   providers: [
     AuthGuard,

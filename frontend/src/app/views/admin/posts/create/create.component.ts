@@ -11,7 +11,10 @@ import { BlogService } from '../../../../services/blog.service';
 export class AdminPostsCreateComponent implements OnInit {
   model: any = {};
   loading = false;
-  error = null;
+  errors = {
+    title: null,
+    body: null
+  };
 
   constructor(private router: Router, private blogService: BlogService) { }
 
@@ -28,7 +31,7 @@ export class AdminPostsCreateComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          this.error = error.message;
+          this.errors = error.json();
         }
       );
   }

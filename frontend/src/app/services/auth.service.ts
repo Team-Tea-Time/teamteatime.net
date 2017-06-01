@@ -14,8 +14,7 @@ export class AuthService {
      .map(response => {
        localStorage.setItem('auth', response.text());
        return response.json();
-     })
-     .catch(this.handleError);
+     });
   }
 
   verify() {
@@ -30,9 +29,5 @@ export class AuthService {
 
   getAuth() {
     return this.auth;
-  }
-
-  private handleError(error: any): Promise<any> {
-    return Promise.reject(error.message || error);
   }
 }

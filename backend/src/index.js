@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import mongoose from 'mongoose';
 import busboy from 'express-busboy';
 import logger from 'morgan';
+import expressValidator from 'express-validator';
 
 import './env';
 import router from './router';
@@ -31,6 +32,15 @@ if (argv && argv[0] === 'cli') {
   }
 
   busboy.extend(app);
+
+  app.use(expressValidator({
+    customValidators: {
+      isArray: function(value) {
+        return Array.isArray(value);
+      }
+    }
+  }));
+
   app.use('/api', router);
 
   let server = app.listen(process.env.PORT || 8080, () => {
