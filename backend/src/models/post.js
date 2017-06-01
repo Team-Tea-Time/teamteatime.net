@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 let Schema = new mongoose.Schema({
   title: { type: String, required: true },
-  user_id: { type: String, required: true },
+  author: { type: String, ref: 'User', required: true },
   body: { type: String, required: true },
   tags: [{ type: String }],
   created_at: { type: Date, default: Date.now },

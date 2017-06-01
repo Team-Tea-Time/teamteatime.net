@@ -12,13 +12,15 @@ import slugify from 'slugify';
 })
 export class BlogComponent implements OnInit {
   posts: Post[];
+  error: string;
 
   constructor(private blogService: BlogService) { }
 
   getPosts(): void {
-    this.blogService
-      .getPosts()
-      .then(posts => this.posts = posts);
+    this.blogService.getPosts().subscribe(
+      posts => this.posts = posts,
+      error =>  this.error = <any>error
+    );
   }
 
   slugify(title): string {

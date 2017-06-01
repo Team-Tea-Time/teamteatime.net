@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { Service } from './service';
-
 @Injectable()
-export class AuthService extends Service {
+export class AuthService {
   auth = null;
 
   constructor(private http: Http) {
-    super();
     this.auth = JSON.parse(localStorage.getItem('auth'));
   }
 
   login(identity: string, password: string) {
     return this.http.post('/api/auth', { identity, password })
-     .toPromise()
-     .then(response => {
-       this.auth = response.json();
+     .map(response => {
        localStorage.setItem('auth', response.text());
+       return response.json();
      })
      .catch(this.handleError);
   }
 
   verify() {
     let token = this.auth.token;
-    return this.http.post('/api/auth/verify', { token }).toPromise();
+    return this.http.post('/api/auth/verify', { token });
   }
 
   clear() {
@@ -34,5 +30,9 @@ export class AuthService extends Service {
 
   getAuth() {
     return this.auth;
+  }
+
+  private handleError(error: any): Promise<any> {
+    return Promise.reject(error.message || error);
   }
 }

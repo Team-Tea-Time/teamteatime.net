@@ -11,7 +11,7 @@ export default function (req, res, next) {
     if (error) {
       return res.status(403).json({ message: 'Failed to authenticate token.' });
     } else {
-      req.decoded = decoded;
+      req.user = decoded;
       next();
     }
   });

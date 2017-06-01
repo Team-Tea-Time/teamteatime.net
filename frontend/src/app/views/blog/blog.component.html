@@ -6,7 +6,7 @@
       </a>
     </h2>
     <p class="created">
-      Published <span momentAgo [timestamp]="post.timestamp"></span>
+      Published <span momentAgo [datetime]="post.datetime"></span>
     </p>
     <div class="body">
       <span [innerHtml]="post.body | safeHtml"></span>

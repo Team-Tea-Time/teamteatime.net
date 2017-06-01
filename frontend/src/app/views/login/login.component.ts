@@ -21,13 +21,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     this.authService.login(this.model.identity, this.model.password)
-      .then(response => {
-        this.loading = false;
-        this.router.navigate(['/admin']);
-      })
-      .catch(response => {
-        this.loading = false;
-        this.error = response.json().message;
-      });
+      .subscribe(
+        auth => {
+          this.loading = false;
+          this.router.navigate(['/admin']);
+        },
+        error => {
+          this.loading = false;
+          this.error = error.message;
+        }
+      );
   }
 }

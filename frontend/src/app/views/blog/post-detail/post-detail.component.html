@@ -1,6 +1,6 @@
 <section *ngIf="post" id="post" class="container grid-960">
   <div class="created">
-    Published by {{post.author}} <span momentAgo [timestamp]="post.timestamp"></span>
+    Published by {{post.author}} <span momentAgo [datetime]="post.datetime"></span>
   </div>
   <div class="body" [innerHtml]="post.body | safeHtml">
   </div>

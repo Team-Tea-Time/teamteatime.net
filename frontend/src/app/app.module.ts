@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { BlogComponent } from './views/blog/blog.component';
 import { PostDetailComponent } from './views/blog/post-detail/post-detail.component';
 import { AdminComponent } from './views/admin/admin.component';
 import { AdminPostsComponent } from './views/admin/posts/posts.component';
+import { AdminPostsCreateComponent } from './views/admin/posts/create/create.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
@@ -25,6 +26,8 @@ import { SplashService } from './services/splash.service';
 import { MomentAgoDirective } from './directives/moment-ago.directive';
 
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+
+import { GlobalRequestOptions } from './request-options';
 
 const routes: Routes = [
   { path: '', component: FrontComponent, data: { title: "Welcome" } },
@@ -45,7 +48,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { title: "Admin Dashboard" },
     children: [
-      { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } }
+      { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } },
+      { path: 'posts/create', component: AdminPostsCreateComponent, data: { title: "Create blog post" } }
     ]
   },
   { path: '**', component: NotFoundComponent, data: { title: "Not found" } }
@@ -63,8 +67,9 @@ const routes: Routes = [
     MomentAgoDirective,
     SafeHtmlPipe,
     PostDetailComponent,
+    AdminComponent,
     AdminPostsComponent,
-    AdminComponent
+    AdminPostsCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,14 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard, GuestGuard, AuthService, BlogService, SplashService],
+  providers: [
+    AuthGuard,
+    GuestGuard,
+    AuthService,
+    BlogService,
+    SplashService,
+    { provide: RequestOptions, useClass: GlobalRequestOptions }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

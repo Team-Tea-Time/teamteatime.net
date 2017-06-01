@@ -6,12 +6,11 @@ import * as moment from 'moment';
   selector: '[momentAgo]'
 })
 export class MomentAgoDirective implements OnChanges {
-  @Input() timestamp: number;
+  @Input() datetime: string;
 
   constructor(private el: ElementRef) { }
 
   ngOnChanges(changes) {
-    let timestamp = changes.timestamp.currentValue / 1000;
-    this.el.nativeElement.textContent = moment.unix(timestamp).fromNow();
+    this.el.nativeElement.textContent = moment(changes.datetime.currentValue).fromNow();
   }
 }

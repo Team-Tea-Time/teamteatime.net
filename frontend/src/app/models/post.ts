@@ -1,9 +1,9 @@
 export class Post {
-  id: number;
+  _id: string;
   title: string;
   author: string;
   body: string;
   tags: string[];
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 }
