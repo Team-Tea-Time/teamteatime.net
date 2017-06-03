@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class SplashService {
-  private title = new Subject<any>();
+  public title: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   public setTitle(title: string) {
     this.title.next(title);
-  }
-
-  public getTitle(): Observable<any> {
-    return this.title.asObservable();
   }
 }

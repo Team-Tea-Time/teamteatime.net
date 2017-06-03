@@ -11,7 +11,7 @@ import { BlogService } from '../../../../services/blog.service';
 export class AdminPostsCreateComponent implements OnInit {
   model: any = {};
   loading = false;
-  allowSlugChange = false;
+  editing = false;
   errors = {
     title: null,
     body: null

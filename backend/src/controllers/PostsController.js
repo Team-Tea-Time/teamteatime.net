@@ -1,14 +1,13 @@
 import post from '../models/post';
 
 class PostsController {
+  constructor() {
+    this.list = this.list.bind(this);
+    this.listByTag = this.listByTag.bind(this);
+  }
+
   list(req, res) {
-    post.find({})
-      .sort('-created_at')
-      .populate('author')
-      .exec((error, posts) => {
-        if (error) throw error;
-        res.json(posts);
-      });
+    this.paginate(req, res);
   }
 
   get(req, res) {
@@ -23,10 +22,14 @@ class PostsController {
   getBySlug(req, res) {
     post.findOne({ slug: req.params.slug })
       .populate('author')
-      .exec((error, post) => {
+      .exec((error, document) => {
         if (error) throw error;
-        res.json(post);
+        res.json(document);
       });
+  }
+
+  listByTag(req, res) {
+    this.paginate(req, res, { tags: decodeURI(req.params.tag) });
   }
 
   create(req, res) {
@@ -83,6 +86,20 @@ class PostsController {
       .exec((error, document) => {
         if (error) throw error;
         res.json(document);
+      });
+  }
+
+  paginate(req, res, constraint = {}) {
+    let page = req.query.page || 1;
+    post.count(constraint)
+      .exec((error, count) => {
+        if (error) throw error;
+        post.paginate(
+          constraint,
+          { page, limit: 10, sort: '-created_at', populate: 'author' }
+        ).then(result => {
+          res.json({ total: count, posts: result.docs });
+        });
       });
   }
 }

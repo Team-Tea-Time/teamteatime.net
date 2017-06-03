@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TagInputModule } from 'ng2-tag-input';
 import { TrumbowygModule } from 'ng2-lazy-trumbowyg';
+import { TruncateModule } from 'ng2-truncate';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { FrontComponent } from './views/front/front.component';
@@ -28,7 +30,7 @@ import { AuthService } from './services/auth.service';
 import { BlogService } from './services/blog.service';
 import { SplashService } from './services/splash.service';
 
-import { MomentAgoDirective } from './directives/moment-ago.directive';
+import { MomentDirective } from './directives/moment.directive';
 
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
@@ -36,8 +38,9 @@ import { GlobalRequestOptions } from './request-options';
 
 const routes: Routes = [
   { path: '', component: FrontComponent, data: { title: "Welcome" } },
-  { path: 'blog/:slug', component: PostDetailComponent },
   { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
+  { path: 'blog/tag/:tag', component: BlogComponent },
+  { path: 'blog/:slug', component: PostDetailComponent },
   { path: 'projects', component: ProjectsComponent, data: { title: "Tea Time Projects" } },
   {
     path: 'login',
@@ -70,7 +73,7 @@ const routes: Routes = [
     SplashComponent,
     ProjectsComponent,
     BlogComponent,
-    MomentAgoDirective,
+    MomentDirective,
     SafeHtmlPipe,
     PostDetailComponent,
     AdminComponent,
@@ -85,7 +88,9 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes),
     TagInputModule,
-    TrumbowygModule
+    TrumbowygModule,
+    TruncateModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthGuard,

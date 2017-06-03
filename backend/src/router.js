@@ -14,6 +14,7 @@ router.get('/users/:id', authorize, UsersController.get);
 router.get('/posts', PostsController.list);
 router.get('/posts/:id', PostsController.get);
 router.get('/posts/slug/:slug', PostsController.getBySlug);
+router.get('/posts/tag/:tag', PostsController.listByTag);
 router.put('/posts/:id', PostsController.update);
 router.delete('/posts/:id', PostsController.delete);
 router.post('/posts', authorize, PostsController.create);

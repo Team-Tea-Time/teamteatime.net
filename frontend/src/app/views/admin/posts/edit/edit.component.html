@@ -12,7 +12,7 @@
       />
       <p class="form-input-hint" *ngIf="errors.title">{{errors.title.msg}}</p>
     </div>
-    <div *ngIf="allowSlugChange" class="form-group" [ngClass]="{ 'has-error': errors.slug }">
+    <div *ngIf="editing" class="form-group" [ngClass]="{ 'has-error': errors.slug }">
       <label class="form-label" for="slug">Slug</label>
       <input
         class="form-input"
@@ -40,7 +40,7 @@
     </div>
 
     <div class="text-center">
-      <button class="btn btn-primary btn-lg">Proceed</button>
+      <button class="btn btn-primary btn-lg">Save</button>
     </div>
   </form>
 </section>

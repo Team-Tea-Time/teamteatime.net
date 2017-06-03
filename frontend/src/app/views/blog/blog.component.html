@@ -1,22 +1,23 @@
 <section class="container grid-960">
-  <div *ngFor="let post of posts" class="post">
+  <div *ngFor="let post of posts | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }" class="post">
     <h2>
       <a [routerLink]="['/blog', post.slug]">
         {{post.title}}
       </a>
     </h2>
     <p class="created">
-      Published <span momentAgo [datetime]="post.datetime"></span>
+      Published <span moment [datetime]="post.datetime"></span>
     </p>
     <div class="body">
-      <span [innerHtml]="post.body | safeHtml"></span>
+      <span [innerHtml]="post.body | truncate : 600 : ''"></span>
     </div>
     <div class="tags">
-      <span *ngFor="let tag of post.tags" class="label">{{tag}}</span>
+      <label *ngFor="let tag of post.tags" class="chip" [routerLink]="['/blog/tag', tag]">{{tag}}</label>
     </div>
     <a [routerLink]="['/blog', post.slug]" class="btn btn-sm">
       Read full post
     </a>
     <hr />
   </div>
+  <pagination-controls (pageChange)="goToPage($event)" class="text-center"></pagination-controls>
 </section>

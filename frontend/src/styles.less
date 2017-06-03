@@ -23,6 +23,24 @@ hr {
     border-bottom: 2px solid @link-color-dark;
   }
 
+  .ngx-pagination {
+    a, button {
+      border-radius: 3px;
+      color: @gray-color-dark;
+      cursor: pointer;
+
+      &:hover {
+        background: @gray-color-light;
+        border: none;
+      }
+    }
+
+    .current {
+      border-radius: 3px;
+      background: @primary-color;
+    }
+  }
+
   .link {
     cursor: pointer;
 
@@ -53,6 +71,26 @@ hr {
       margin: 2rem 0;
     }
   }
+
+  label.chip[ng-reflect-router-link] {
+    cursor: pointer;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1.0;
+    }
+  }
+
+  tag {
+    border-radius: 3px;
+    padding: 0 5px 0 8px;
+  }
+}
+
+#post {
+  h2, h3, h4 {
+    color: @secondary-color;
+  }
 }
 
 .container {
@@ -68,4 +106,89 @@ hr {
   to {
     opacity: 1;
   }
+}
+
+// Highlight.js
+pre code, .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1.5em;
+  background: #2e3745;
+  font-size: 1.4rem;
+  color: #c4d4e7;
+  line-height: 2rem;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #617f9f;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #88b4e7;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #88b4e7;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  color: #34febb;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #34febb;
+}
+
+.hljs-attr {
+  color: #40b991;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #34febb;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id {
+  color: #88b4e7;
+}
+
+.hljs-title {
+  color: #34febb;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
 }

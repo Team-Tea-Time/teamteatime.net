@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Post } from '../../../models/post';
-import { BlogService } from '../../../services/blog.service';
+import { Post } from 'app/models/post';
+import { BlogService } from 'app/services/blog.service';
+import { SplashService } from 'app/services/splash.service';
 
 @Component({
   selector: 'app-posts',
@@ -9,16 +10,30 @@ import { BlogService } from '../../../services/blog.service';
   styleUrls: ['./posts.component.less']
 })
 export class AdminPostsComponent implements OnInit {
+  total: number;
   posts: Post[];
+  page: number = 1;
   error: string;
 
-  constructor(private blogService: BlogService) { }
+  constructor(
+    private blogService: BlogService,
+    private splashService: SplashService
+  ) {}
+
+  ngOnInit(): void {
+    this.getPosts();
+  }
 
   getPosts(): void {
-    this.blogService.getPosts().subscribe(
-      posts => this.posts = posts,
-      error => this.error = <any>error
-    );
+    this.blogService.getPosts(this.page).subscribe(data => {
+      this.total = data.total;
+      this.posts = data.posts;
+    });
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.getPosts();
   }
 
   delete(post) {
@@ -32,9 +47,5 @@ export class AdminPostsComponent implements OnInit {
         error => this.error = <any>error
       )
     }
-  }
-
-  ngOnInit(): void {
-    this.getPosts();
   }
 }

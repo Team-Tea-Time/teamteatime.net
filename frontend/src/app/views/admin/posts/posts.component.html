@@ -20,7 +20,7 @@
           No posts
         </td>
       </tr>
-      <tr *ngFor="let post of posts">
+      <tr *ngFor="let post of posts | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }">
         <td>
           <a [routerLink]="['/blog', post.slug]">
             {{post.title}}
@@ -30,10 +30,10 @@
           {{post.author.name}}
         </td>
         <td>
-          <span momentAgo [datetime]="post.created_at"></span>
+          <span moment [datetime]="post.created_at"></span>
         </td>
         <td>
-          <span momentAgo [datetime]="post.updated_at"></span>
+          <span moment [datetime]="post.updated_at"></span>
         </td>
         <td class="text-right">
           <a [routerLink]="['/admin/posts', post._id, 'edit']">Edit</a>
@@ -43,9 +43,5 @@
     </tbody>
   </table>
 
-  <div class="text-center">
-    <button class="btn btn-primary btn-lg" [routerLink]="'/admin/posts/create'">
-      Create post
-    </button>
-  </div>
+  <pagination-controls (pageChange)="goToPage($event)" class="text-center"></pagination-controls>
 </section>

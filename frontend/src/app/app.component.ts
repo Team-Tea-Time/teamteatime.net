@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       .mergeMap(route => route.data)
       .subscribe(event => {
         if (!event['title']) {
-          this.splashService.getTitle().subscribe(title => {
+          this.splashService.title.subscribe(title => {
             this.setTitle(title);
           });
         } else {

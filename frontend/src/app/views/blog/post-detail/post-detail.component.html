@@ -1,10 +1,19 @@
 <section *ngIf="post" id="post" class="container grid-960">
+  <a class="blog-link" [routerLink]="['/blog']">
+    <i class="icon icon-arrow-left"></i> See all posts
+  </a>
   <div class="created">
-    Published by {{post.author.name}} <span momentAgo [datetime]="post.datetime"></span>
+    Published by {{post.author.name}},
+    <span moment [datetime]="post.created_at" [fromNow]="false"></span>
   </div>
   <div class="body" [innerHtml]="post.body | safeHtml">
   </div>
   <div class="tags">
-    <span *ngFor="let tag of post.tags" class="label">{{tag}}</span>
+    <label *ngFor="let tag of post.tags" class="chip" [routerLink]="['/blog/tag', tag]">{{tag}}</label>
+  </div>
+  <div *ngIf="auth" class="text-center">
+    <button class="btn" [routerLink]="['/admin/posts', post._id, 'edit']">
+      Edit this post
+    </button>
   </div>
 </section>

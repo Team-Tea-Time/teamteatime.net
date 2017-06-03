@@ -11,7 +11,7 @@ export class AdminPostsEditComponent implements OnInit {
   model: any = {};
   initialBody: string;
   loading = true;
-  allowSlugChange = true;
+  editing = true;
   errors = {
     title: null,
     slug: null,
