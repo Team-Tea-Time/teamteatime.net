@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import user from '../models/user';
+import User from '../models/User';
 
 class AuthController {
   constructor() {
@@ -11,7 +11,7 @@ class AuthController {
     let id = req.body.identity;
     let criteria = this.isEmail(id) ? { email: id } : { name: id };
 
-    user.findOne(criteria).exec().then(document => {
+    User.findOne(criteria).exec().then(document => {
       if (!document) {
         return res.status(422).json({ message: 'Authentication failed. User not found.' });
       }

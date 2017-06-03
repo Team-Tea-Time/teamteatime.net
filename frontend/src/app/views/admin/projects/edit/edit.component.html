@@ -1,0 +1,90 @@
+<section class="container grid-960">
+  <form (ngSubmit)="submit()">
+    <div class="form-group" [ngClass]="{ 'has-error': errors.name }">
+      <label class="form-label" for="name">Name</label>
+      <input
+        class="form-input"
+        type="text"
+        id="name"
+        placeholder="Name"
+        name="name"
+        [(ngModel)]="model.name"
+      />
+      <p class="form-input-hint" *ngIf="errors.name">{{errors.name.msg}}</p>
+    </div>
+    <div *ngIf="editing" class="form-group" [ngClass]="{ 'has-error': errors.slug }">
+      <label class="form-label" for="slug">Slug</label>
+      <input
+        class="form-input"
+        type="text"
+        id="slug"
+        placeholder="Slug"
+        name="slug"
+        [(ngModel)]="model.slug"
+      />
+      <p class="form-input-hint" *ngIf="errors.slug">{{errors.slug.msg}}</p>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': errors.category_id }">
+      <label class="form-label" for="category">Category</label>
+      <select class="form-select" [(ngModel)]="model.category_id" name="category">
+        <option
+          *ngFor="let category of categories"
+          [value]="category._id"
+          [selected]="model.category && category._id == model.category._id"
+        >{{category.name}}</option>
+      </select>
+      <p class="form-input-hint" *ngIf="errors.category_id">{{errors.category_id.msg}}</p>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': errors.summary }">
+      <label class="form-label" for="summary">Summary</label>
+      <trumbowyg
+        liveUpdate="true"
+        togglePreview="true"
+        [initialContent]="initialSummary"
+        (savedContent)="model.summary=$event"
+      ></trumbowyg>
+      <p class="form-input-hint" *ngIf="errors.summary">{{errors.summary.msg}}</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="url">URL</label>
+      <input
+        class="form-input"
+        type="text"
+        id="url"
+        placeholder="Name"
+        name="url"
+        [(ngModel)]="model.url"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="url">Documentation repository</label>
+      <input
+        class="form-input"
+        type="text"
+        id="documentation_repo"
+        placeholder="Name"
+        name="documentation_repo"
+        [(ngModel)]="model.documentation_repo"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="download_url">Download URL</label>
+      <input
+        class="form-input"
+        type="text"
+        id="download_url"
+        placeholder="Name"
+        name="download_url"
+        [(ngModel)]="model.download_url"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="tags">Tags</label>
+      <tag-input [(ngModel)]="model.tags" name="tags" [modelAsStrings]="true"></tag-input>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg">Save</button>
+    </div>
+  </form>
+</section>

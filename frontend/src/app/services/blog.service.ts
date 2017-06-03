@@ -4,13 +4,13 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Post } from 'app/models/post';
+import { Post } from 'app/models/post.model';
 
 @Injectable()
 export class BlogService {
   private url = '/api/posts';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getPosts(page = null) {
     let url = (page) ? `${this.url}?page=${page}` : this.url;
@@ -25,8 +25,8 @@ export class BlogService {
       .map(this.extractData);
   }
 
-  getPost(postId: string): Observable<Post> {
-    return this.http.get(`${this.url}/${postId}`)
+  getPost(id: string): Observable<Post> {
+    return this.http.get(`${this.url}/${id}`)
       .map(this.extractData);
   }
 
@@ -45,8 +45,8 @@ export class BlogService {
       .map(this.extractData);
   }
 
-  deletePost(postId: string): Observable<Post> {
-    return this.http.delete(`${this.url}/${postId}`)
+  deletePost(id: string): Observable<Post> {
+    return this.http.delete(`${this.url}/${id}`)
       .map(this.extractData);
   }
 

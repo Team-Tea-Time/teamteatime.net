@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   title = 'Loading...';
   atTop = true;
   links = [
+    { path: '/', label: 'Projects' },
     { path: '/blog', label: 'Blog' },
-    { path: '/projects', label: 'Projects' },
     { path: '/contact', label: 'Contact' }
   ];
 

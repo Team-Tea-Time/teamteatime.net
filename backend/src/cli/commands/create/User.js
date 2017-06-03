@@ -1,4 +1,4 @@
-import user from '../../../models/user';
+import User from '../../../models/User';
 import Command from '../Command';
 
 class Create extends Command {
@@ -14,7 +14,7 @@ class Create extends Command {
   }
 
   exec(argv) {
-    return this.create(user, {
+    return this.create(User, {
       name: argv.name,
       email: argv.email,
       password: argv.password

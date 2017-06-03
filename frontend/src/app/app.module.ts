@@ -11,7 +11,6 @@ import { TruncateModule } from 'ng2-truncate';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { FrontComponent } from './views/front/front.component';
 import { LoginComponent } from './views/login/login.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProjectsComponent } from './views/projects/projects.component';
@@ -19,6 +18,11 @@ import { SplashComponent } from './views/partials/splash/splash.component';
 import { BlogComponent } from './views/blog/blog.component';
 import { PostDetailComponent } from './views/blog/post-detail/post-detail.component';
 import { AdminComponent } from './views/admin/admin.component';
+import { AdminProjectsComponent } from './views/admin/projects/projects.component';
+import { AdminProjectsCategoriesCreateComponent } from './views/admin/projects/categories/create/create.component';
+import { AdminProjectsCategoriesEditComponent } from './views/admin/projects/categories/edit/edit.component';
+import { AdminProjectsCreateComponent } from './views/admin/projects/create/create.component';
+import { AdminProjectsEditComponent } from './views/admin/projects/edit/edit.component';
 import { AdminPostsComponent } from './views/admin/posts/posts.component';
 import { AdminPostsCreateComponent } from './views/admin/posts/create/create.component';
 import { AdminPostsEditComponent } from './views/admin/posts/edit/edit.component';
@@ -28,6 +32,7 @@ import { GuestGuard } from './guards/guest.guard';
 
 import { AuthService } from './services/auth.service';
 import { BlogService } from './services/blog.service';
+import { ProjectService } from './services/project.service';
 import { SplashService } from './services/splash.service';
 
 import { MomentDirective } from './directives/moment.directive';
@@ -37,11 +42,10 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { GlobalRequestOptions } from './request-options';
 
 const routes: Routes = [
-  { path: '', component: FrontComponent, data: { title: "Welcome" } },
+  { path: '', component: ProjectsComponent, data: { title: "It's Tea Time." } },
   { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
   { path: 'blog/tag/:tag', component: BlogComponent },
   { path: 'blog/:slug', component: PostDetailComponent },
-  { path: 'projects', component: ProjectsComponent, data: { title: "Tea Time Projects" } },
   {
     path: 'login',
     component: LoginComponent,
@@ -56,6 +60,11 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { title: "Admin Dashboard" },
     children: [
+      { path: 'projects', component: AdminProjectsComponent, data: { title: "Projects" } },
+      { path: 'projects/categories/create', component: AdminProjectsCategoriesCreateComponent, data: { title: "Create project category" } },
+      { path: 'projects/categories/:id/edit', component: AdminProjectsCategoriesEditComponent, data: { title: "Edit project category" } },
+      { path: 'projects/create', component: AdminProjectsCreateComponent, data: { title: "Create project" } },
+      { path: 'projects/:id/edit', component: AdminProjectsEditComponent, data: { title: "Edit project" } },
       { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } },
       { path: 'posts/create', component: AdminPostsCreateComponent, data: { title: "Create blog post" } },
       { path: 'posts/:id/edit', component: AdminPostsEditComponent, data: { title: "Edit blog post" } }
@@ -67,7 +76,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    FrontComponent,
     LoginComponent,
     NotFoundComponent,
     SplashComponent,
@@ -77,6 +85,11 @@ const routes: Routes = [
     SafeHtmlPipe,
     PostDetailComponent,
     AdminComponent,
+    AdminProjectsComponent,
+    AdminProjectsCategoriesCreateComponent,
+    AdminProjectsCategoriesEditComponent,
+    AdminProjectsCreateComponent,
+    AdminProjectsEditComponent,
     AdminPostsComponent,
     AdminPostsCreateComponent,
     AdminPostsEditComponent
@@ -97,6 +110,7 @@ const routes: Routes = [
     GuestGuard,
     AuthService,
     BlogService,
+    ProjectService,
     SplashService,
     { provide: RequestOptions, useClass: GlobalRequestOptions }
   ],

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Post } from 'app/models/post';
+import { Post } from 'app/models/post.model';
 import { BlogService } from 'app/services/blog.service';
 import { SplashService } from 'app/services/splash.service';
 
 @Component({
-  selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.less']
 })
@@ -41,7 +40,7 @@ export class AdminPostsComponent implements OnInit {
       this.blogService.deletePost(post._id).subscribe(
         document => {
           this.posts = this.posts.filter(p => {
-              return p._id !== document._id
+            return p._id !== document._id
           });
         },
         error => this.error = <any>error

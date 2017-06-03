@@ -1,0 +1,20 @@
+<section class="container grid-960">
+  <form (ngSubmit)="submit()">
+    <div class="form-group" [ngClass]="{ 'has-error': errors.name }">
+      <label class="form-label" for="name">Name</label>
+      <input
+        class="form-input"
+        type="text"
+        id="name"
+        placeholder="Name"
+        name="name"
+        [(ngModel)]="model.name"
+      />
+      <p class="form-input-hint" *ngIf="errors.name">{{errors.name.msg}}</p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg">Save</button>
+    </div>
+  </form>
+</section>

@@ -1,29 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BlogService } from 'app/services/blog.service';
+import { ProjectService } from 'app/services/project.service';
 
 @Component({
   templateUrl: '../edit/edit.component.html'
 })
-export class AdminPostsCreateComponent {
+export class AdminProjectsCategoriesCreateComponent {
   model: any = {};
   loading = false;
-  editing = false;
   errors = {
-    title: null,
-    body: null
+    name: null
   };
 
-  constructor(private router: Router, private blogService: BlogService) {}
+  constructor(private router: Router, private projectService: ProjectService) {}
 
   submit() {
     this.loading = true;
-    this.blogService.createPost(this.model)
+    this.projectService.createCategory(this.model)
       .subscribe(
-        post => {
+        category => {
           this.loading = false;
-          this.router.navigate(['/admin/posts']);
+          this.router.navigate(['/admin/projects']);
         },
         error => {
           this.loading = false;

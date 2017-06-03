@@ -1,40 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { BlogService } from 'app/services/blog.service';
+import { ProjectService } from 'app/services/project.service';
 
 @Component({
   templateUrl: './edit.component.html'
 })
-export class AdminPostsEditComponent implements OnInit {
+export class AdminProjectsCategoriesEditComponent implements OnInit {
   model: any = {};
-  initialBody: string;
   loading = true;
-  editing = true;
   errors = {
-    title: null,
-    slug: null,
-    body: null
+    name: null
   };
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private blogService: BlogService
+    private projectService: ProjectService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.blogService.getPost(params['id'])
+      this.projectService.getCategory(params['id'])
         .subscribe(
-          post => {
+          category => {
             this.loading = false;
-            this.model._id = post._id;
-            this.model.title = post.title;
-            this.model.slug = post.slug;
-            this.model.body = post.body;
-            this.initialBody = post.body;
-            this.model.tags = post.tags;
+            this.model._id = category._id;
+            this.model.name = category.name;
           },
           error => {
             this.loading = false;
@@ -46,11 +38,11 @@ export class AdminPostsEditComponent implements OnInit {
 
   submit() {
     this.loading = true;
-    this.blogService.updatePost(this.model)
+    this.projectService.updateCategory(this.model)
       .subscribe(
-        post => {
+        category => {
           this.loading = false;
-          this.router.navigate(['/admin/posts']);
+          this.router.navigate(['/admin/projects']);
         },
         error => {
           this.loading = false;

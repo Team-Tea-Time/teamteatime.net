@@ -3,13 +3,12 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import hljs from 'highlight.js';
 
-import { Post } from 'app/models/post';
+import { Post } from 'app/models/post.model';
 import { AuthService } from 'app/services/auth.service';
 import { BlogService } from 'app/services/blog.service';
 import { SplashService } from 'app/services/splash.service';
 
 @Component({
-  selector: 'app-blog-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.less']
 })

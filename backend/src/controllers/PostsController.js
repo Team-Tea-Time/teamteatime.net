@@ -1,4 +1,4 @@
-import post from '../models/post';
+import Post from '../models/Post';
 
 class PostsController {
   constructor() {
@@ -11,7 +11,7 @@ class PostsController {
   }
 
   get(req, res) {
-    post.findById(req.params.id)
+    Post.findById(req.params.id)
       .populate('author')
       .exec((error, document) => {
         if (error) throw error;
@@ -20,7 +20,7 @@ class PostsController {
   }
 
   getBySlug(req, res) {
-    post.findOne({ slug: req.params.slug })
+    Post.findOne({ slug: req.params.slug })
       .populate('author')
       .exec((error, document) => {
         if (error) throw error;
@@ -42,9 +42,9 @@ class PostsController {
         return;
       }
 
-      let document = new post({
+      let document = new Post({
         title: req.body.title,
-        author: req.user._doc._id,
+        author: req.User._doc._id,
         body: req.body.body,
         tags: req.body.tags
       });
@@ -66,7 +66,7 @@ class PostsController {
         return;
       }
 
-      post.findById(req.params.id)
+      Post.findById(req.params.id)
         .exec((error, document) => {
           if (error) throw error;
 
@@ -82,7 +82,7 @@ class PostsController {
   }
 
   delete(req, res) {
-    post.findByIdAndRemove(req.params.id)
+    Post.findByIdAndRemove(req.params.id)
       .exec((error, document) => {
         if (error) throw error;
         res.json(document);
@@ -91,10 +91,10 @@ class PostsController {
 
   paginate(req, res, constraint = {}) {
     let page = req.query.page || 1;
-    post.count(constraint)
+    Post.count(constraint)
       .exec((error, count) => {
         if (error) throw error;
-        post.paginate(
+        Post.paginate(
           constraint,
           { page, limit: 10, sort: '-created_at', populate: 'author' }
         ).then(result => {
