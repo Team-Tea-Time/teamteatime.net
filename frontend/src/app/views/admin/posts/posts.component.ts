@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../../../models/post';
 import { BlogService } from '../../../services/blog.service';
 
-import slugify from 'slugify';
-
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -23,8 +21,17 @@ export class AdminPostsComponent implements OnInit {
     );
   }
 
-  slugify(title): string {
-    return slugify(title);
+  delete(post) {
+    if (confirm(`Are you sure you want to remove the post titled '${post.title}'?`)) {
+      this.blogService.deletePost(post._id).subscribe(
+        document => {
+          this.posts = this.posts.filter(p => {
+              return p._id !== document._id
+          });
+        },
+        error => this.error = <any>error
+      )
+    }
   }
 
   ngOnInit(): void {

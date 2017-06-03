@@ -20,18 +20,24 @@ class PostsController {
       });
   }
 
+  getBySlug(req, res) {
+    post.findOne({ slug: req.params.slug })
+      .populate('author')
+      .exec((error, post) => {
+        if (error) throw error;
+        res.json(post);
+      });
+  }
+
   create(req, res) {
     req.checkBody('title', 'Give this post a title').notEmpty();
     req.checkBody('body', 'Write something!').notEmpty();
-    req.checkBody('tags', 'Must be an array').isArray();
 
     req.getValidationResult().then((result) => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;
       }
-
-      console.log(req.body.tags);
 
       let document = new post({
         title: req.body.title,
@@ -44,7 +50,40 @@ class PostsController {
 
       res.json(document);
     });
+  }
 
+  update(req, res) {
+    req.checkBody('title', 'Give this post a title').notEmpty();
+    req.checkBody('slug', 'Give this post a slug').notEmpty();
+    req.checkBody('body', 'Write something!').notEmpty();
+
+    req.getValidationResult().then((result) => {
+      if (!result.isEmpty()) {
+        res.status(400).json(result.mapped());
+        return;
+      }
+
+      post.findById(req.params.id)
+        .exec((error, document) => {
+          if (error) throw error;
+
+          document.title = req.body.title;
+          document.slug = req.body.slug;
+          document.body = req.body.body;
+          document.tags = req.body.tags || [];
+          document.save();
+
+          res.json(document);
+        });
+    });
+  }
+
+  delete(req, res) {
+    post.findByIdAndRemove(req.params.id)
+      .exec((error, document) => {
+        if (error) throw error;
+        res.json(document);
+      });
   }
 }
 

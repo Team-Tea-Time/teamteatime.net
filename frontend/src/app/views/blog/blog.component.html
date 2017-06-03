@@ -1,7 +1,7 @@
 <section class="container grid-960">
   <div *ngFor="let post of posts" class="post">
     <h2>
-      <a [routerLink]="['/blog', post.id, slugify(post.title)]">
+      <a [routerLink]="['/blog', post.slug]">
         {{post.title}}
       </a>
     </h2>
@@ -14,7 +14,7 @@
     <div class="tags">
       <span *ngFor="let tag of post.tags" class="label">{{tag}}</span>
     </div>
-    <a [routerLink]="['/blog', post.id, slugify(post.title)]" class="btn btn-sm">
+    <a [routerLink]="['/blog', post.slug]" class="btn btn-sm">
       Read full post
     </a>
     <hr />

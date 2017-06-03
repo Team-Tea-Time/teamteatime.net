@@ -12,16 +12,26 @@
       />
       <p class="form-input-hint" *ngIf="errors.title">{{errors.title.msg}}</p>
     </div>
+    <div *ngIf="allowSlugChange" class="form-group" [ngClass]="{ 'has-error': errors.slug }">
+      <label class="form-label" for="slug">Slug</label>
+      <input
+        class="form-input"
+        type="text"
+        id="slug"
+        placeholder="Slug"
+        name="slug"
+        [(ngModel)]="model.slug"
+      />
+      <p class="form-input-hint" *ngIf="errors.slug">{{errors.slug.msg}}</p>
+    </div>
     <div class="form-group" [ngClass]="{ 'has-error': errors.body }">
       <label class="form-label" for="body">Body</label>
-      <textarea
-        class="form-input"
-        id="body"
-        placeholder="Body"
-        rows="6"
-        name="body"
-        [(ngModel)]="model.body"
-      ></textarea>
+      <trumbowyg
+        liveUpdate="true"
+        togglePreview="true"
+        [initialContent]="initialBody"
+        (savedContent)="model.body=$event"
+      ></trumbowyg>
       <p class="form-input-hint" *ngIf="errors.body">{{errors.body.msg}}</p>
     </div>
     <div class="form-group">

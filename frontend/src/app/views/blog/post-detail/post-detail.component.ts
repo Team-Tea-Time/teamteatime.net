@@ -22,5 +22,14 @@ export class PostDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.blogService.getPostBySlug(params['slug'])
+        .subscribe(
+          post => {
+            this.splashService.setTitle(post.title);
+            this.post = post;
+          }
+        );
+    });
   }
 }

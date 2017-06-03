@@ -1,6 +1,7 @@
 export class Post {
   _id: string;
   title: string;
+  slug: string;
   author: string;
   body: string;
   tags: string[];

@@ -23,6 +23,19 @@ hr {
     border-bottom: 2px solid @link-color-dark;
   }
 
+  .link {
+    cursor: pointer;
+
+    &.danger {
+      color: darken(@danger-color, 10%);
+
+      &:hover {
+        border-bottom: 2px solid @danger-color;
+        color: @danger-color;
+      }
+    }
+  }
+
   section {
     animation-duration: 0.8s;
     animation-name: fade;

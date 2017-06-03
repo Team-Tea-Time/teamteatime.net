@@ -13,6 +13,9 @@ router.get('/users', UsersController.list);
 router.get('/users/:id', authorize, UsersController.get);
 router.get('/posts', PostsController.list);
 router.get('/posts/:id', PostsController.get);
+router.get('/posts/slug/:slug', PostsController.getBySlug);
+router.put('/posts/:id', PostsController.update);
+router.delete('/posts/:id', PostsController.delete);
 router.post('/posts', authorize, PostsController.create);
 
 export default router;

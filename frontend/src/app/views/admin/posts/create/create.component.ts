@@ -5,12 +5,13 @@ import { BlogService } from '../../../../services/blog.service';
 
 @Component({
   selector: 'app-create',
-  templateUrl: './create.component.html',
+  templateUrl: '../edit/edit.component.html',
   styleUrls: ['./create.component.less']
 })
 export class AdminPostsCreateComponent implements OnInit {
   model: any = {};
   loading = false;
+  allowSlugChange = false;
   errors = {
     title: null,
     body: null

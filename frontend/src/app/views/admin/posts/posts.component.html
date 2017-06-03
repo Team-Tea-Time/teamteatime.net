@@ -9,20 +9,20 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Created by</th>
-        <th>Created at</th>
-        <th colspan="2">Updated at</th>
+        <th>Author</th>
+        <th>Created</th>
+        <th colspan="2">Updated</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="!posts">
+      <tr *ngIf="!posts || posts.length == 0">
         <td colspan="5">
           No posts
         </td>
       </tr>
       <tr *ngFor="let post of posts">
         <td>
-          <a [routerLink]="['/blog', post._id, slugify(post.title)]">
+          <a [routerLink]="['/blog', post.slug]">
             {{post.title}}
           </a>
         </td>
@@ -35,8 +35,9 @@
         <td>
           <span momentAgo [datetime]="post.updated_at"></span>
         </td>
-        <td>
-          <a [routerLink]="['/admin/posts', post.id, 'edit']">Edit</a>
+        <td class="text-right">
+          <a [routerLink]="['/admin/posts', post._id, 'edit']">Edit</a>
+          <span class="link danger" (click)="delete(post)">Delete</span>
         </td>
       </tr>
     </tbody>

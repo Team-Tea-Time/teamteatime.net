@@ -5,9 +5,7 @@ import { Headers, Http } from '@angular/http';
 export class AuthService {
   auth = null;
 
-  constructor(private http: Http) {
-    this.auth = JSON.parse(localStorage.getItem('auth'));
-  }
+  constructor(private http: Http) {}
 
   login(identity: string, password: string) {
     return this.http.post('/api/auth', { identity, password })
@@ -28,6 +26,10 @@ export class AuthService {
   }
 
   getAuth() {
+    if (!this.auth) {
+      this.auth = JSON.parse(localStorage.getItem('auth'));
+    }
+
     return this.auth;
   }
 }

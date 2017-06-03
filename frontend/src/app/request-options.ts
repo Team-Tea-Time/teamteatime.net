@@ -5,6 +5,10 @@ import { BaseRequestOptions } from '@angular/http';
 export class GlobalRequestOptions extends BaseRequestOptions {
   constructor() {
       super();
-      this.headers.append('x-access-token', JSON.parse(localStorage.getItem('auth')).token);
+      let auth = JSON.parse(localStorage.getItem('auth'));
+
+      if (auth) {
+        this.headers.append('x-access-token', JSON.parse(localStorage.getItem('auth')).token);
+      }
   }
 }

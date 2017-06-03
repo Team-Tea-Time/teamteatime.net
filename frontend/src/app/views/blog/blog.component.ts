@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../../models/post';
 import { BlogService } from '../../services/blog.service';
 
-import slugify from 'slugify';
-
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -19,12 +17,8 @@ export class BlogComponent implements OnInit {
   getPosts(): void {
     this.blogService.getPosts().subscribe(
       posts => this.posts = posts,
-      error =>  this.error = <any>error
+      error => this.error = <any>error
     );
-  }
-
-  slugify(title): string {
-    return slugify(title);
   }
 
   ngOnInit(): void {

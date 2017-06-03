@@ -34,6 +34,7 @@
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.6",
     "mongoose-bcrypt": "^1.4.2",
+    "mongoose-url-slugs": "^1.0.0",
     "morgan": "^1.8.1"
   },
   "devDependencies": {

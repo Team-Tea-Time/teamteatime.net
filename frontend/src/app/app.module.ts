@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TagInputModule } from 'ng2-tag-input';
+import { TrumbowygModule } from 'ng2-lazy-trumbowyg';
 
 import { AppComponent } from './app.component';
 import { FrontComponent } from './views/front/front.component';
@@ -18,6 +19,7 @@ import { PostDetailComponent } from './views/blog/post-detail/post-detail.compon
 import { AdminComponent } from './views/admin/admin.component';
 import { AdminPostsComponent } from './views/admin/posts/posts.component';
 import { AdminPostsCreateComponent } from './views/admin/posts/create/create.component';
+import { AdminPostsEditComponent } from './views/admin/posts/edit/edit.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
@@ -34,7 +36,7 @@ import { GlobalRequestOptions } from './request-options';
 
 const routes: Routes = [
   { path: '', component: FrontComponent, data: { title: "Welcome" } },
-  { path: 'blog/:id/:slug', component: PostDetailComponent },
+  { path: 'blog/:slug', component: PostDetailComponent },
   { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
   { path: 'projects', component: ProjectsComponent, data: { title: "Tea Time Projects" } },
   {
@@ -52,7 +54,8 @@ const routes: Routes = [
     data: { title: "Admin Dashboard" },
     children: [
       { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } },
-      { path: 'posts/create', component: AdminPostsCreateComponent, data: { title: "Create blog post" } }
+      { path: 'posts/create', component: AdminPostsCreateComponent, data: { title: "Create blog post" } },
+      { path: 'posts/:id/edit', component: AdminPostsEditComponent, data: { title: "Edit blog post" } }
     ]
   },
   { path: '**', component: NotFoundComponent, data: { title: "Not found" } }
@@ -72,7 +75,8 @@ const routes: Routes = [
     PostDetailComponent,
     AdminComponent,
     AdminPostsComponent,
-    AdminPostsCreateComponent
+    AdminPostsCreateComponent,
+    AdminPostsEditComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,8 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    TagInputModule
+    TagInputModule,
+    TrumbowygModule
   ],
   providers: [
     AuthGuard,
