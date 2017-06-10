@@ -4,6 +4,7 @@
 @import '../node_modules/spectre.css/spectre';
 @import '../node_modules/spectre.css/spectre-icons';
 @import '../node_modules/spectre.css/spectre-exp';
+@import '../node_modules/angular2-busy/src/style/busy';
 @import 'variables';
 
 h1, h2, h3, h4 {
@@ -18,7 +19,7 @@ hr {
 }
 
 #content {
-  a:not(.btn):hover {
+  a:not(.btn):not(.menu-item .btn):hover {
     text-decoration: none;
     border-bottom: 2px solid @link-color-dark;
   }
@@ -26,6 +27,24 @@ hr {
   .btn {
     &:focus {
       background: inherit;
+    }
+    &.btn-primary:focus {
+      background: @primary-color;
+    }
+  }
+
+  .menu {
+    .menu-item {
+      a {
+        &:focus {
+          background: inherit;
+        }
+
+        &.active {
+          font-weight: bold;
+          background: none;
+        }
+      }
     }
   }
 
@@ -94,6 +113,20 @@ hr {
     }
   }
 
+  table:not(.table) {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    th {
+      text-align: left;
+      padding: 0.6rem;
+    }
+
+    td {
+      padding: 0.6rem;
+    }
+  }
+
   label.chip[ng-reflect-router-link] {
     cursor: pointer;
     opacity: 0.8;
@@ -128,6 +161,11 @@ hr {
   to {
     opacity: 1;
   }
+}
+
+// Busy
+.ng-busy-default-sign {
+    border: none;
 }
 
 // Highlight.js

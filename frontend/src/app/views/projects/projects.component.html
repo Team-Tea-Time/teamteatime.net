@@ -34,7 +34,13 @@
               >
                 View site
               </a>
-              <button class="btn btn-primary" *ngIf="project.source_repo">View docs</button>
+              <a
+                class="btn btn-primary"
+                *ngIf="project.source_repo"
+                [routerLink]="['/docs', project.slug]"
+              >
+                View docs
+              </a>
               <a
                 class="btn"
                 *ngIf="project.source_repo"

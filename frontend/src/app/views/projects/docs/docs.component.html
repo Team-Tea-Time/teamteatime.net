@@ -1,0 +1,44 @@
+<section
+  class="container grid-960"
+  [ngBusy]="[loadingBranches, loadingTree, loadingConfig, loadingContent]"
+  *ngIf="content"
+>
+  <div class="columns">
+    <div class="column col-md-12 col-3">
+      <div class="dropdown">
+        <span class="btn btn-primary dropdown-toggle" tabindex="0">
+          <span>Version</span> {{currentBranch}} <i class="icon icon-caret"></i>
+        </span>
+        <ul class="menu">
+          <li class="menu-item" *ngFor="let branch of branches">
+            <a
+              [routerLink]="['/docs', project.slug, branch.name]"
+              routerLinkActive="active"
+            >
+              {{branch.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <ul class="menu">
+        <li>
+          <ul *ngFor="let category of config.navigation">
+            <li class="divider" [attr.data-content]="category.heading"></li>
+            <li class="menu-item" *ngFor="let item of category.items">
+              <a
+                [routerLink]="['/docs', project.slug, currentBranch, item.file]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                {{item.label}}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="column col-md-12 col-9" [innerHtml]="content | safeHtml">
+    </div>
+  </div>
+</section>
+<hr>

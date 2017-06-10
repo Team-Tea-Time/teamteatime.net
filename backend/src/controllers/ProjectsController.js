@@ -19,6 +19,15 @@ class ProjectsController {
       });
   }
 
+  getBySlug(req, res) {
+    Project.findOne({ slug: req.params.slug })
+      .populate('category')
+      .exec((error, document) => {
+        if (error) throw error;
+        res.json(document);
+      });
+  }
+
   create(req, res) {
     req.checkBody('name', 'Give this project a name').notEmpty();
     req.checkBody('category_id', 'Select a category').notEmpty();

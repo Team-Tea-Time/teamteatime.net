@@ -39,6 +39,11 @@ export class ProjectService {
       .map(this.extractData);
   }
 
+  getProjectBySlug(slug: string): Observable<Project> {
+    return this.http.get(`${this.urlProjects}/slug/${slug}`)
+      .map(this.extractData);
+  }
+
   createCategory(category: ProjectCategory): Observable<ProjectCategory> {
     return this.http.post(this.urlCategories, category)
       .map(this.extractData);

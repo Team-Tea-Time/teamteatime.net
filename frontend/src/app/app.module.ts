@@ -9,11 +9,13 @@ import { TagInputModule } from 'ng2-tag-input';
 import { TrumbowygModule } from 'ng2-lazy-trumbowyg';
 import { TruncateModule } from 'ng2-truncate';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BusyModule } from 'angular2-busy';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProjectsComponent } from './views/projects/projects.component';
+import { ProjectsDocsComponent } from './views/projects/docs/docs.component';
 import { FileSelectComponent } from './views/partials/file-select/file-select.component';
 import { SplashComponent } from './views/partials/splash/splash.component';
 import { BlogComponent } from './views/blog/blog.component';
@@ -32,18 +34,23 @@ import { GuestGuard } from './guards/guest.guard';
 
 import { AuthService } from './services/auth.service';
 import { BlogService } from './services/blog.service';
+import { GitHubService } from './services/github.service';
 import { MediaService } from './services/media.service';
 import { ProjectService } from './services/project.service';
 import { SplashService } from './services/splash.service';
 
 import { MomentDirective } from './directives/moment.directive';
 
+import { KeysPipe } from './pipes/keys.pipe';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 import { GlobalRequestOptions } from './request-options';
 
 const routes: Routes = [
   { path: '', component: ProjectsComponent, data: { title: "It's Tea Time." } },
+  { path: 'docs/:slug', component: ProjectsDocsComponent },
+  { path: 'docs/:slug/:branch', component: ProjectsDocsComponent },
+  { path: 'docs/:slug/:branch/:object', component: ProjectsDocsComponent },
   { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
   { path: 'blog/tag/:tag', component: BlogComponent },
   { path: 'blog/:slug', component: PostDetailComponent },
@@ -82,8 +89,10 @@ const routes: Routes = [
     FileSelectComponent,
     SplashComponent,
     ProjectsComponent,
+    ProjectsDocsComponent,
     BlogComponent,
     MomentDirective,
+    KeysPipe,
     SafeHtmlPipe,
     PostDetailComponent,
     AdminComponent,
@@ -104,13 +113,15 @@ const routes: Routes = [
     TagInputModule,
     TrumbowygModule,
     TruncateModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BusyModule
   ],
   providers: [
     AuthGuard,
     GuestGuard,
     AuthService,
     BlogService,
+    GitHubService,
     MediaService,
     ProjectService,
     SplashService,

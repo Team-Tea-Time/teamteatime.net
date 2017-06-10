@@ -3,11 +3,12 @@ import express from 'express';
 import authorize from './middleware/authorize';
 
 import AuthController from './controllers/AuthController';
+import GitHubController from './controllers/GitHubController';
 import MediaController from './controllers/MediaController';
-import UsersController from './controllers/UsersController';
 import PostsController from './controllers/PostsController';
 import ProjectCategoriesController from './controllers/ProjectCategoriesController';
 import ProjectsController from './controllers/ProjectsController';
+import UsersController from './controllers/UsersController';
 
 let router = express.Router();
 
@@ -35,8 +36,13 @@ router.delete('/project-categories/:id', authorize, ProjectCategoriesController.
 
 router.get('/projects', ProjectsController.list);
 router.get('/projects/:id', ProjectsController.get);
+router.get('/projects/slug/:slug', ProjectsController.getBySlug);
 router.post('/projects', authorize, ProjectsController.create);
 router.put('/projects/:id', authorize, ProjectsController.update);
 router.delete('/projects/:id', authorize, ProjectsController.delete);
+
+router.get('/github/:owner/:repo/branches', GitHubController.getBranches);
+router.get('/github/:owner/:repo/tree/:sha', GitHubController.getTree);
+router.get('/github/:owner/:repo/blob/:sha', GitHubController.getBlob);
 
 export default router;
