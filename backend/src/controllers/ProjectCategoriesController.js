@@ -6,7 +6,11 @@ class ProjectCategoriesController {
   }
 
   list(req, res) {
-    ProjectCategory.find({}).populate('projects').exec((error, categories) => {
+    let query = req.query.withProjects
+      ? ProjectCategory.find({}).populate('projects')
+      : ProjectCategory.find({});
+
+    query.exec((error, categories) => {
       if (error) throw error;
       res.json(categories);
     });

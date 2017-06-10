@@ -3,124 +3,35 @@
     <p>Hello! We are Nick and Rick, programming and web dev enthusiasts based in the UK.</p>
     <p>See a selection of our projects below.</p>
   </section>
-  <section class="container grid-960 websites">
-    <h2>Websites</h2>
-    <div class="columns">
-      <div class="column col-4">
+  <section
+    *ngFor="let category of categories; let even = even; let odd = odd"
+    [ngClass]="{ category: true, dark: odd }"
+  >
+    <section class="container grid-960">
+      <h2>{{category.name}}</h2>
+      <div class="column col-4" *ngFor="let project of category.projects">
         <div class="card">
           <div class="card-image">
-            <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
+            <img [src]="'https://s3-eu-west-1.amazonaws.com/teamteatime.net/' + project.images[0]" class="img-responsive" />
           </div>
           <div class="card-header">
-            <h4 class="card-title">Project</h4>
-            <h6 class="card-subtitle">Software and hardware</h6>
+            <h4 class="card-title">{{project.name}}</h4>
+            <h6 class="card-subtitle" *ngIf="project.tags">
+              <span *ngFor="let tag of project.tags; let last = last">
+                 {{tag}}{{last ? '' : ', '}}
+              </span>
+            </h6>
           </div>
           <div class="card-body">
-            Empower every person and every organization on the planet to achieve more.
+            {{project.summary}}
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary">View site</button>
-            <button class="btn">View on GitHub</button>
-          </div>
-        </div>
-      </div>
-      <div class="column col-4">
-        <div class="card">
-          <div class="card-image">
-            <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
-          </div>
-          <div class="card-header">
-            <h4 class="card-title">Project</h4>
-            <h6 class="card-subtitle">Software and hardware</h6>
-          </div>
-          <div class="card-body">
-            Empower every person and every organization on the planet to achieve more.
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary">View site</button>
-            <button class="btn">View on GitHub</button>
-          </div>
-        </div>
-      </div>
-      <div class="column col-4">
-        <div class="card">
-          <div class="card-image">
-            <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
-          </div>
-          <div class="card-header">
-            <h4 class="card-title">Project</h4>
-            <h6 class="card-subtitle">Software and hardware</h6>
-          </div>
-          <div class="card-body">
-            Empower every person and every organization on the planet to achieve more.
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary">View site</button>
-            <button class="btn">View on GitHub</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="dark">
-    <section class="container grid-960 libraries">
-      <h2>Libraries</h2>
-      <div class="columns">
-        <div class="column col-4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
-            </div>
-            <div class="card-header">
-              <h4 class="card-title">Project</h4>
-              <h6 class="card-subtitle">Software and hardware</h6>
-            </div>
-            <div class="card-body">
-              Empower every person and every organization on the planet to achieve more.
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-primary">View docs</button>
-              <button class="btn">View on GitHub</button>
-              <button class="btn"><i class="icon icon-download"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="column col-4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
-            </div>
-            <div class="card-header">
-              <h4 class="card-title">Project</h4>
-              <h6 class="card-subtitle">Software and hardware</h6>
-            </div>
-            <div class="card-body">
-              Empower every person and every organization on the planet to achieve more.
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-primary">View docs</button>
-              <button class="btn">View on GitHub</button>
-              <button class="btn"><i class="icon icon-download"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="column col-4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://picturepan2.github.io/spectre/img/osx-el-capitan.jpg" class="img-responsive" />
-            </div>
-            <div class="card-header">
-              <h4 class="card-title">Project</h4>
-              <h6 class="card-subtitle">Software and hardware</h6>
-            </div>
-            <div class="card-body">
-              Empower every person and every organization on the planet to achieve more.
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-primary">View docs</button>
-              <button class="btn">View on GitHub</button>
-              <button class="btn"><i class="icon icon-download"></i></button>
-            </div>
+            <button class="btn btn-primary">View details</button>
+            <button class="btn" *ngIf="project.url">Visit site</button>
+            <button class="btn" *ngIf="project.documentation_repo">View docs</button>
+            <button class="btn" *ngIf="project.download_url">
+              <i class="icon icon-download"></i>
+            </button>
           </div>
         </div>
       </div>

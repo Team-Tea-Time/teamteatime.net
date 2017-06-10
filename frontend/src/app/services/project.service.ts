@@ -14,8 +14,12 @@ export class ProjectService {
 
   constructor(private http: Http) {}
 
-  getCategories(withProjects = false): Observable<ProjectCategory[]> {
-    return this.http.get(this.urlCategories)
+  getCategories(withProjects: Boolean = false): Observable<ProjectCategory[]> {
+    let url = withProjects
+      ? `${this.urlCategories}?withProjects=true`
+      : this.urlCategories;
+
+    return this.http.get(url)
       .map(this.extractData);
   }
 
@@ -35,13 +39,13 @@ export class ProjectService {
       .map(this.extractData);
   }
 
-  createCategory(data: ProjectCategory): Observable<ProjectCategory> {
-    return this.http.post(this.urlCategories, data)
+  createCategory(category: ProjectCategory): Observable<ProjectCategory> {
+    return this.http.post(this.urlCategories, category)
       .map(this.extractData);
   }
 
-  createProject(data: Project): Observable<Project> {
-    return this.http.post(this.urlProjects, data)
+  createProject(project: Project): Observable<Project> {
+    return this.http.post(this.urlProjects, project)
       .map(this.extractData);
   }
 

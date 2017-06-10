@@ -3,6 +3,7 @@ import express from 'express';
 import authorize from './middleware/authorize';
 
 import AuthController from './controllers/AuthController';
+import MediaController from './controllers/MediaController';
 import UsersController from './controllers/UsersController';
 import PostsController from './controllers/PostsController';
 import ProjectCategoriesController from './controllers/ProjectCategoriesController';
@@ -14,6 +15,9 @@ router.post('/auth', AuthController.auth);
 
 router.get('/users', UsersController.list);
 router.get('/users/:id', authorize, UsersController.get);
+
+router.post('/media/signed-url', authorize, MediaController.getSignedURL);
+router.delete('/media/:key', authorize, MediaController.delete);
 
 router.get('/posts', PostsController.list);
 router.get('/posts/:id', PostsController.get);

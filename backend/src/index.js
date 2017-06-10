@@ -31,7 +31,7 @@ if (argv && argv[0] === 'cli') {
     app.use(logger('dev'));
   }
 
-  busboy.extend(app);
+  busboy.extend(app, { upload: true });
 
   app.use(expressValidator({
     customValidators: {

@@ -37,6 +37,7 @@ class ProjectsController {
           Project.create({
             name: req.body.name,
             category: req.body.category_id,
+            images: req.body.images,
             summary: req.body.summary,
             url: req.body.url,
             documentation_repo: req.body.documentation_repo,
@@ -70,6 +71,7 @@ class ProjectsController {
 
           project.name = req.body.name;
           project.category = req.body.category_id;
+          project.images = req.body.images,
           project.summary = req.body.summary;
           project.url = req.body.url;
           project.documentation_repo = req.body.documentation_repo;

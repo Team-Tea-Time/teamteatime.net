@@ -5,6 +5,7 @@ export class Project {
   name: string;
   slug: string;
   category: ProjectCategory;
+  images: string[];
   summary: string;
   url: string;
   documentation_repo: string;

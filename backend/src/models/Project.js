@@ -5,6 +5,7 @@ import URLSlugs from 'mongoose-url-slugs';
 let Schema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'ProjectCategory', required: true },
+  images: [{ type: String }],
   summary: { type: String, required: true },
   url: { type: String },
   documentation_repo: { type: String },

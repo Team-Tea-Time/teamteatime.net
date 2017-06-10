@@ -1,4 +1,4 @@
-<section class="container grid-960">
+<section id="create-project" class="container grid-960">
   <form (ngSubmit)="submit()">
     <div class="form-group" [ngClass]="{ 'has-error': errors.name }">
       <label class="form-label" for="name">Name</label>
@@ -35,6 +35,21 @@
       </select>
       <p class="form-input-hint" *ngIf="errors.category_id">{{errors.category_id.msg}}</p>
     </div>
+    <file-select
+      label="Images"
+      (select)="onSelectImage($event)"
+      #images
+    ></file-select>
+    <table class="table" *ngIf="model.images">
+      <tbody>
+        <tr *ngFor="let key of model.images">
+          <td>{{key}}</td>
+          <td class="text-right">
+            <i class="icon icon-cross delete" (click)="deleteImage(key)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div class="form-group" [ngClass]="{ 'has-error': errors.summary }">
       <label class="form-label" for="summary">Summary</label>
       <trumbowyg

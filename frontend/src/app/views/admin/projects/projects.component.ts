@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Project } from 'app/models/project.model';
 import { ProjectCategory } from 'app/models/project-category.model';
+import { MediaService } from 'app/services/media.service';
 import { ProjectService } from 'app/services/project.service';
 import { SplashService } from 'app/services/splash.service';
 
@@ -17,6 +18,7 @@ export class AdminProjectsComponent implements OnInit {
   error: string;
 
   constructor(
+    private mediaService: MediaService,
     private projectService: ProjectService,
     private splashService: SplashService
   ) {}
@@ -60,6 +62,10 @@ export class AdminProjectsComponent implements OnInit {
 
   deleteProject(project) {
     if (confirm(`Are you sure you want to remove the project '${project.name}'?`)) {
+      for (let key of project.images) {
+        this.mediaService.deleteObject(key).subscribe();
+      }
+
       this.projectService.deleteProject(project._id).subscribe(
         document => {
           this.projects = this.projects.filter(p => {
