@@ -25,9 +25,6 @@ export class AdminProjectsEditComponent implements OnInit {
     summary: null
   };
 
-  @ViewChild('images')
-  imageSelection: any;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -56,6 +53,7 @@ export class AdminProjectsEditComponent implements OnInit {
               this.initialSummary = project.summary;
               this.model.summary = project.summary;
               this.model.url = project.url;
+              this.model.source_repo = project.source_repo;
               this.model.documentation_repo = project.documentation_repo;
               this.model.download_url = project.download_url;
               this.model.tags = project.tags;
@@ -81,7 +79,6 @@ export class AdminProjectsEditComponent implements OnInit {
             return image != key;
           });
           this.s3Queue = [];
-          this.imageSelection.nativeElement.value = '';
           this.submit(false);
         }
       );
@@ -113,6 +110,7 @@ export class AdminProjectsEditComponent implements OnInit {
         },
         error => {
           this.loading = false;
+          this.s3Queue = [];
           this.errors = error.json();
         }
       );

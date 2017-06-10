@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }
   ];
+  now = Date.now();
 
   constructor(
     private router: Router,

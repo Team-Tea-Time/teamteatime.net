@@ -40,6 +40,7 @@ class ProjectsController {
             images: req.body.images,
             summary: req.body.summary,
             url: req.body.url,
+            source_repo: req.body.source_repo,
             documentation_repo: req.body.documentation_repo,
             download_url: req.body.download_url,
             tags: req.body.tags
@@ -69,15 +70,38 @@ class ProjectsController {
         .exec((error, project) => {
           if (error) throw error;
 
+          if (req.body.category_id != project.category) {
+            ProjectCategory.findById(project.category)
+              .populate('projects')
+              .exec((error, category) => {
+                if (error) throw error;
+
+                category.projects.pull(project);
+                category.save();
+              });
+          }
+
           project.name = req.body.name;
           project.category = req.body.category_id;
           project.images = req.body.images,
           project.summary = req.body.summary;
           project.url = req.body.url;
+          project.source_repo = req.body.source_repo;
           project.documentation_repo = req.body.documentation_repo;
           project.download_url = req.body.download_url;
           project.tags = req.body.tags;
           project.save();
+
+          if (req.body.category_id != project.category) {
+            ProjectCategory.findById(req.body.category_id)
+              .populate('projects')
+              .exec((error, category) => {
+                if (error) throw error;
+
+                category.projects.push(project);
+                category.save();
+              });
+          }
 
           res.json(project);
         });
@@ -91,6 +115,8 @@ class ProjectsController {
 
         ProjectCategory.findById(project.category)
           .exec((error, category) => {
+            if (error) throw error;
+
             category.projects.pull(project);
             category.save();
             res.json(project);

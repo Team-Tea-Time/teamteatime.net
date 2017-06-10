@@ -38,7 +38,6 @@
     <file-select
       label="Images"
       (select)="onSelectImage($event)"
-      #images
     ></file-select>
     <table class="table" *ngIf="model.images">
       <tbody>
@@ -66,18 +65,29 @@
         class="form-input"
         type="text"
         id="url"
-        placeholder="Name"
+        placeholder="URL"
         name="url"
         [(ngModel)]="model.url"
       />
     </div>
     <div class="form-group">
-      <label class="form-label" for="url">Documentation repository</label>
+      <label class="form-label" for="source-repo">Source repository</label>
       <input
         class="form-input"
         type="text"
-        id="documentation_repo"
-        placeholder="Name"
+        id="source-repo"
+        placeholder="Source repo name"
+        name="source_repo"
+        [(ngModel)]="model.source_repo"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="documentation-repo">Documentation repository</label>
+      <input
+        class="form-input"
+        type="text"
+        id="documentation-repo"
+        placeholder="Documentation repo name"
         name="documentation_repo"
         [(ngModel)]="model.documentation_repo"
       />
@@ -88,7 +98,7 @@
         class="form-input"
         type="text"
         id="download_url"
-        placeholder="Name"
+        placeholder="Download URL"
         name="download_url"
         [(ngModel)]="model.download_url"
       />

@@ -9,4 +9,37 @@
     font-weight: 500;
     color: @gray-color;
   }
+
+  .card {
+    .card-subtitle {
+      margin: 0;
+    }
+
+    .card-footer {
+      a {
+        .github {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          margin-top: -2px;
+          background: url('../../../assets/github_dark.png') no-repeat 0 0;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          .github {
+            background-image: url('../../../assets/github_light.png');
+          }
+        }
+      }
+    }
+  }
+
+  .dark {
+    .card {
+      a .github {
+        background-image: url('../../../assets/github_light.png');
+      }
+    }
+  }
 }

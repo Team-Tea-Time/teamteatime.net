@@ -8,6 +8,7 @@ export class Project {
   images: string[];
   summary: string;
   url: string;
+  source_repo: string;
   documentation_repo: string;
   download_url: string;
   tags: string[];

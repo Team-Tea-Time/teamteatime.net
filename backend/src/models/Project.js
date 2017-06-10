@@ -8,6 +8,7 @@ let Schema = new mongoose.Schema({
   images: [{ type: String }],
   summary: { type: String, required: true },
   url: { type: String },
+  source_repo: { type: String },
   documentation_repo: { type: String },
   download_url: { type: String },
   tags: [{ type: String }]
