@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { AuthService } from './services/auth.service';
-import { SplashService } from './services/splash.service';
-
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+
+import { AuthService } from './services/auth.service';
+import { SplashService } from './services/splash.service';
+import { ToastService } from './services/toast.service';
+
+import { Toast } from './models/toast.model';
 
 import debounce from 'debounce';
 
@@ -18,6 +21,7 @@ import debounce from 'debounce';
 })
 export class AppComponent implements OnInit {
   title = 'Loading...';
+  toasts: Toast[] = [];
   atTop = true;
   links = [
     { path: '/', label: 'Projects' },
@@ -31,8 +35,9 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private splashService: SplashService,
+    private toastService: ToastService,
     public authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.router.events
@@ -58,10 +63,17 @@ export class AppComponent implements OnInit {
     window.onscroll = debounce(event => {
       this.atTop = !(window.pageYOffset || document.documentElement.scrollTop);
     }, 15);
+
+    // Handle toast
+    this.toastService.bag.subscribe(toasts => this.toasts = toasts);
   }
 
   setTitle(title: string) {
     this.titleService.setTitle(`${title} - Team Tea Time`);
     this.title = title;
+  }
+
+  dismissToast(toast: Toast) {
+    this.toastService.dismiss(toast);
   }
 }

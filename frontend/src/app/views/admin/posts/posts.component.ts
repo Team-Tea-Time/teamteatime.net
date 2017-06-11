@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from 'app/models/post.model';
 import { BlogService } from 'app/services/blog.service';
 import { SplashService } from 'app/services/splash.service';
+import { ToastService } from 'app/services/toast.service';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -16,7 +17,8 @@ export class AdminPostsComponent implements OnInit {
 
   constructor(
     private blogService: BlogService,
-    private splashService: SplashService
+    private splashService: SplashService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class AdminPostsComponent implements OnInit {
           this.posts = this.posts.filter(p => {
             return p._id !== document._id
           });
+          this.toastService.add('success', `'${document.title}' deleted.`);
         },
         error => this.error = <any>error
       )

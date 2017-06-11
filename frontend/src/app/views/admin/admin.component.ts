@@ -10,7 +10,6 @@ import { AuthService } from 'app/services/auth.service';
 export class AdminComponent implements OnInit {
   user: object;
   links = [
-    { path: '/admin', label: 'Dashboard' },
     { path: '/admin/projects', label: 'Projects' },
     { path: '/admin/posts', label: 'Posts' },
     { path: '/admin/users', label: 'Users' }

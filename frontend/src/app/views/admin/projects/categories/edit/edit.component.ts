@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs';
+
 import { ProjectService } from 'app/services/project.service';
+import { ToastService } from 'app/services/toast.service';
 
 @Component({
   templateUrl: './edit.component.html'
 })
 export class AdminProjectsCategoriesEditComponent implements OnInit {
+  loading: Subscription;
   model: any = {};
-  loading = true;
+  editing: boolean = false;
   errors = {
     name: null
   };
@@ -16,36 +20,39 @@ export class AdminProjectsCategoriesEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.projectService.getCategory(params['id'])
-        .subscribe(
-          category => {
-            this.loading = false;
-            this.model._id = category._id;
-            this.model.name = category.name;
-          },
-          error => {
-            this.loading = false;
-            this.errors = error.json();
-          }
-        )
+      if (params['id']) {
+        this.loading = this.projectService.getCategory(params['id'])
+          .subscribe(
+            category => {
+              this.editing = true;
+              this.model._id = category._id;
+              this.model.name = category.name;
+            },
+            error => {
+              this.errors = error.json();
+            }
+          );
+      }
     });
   }
 
   submit() {
-    this.loading = true;
-    this.projectService.updateCategory(this.model)
-      .subscribe(
+    let observable = this.editing
+      ? this.projectService.updateCategory(this.model)
+      : this.projectService.createCategory(this.model);
+
+    this.loading = observable.subscribe(
         category => {
-          this.loading = false;
           this.router.navigate(['/admin/projects']);
+          this.toastService.add('success', `'${category.name}' saved.`);
         },
         error => {
-          this.loading = false;
           this.errors = error.json();
         }
       );

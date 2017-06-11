@@ -1,4 +1,4 @@
-<section class="container grid-960">
+<section class="container grid-960" [ngBusy]="loading">
   <form (ngSubmit)="submit()">
     <div class="form-group" [ngClass]="{ 'has-error': errors.name }">
       <label class="form-label" for="name">Name</label>

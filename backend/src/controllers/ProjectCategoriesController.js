@@ -27,7 +27,7 @@ class ProjectCategoriesController {
   create(req, res) {
     req.checkBody('name', 'Give this project category a name').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;
@@ -43,7 +43,7 @@ class ProjectCategoriesController {
   update(req, res) {
     req.checkBody('name', 'Give this project a name').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;

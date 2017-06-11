@@ -5,6 +5,7 @@ import apicache from 'apicache';
 import authorize from './middleware/authorize';
 
 import AuthController from './controllers/AuthController';
+import ContactController from './controllers/ContactController';
 import GitHubController from './controllers/GitHubController';
 import MediaController from './controllers/MediaController';
 import PostsController from './controllers/PostsController';
@@ -52,5 +53,7 @@ router.delete('/projects/:id', authorize, ProjectsController.delete);
 router.get('/github/:owner/:repo/branches', cache('1 day'), GitHubController.getBranches);
 router.get('/github/:owner/:repo/tree/:sha', cache('1 day'), GitHubController.getTree);
 router.get('/github/:owner/:repo/blob/:sha', cache('1 day'), GitHubController.getBlob);
+
+router.post('/contact', ContactController.sendMessage);
 
 export default router;

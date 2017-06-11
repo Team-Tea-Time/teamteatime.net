@@ -1,21 +1,24 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs';
+
 import { Project } from 'app/models/project.model';
 import { ProjectCategory } from 'app/models/project-category.model';
 import { MediaService } from 'app/services/media.service';
 import { ProjectService } from 'app/services/project.service';
+import { ToastService } from 'app/services/toast.service';
 
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.less']
 })
 export class AdminProjectsEditComponent implements OnInit {
+  loading: Subscription;
   model: any = {
     images: []
   };
   s3Queue = [];
-  loading = false;
   editing = false;
   categories: ProjectCategory[];
   initialSummary: String = null;
@@ -29,7 +32,8 @@ export class AdminProjectsEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private mediaService: MediaService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -40,10 +44,9 @@ export class AdminProjectsEditComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.projectService.getProject(params['id'])
+        this.loading = this.projectService.getProject(params['id'])
           .subscribe(
             project => {
-              this.loading = false;
               this.editing = true;
               this.model._id = project._id;
               this.model.name = project.name;
@@ -59,7 +62,6 @@ export class AdminProjectsEditComponent implements OnInit {
               this.model.tags = project.tags;
             },
             error => {
-              this.loading = false;
               this.errors = error.json();
             }
           )
@@ -73,21 +75,20 @@ export class AdminProjectsEditComponent implements OnInit {
 
   deleteImage(key) {
     if (confirm(`Are you sure you want to remove the image '${key}'?`)) {
-      this.mediaService.deleteObject(key).subscribe(
+      this.loading = this.mediaService.deleteObject(key).subscribe(
         response => {
           this.model.images = this.model.images.filter(image => {
             return image != key;
           });
           this.s3Queue = [];
           this.submit(false);
+          this.toastService.add('success', 'Image deleted.');
         }
       );
     }
   }
 
   submit(redirect: boolean = true) {
-    this.loading = true;
-
     for (let object of this.s3Queue) {
       this.model.images.push(object.file.name);
     }
@@ -96,20 +97,18 @@ export class AdminProjectsEditComponent implements OnInit {
       ? this.projectService.updateProject(this.model)
       : this.projectService.createProject(this.model);
 
-    observable.subscribe(
+    this.loading = observable.subscribe(
         project => {
           for (let object of this.s3Queue) {
             this.mediaService.completeS3Request(object).subscribe();
           }
 
-          this.loading = false;
-
           if (redirect) {
             this.router.navigate(['/admin/projects']);
+            this.toastService.add('success', `'${project.name}' saved.`);
           }
         },
         error => {
-          this.loading = false;
           this.s3Queue = [];
           this.errors = error.json();
         }

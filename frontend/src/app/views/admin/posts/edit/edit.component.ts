@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs';
+
 import { BlogService } from 'app/services/blog.service';
+import { ToastService } from 'app/services/toast.service';
 
 @Component({
   templateUrl: './edit.component.html'
 })
 export class AdminPostsEditComponent implements OnInit {
+  loading: Subscription;
   model: any = {};
   initialBody: string;
-  loading = true;
-  editing = true;
+  editing: boolean = false;
   errors = {
     title: null,
     slug: null,
@@ -20,15 +23,16 @@ export class AdminPostsEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private blogService: BlogService
-  ) { }
+    private blogService: BlogService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.blogService.getPost(params['id'])
+      this.loading = this.blogService.getPost(params['id'])
         .subscribe(
           post => {
-            this.loading = false;
+            this.editing = true;
             this.model._id = post._id;
             this.model.title = post.title;
             this.model.slug = post.slug;
@@ -37,7 +41,6 @@ export class AdminPostsEditComponent implements OnInit {
             this.model.tags = post.tags;
           },
           error => {
-            this.loading = false;
             this.errors = error.json();
           }
         )
@@ -45,15 +48,16 @@ export class AdminPostsEditComponent implements OnInit {
   }
 
   submit() {
-    this.loading = true;
-    this.blogService.updatePost(this.model)
-      .subscribe(
+    let observable = this.editing
+      ? this.blogService.updatePost(this.model)
+      : this.blogService.createPost(this.model);
+
+    this.loading = observable.subscribe(
         post => {
-          this.loading = false;
           this.router.navigate(['/admin/posts']);
+          this.toastService.add('success', `'${post.title}' saved.`);
         },
         error => {
-          this.loading = false;
           this.errors = error.json();
         }
       );

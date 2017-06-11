@@ -37,6 +37,9 @@ if (argv && argv[0] === 'cli') {
     customValidators: {
       isArray: function(value) {
         return Array.isArray(value);
+      },
+      isEmpty: function(value) {
+        return value == null;
       }
     }
   }));

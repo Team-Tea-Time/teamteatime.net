@@ -87,6 +87,31 @@
   }
 }
 
+#content {
+  .toasts {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+
+    .toast {
+      padding: 2rem;
+      margin-top: 1rem;
+      border: none;
+      animation-duration: 0.5s;
+      animation-name: fadeIn;
+
+      button {
+        margin-top: 2px;
+      }
+
+      &.dismiss {
+        animation-duration: 0.25s;
+        animation-name: fadeOut;
+      }
+    }
+  }
+}
+
 #footer {
   padding: 2rem 0 4rem 0;
   font-size: 1.4rem;

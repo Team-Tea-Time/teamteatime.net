@@ -33,7 +33,7 @@ class ProjectsController {
     req.checkBody('category_id', 'Select a category').notEmpty();
     req.checkBody('summary', 'Write a summary').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;
@@ -69,7 +69,7 @@ class ProjectsController {
     req.checkBody('category_id', 'Select a category').notEmpty();
     req.checkBody('summary', 'Give this project a summary').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;

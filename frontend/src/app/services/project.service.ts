@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
 import { Project } from 'app/models/project.model';
 import { ProjectCategory } from 'app/models/project-category.model';

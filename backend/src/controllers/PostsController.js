@@ -36,7 +36,7 @@ class PostsController {
     req.checkBody('title', 'Give this post a title').notEmpty();
     req.checkBody('body', 'Write something!').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;
@@ -60,7 +60,7 @@ class PostsController {
     req.checkBody('slug', 'Give this post a slug').notEmpty();
     req.checkBody('body', 'Write something!').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then(result => {
       if (!result.isEmpty()) {
         res.status(400).json(result.mapped());
         return;

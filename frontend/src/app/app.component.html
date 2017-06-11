@@ -13,7 +13,12 @@
       >
         {{link.label}}
       </a>
-      <a [ngClass]="{ hide: !authService.getAuth() }" [routerLink]="['/admin']" class="btn btn-link link-admin">
+      <a
+        [ngClass]="{ hide: !authService.getAuth() }"
+        [routerLink]="['/admin']"
+        routerLinkActive="active"
+        class="btn btn-link link-admin"
+      >
         Admin
       </a>
     </section>
@@ -21,6 +26,12 @@
 </header>
 <app-splash [title]="title"></app-splash>
 <section id="content">
+  <div class="toasts" [hidden]="!toasts || toasts.length < 1">
+    <div *ngFor="let toast of toasts" class="toast toast-{{toast.type}} {{toast.class}}">
+      <button class="btn btn-clear float-right" (click)="dismissToast(toast)"></button>
+      {{toast.message}}
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </section>
 <section id="footer">

@@ -5,6 +5,7 @@ import { ProjectCategory } from 'app/models/project-category.model';
 import { MediaService } from 'app/services/media.service';
 import { ProjectService } from 'app/services/project.service';
 import { SplashService } from 'app/services/splash.service';
+import { ToastService } from 'app/services/toast.service';
 
 @Component({
   templateUrl: './projects.component.html',
@@ -20,7 +21,8 @@ export class AdminProjectsComponent implements OnInit {
   constructor(
     private mediaService: MediaService,
     private projectService: ProjectService,
-    private splashService: SplashService
+    private splashService: SplashService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class AdminProjectsComponent implements OnInit {
           this.categories = this.categories.filter(c => {
             return c._id !== document._id
           });
+          this.toastService.add('success', `${document.name} deleted.`);
         },
         error => this.error = <any>error
       )
@@ -72,6 +75,7 @@ export class AdminProjectsComponent implements OnInit {
             return p._id !== document._id
           });
           this.getCategories();
+          this.toastService.add('success', `${document.name} deleted.`);
         },
         error => this.error = <any>error
       )
