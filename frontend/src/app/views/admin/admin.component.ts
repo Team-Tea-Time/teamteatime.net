@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'app/services/auth.service';
 
+import { User } from 'app/models/user.model';
+
 @Component({
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.less']
 })
 export class AdminComponent implements OnInit {
-  user: object;
+  user: User;
   links = [
     { path: '/admin/projects', label: 'Projects' },
     { path: '/admin/posts', label: 'Posts' },

@@ -6,12 +6,14 @@ import { Subscription } from 'rxjs';
 import { ToastService } from 'app/services/toast.service';
 import { UserService } from 'app/services/user.service';
 
+import { User } from 'app/models/user.model';
+
 @Component({
   templateUrl: './edit.component.html'
 })
 export class AdminUsersEditComponent implements OnInit {
   loading: Subscription;
-  model: any = {};
+  model: User;
   editing: boolean = false;
   errors = {
     name: null
