@@ -46,7 +46,7 @@ if (argv && argv[0] === 'cli') {
 
   app.use('/api', router);
 
-  let server = app.listen(process.env.PORT || 8080, () => {
+  let server = app.listen(process.env.PORT || 8090, () => {
     let port = server.address().port;
     console.log("Started on port", port);
   });

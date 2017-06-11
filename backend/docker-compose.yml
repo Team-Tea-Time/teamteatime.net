@@ -9,7 +9,7 @@ services:
       - ${PWD-.}:/app
       - /app/node_modules/
     ports:
-      - "8080:8080"
+      - "8090:8090"
     links:
       - mongo
   mongo:

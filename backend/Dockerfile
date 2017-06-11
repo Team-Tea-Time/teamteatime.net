@@ -8,7 +8,7 @@ COPY . /app/
 
 WORKDIR /app
 
-ENV PORT 8080
-EXPOSE 8080
+ENV PORT 8090
+EXPOSE 8090
 
 CMD ["yarn", "dev"]
