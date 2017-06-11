@@ -29,21 +29,23 @@ export class AdminPostsEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.loading = this.blogService.getPost(params['id'])
-        .subscribe(
-          post => {
-            this.editing = true;
-            this.model._id = post._id;
-            this.model.title = post.title;
-            this.model.slug = post.slug;
-            this.model.body = post.body;
-            this.initialBody = post.body;
-            this.model.tags = post.tags;
-          },
-          error => {
-            this.errors = error.json();
-          }
-        )
+      if (params['id']) {
+        this.loading = this.blogService.getPost(params['id'])
+          .subscribe(
+            post => {
+              this.editing = true;
+              this.model._id = post._id;
+              this.model.title = post.title;
+              this.model.slug = post.slug;
+              this.model.body = post.body;
+              this.initialBody = post.body;
+              this.model.tags = post.tags;
+            },
+            error => {
+              this.errors = error.json();
+            }
+          )
+      }
     });
   }
 
