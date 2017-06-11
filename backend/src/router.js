@@ -1,4 +1,6 @@
 import express from 'express';
+import redis from 'redis';
+import apicache from 'apicache';
 
 import authorize from './middleware/authorize';
 
@@ -11,6 +13,12 @@ import ProjectsController from './controllers/ProjectsController';
 import UsersController from './controllers/UsersController';
 
 let router = express.Router();
+let cache = apicache.options({
+  redisClient: redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT
+  })
+}).middleware;
 
 router.post('/auth', AuthController.auth);
 
@@ -41,8 +49,8 @@ router.post('/projects', authorize, ProjectsController.create);
 router.put('/projects/:id', authorize, ProjectsController.update);
 router.delete('/projects/:id', authorize, ProjectsController.delete);
 
-router.get('/github/:owner/:repo/branches', GitHubController.getBranches);
-router.get('/github/:owner/:repo/tree/:sha', GitHubController.getTree);
-router.get('/github/:owner/:repo/blob/:sha', GitHubController.getBlob);
+router.get('/github/:owner/:repo/branches', cache('1 day'), GitHubController.getBranches);
+router.get('/github/:owner/:repo/tree/:sha', cache('1 day'), GitHubController.getTree);
+router.get('/github/:owner/:repo/blob/:sha', cache('1 day'), GitHubController.getBlob);
 
 export default router;

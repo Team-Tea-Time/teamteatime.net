@@ -24,6 +24,7 @@
     }
   },
   "dependencies": {
+    "apicache": "^0.8.6",
     "aws-sdk": "^2.62.0",
     "bluebird": "^3.5.0",
     "dotenv": "^4.0.0",
@@ -38,7 +39,8 @@
     "mongoose-bcrypt": "^1.4.2",
     "mongoose-paginate": "^5.0.3",
     "mongoose-url-slugs": "^1.0.0",
-    "morgan": "^1.8.1"
+    "morgan": "^1.8.1",
+    "redis": "^2.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

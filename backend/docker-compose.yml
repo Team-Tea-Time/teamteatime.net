@@ -2,6 +2,7 @@ version: '2.1'
 
 services:
   express:
+    container_name: "ttt-express"
     build:
       context: ${PWD-.}
     volumes:
@@ -12,6 +13,12 @@ services:
     links:
       - mongo
   mongo:
+    container_name: "ttt-mongo"
     image: "mongo:3.4.3"
     ports:
       - "27017:27017"
+  redis:
+    container_name: "ttt-redis"
+    image: "redis:3.0"
+    ports:
+      - "6379:6379"
