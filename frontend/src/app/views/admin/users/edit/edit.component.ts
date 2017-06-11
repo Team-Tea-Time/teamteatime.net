@@ -16,7 +16,9 @@ export class AdminUsersEditComponent implements OnInit {
   model: User;
   editing: boolean = false;
   errors = {
-    name: null
+    name: null,
+    email: null,
+    password: null
   };
 
   constructor(
