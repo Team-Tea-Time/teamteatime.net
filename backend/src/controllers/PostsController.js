@@ -44,7 +44,7 @@ class PostsController {
 
       let document = new Post({
         title: req.body.title,
-        author: req.User._doc._id,
+        author: req.user._doc._id,
         body: req.body.body,
         tags: req.body.tags
       });
