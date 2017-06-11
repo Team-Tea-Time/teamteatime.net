@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
+import { ProjectCategory } from 'app/models/project-category.model';
 import { ProjectService } from 'app/services/project.service';
 import { ToastService } from 'app/services/toast.service';
 
@@ -11,7 +12,7 @@ import { ToastService } from 'app/services/toast.service';
 })
 export class AdminProjectsCategoriesEditComponent implements OnInit {
   loading: Subscription;
-  model: any = {};
+  model: ProjectCategory = new ProjectCategory();
   editing: boolean = false;
   errors = {
     name: null

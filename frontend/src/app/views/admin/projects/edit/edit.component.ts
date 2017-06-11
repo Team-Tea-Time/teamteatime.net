@@ -15,9 +15,7 @@ import { ToastService } from 'app/services/toast.service';
 })
 export class AdminProjectsEditComponent implements OnInit {
   loading: Subscription;
-  model: any = {
-    images: []
-  };
+  model: Project = new Project();
   s3Queue = [];
   editing = false;
   categories: ProjectCategory[];

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
+import { Post } from 'app/models/post.model';
 import { BlogService } from 'app/services/blog.service';
 import { ToastService } from 'app/services/toast.service';
 
@@ -11,7 +12,7 @@ import { ToastService } from 'app/services/toast.service';
 })
 export class AdminPostsEditComponent implements OnInit {
   loading: Subscription;
-  model: any = {};
+  model: Post = new Post();
   initialBody: string;
   editing: boolean = false;
   errors = {

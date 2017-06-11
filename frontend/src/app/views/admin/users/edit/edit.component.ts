@@ -3,17 +3,16 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
+import { User } from 'app/models/user.model';
 import { ToastService } from 'app/services/toast.service';
 import { UserService } from 'app/services/user.service';
-
-import { User } from 'app/models/user.model';
 
 @Component({
   templateUrl: './edit.component.html'
 })
 export class AdminUsersEditComponent implements OnInit {
   loading: Subscription;
-  model: User;
+  model: User = new User();
   editing: boolean = false;
   errors = {
     name: null,

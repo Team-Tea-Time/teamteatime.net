@@ -4,6 +4,7 @@ export class Project {
   _id: string;
   name: string;
   slug: string;
+  category_id: string;
   category: ProjectCategory;
   images: string[];
   summary: string;
