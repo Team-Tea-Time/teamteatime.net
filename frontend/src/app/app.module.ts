@@ -28,6 +28,8 @@ import { AdminProjectsCategoriesEditComponent } from './views/admin/projects/cat
 import { AdminProjectsEditComponent } from './views/admin/projects/edit/edit.component';
 import { AdminPostsComponent } from './views/admin/posts/posts.component';
 import { AdminPostsEditComponent } from './views/admin/posts/edit/edit.component';
+import { AdminUsersComponent } from './views/admin/users/users.component';
+import { AdminUsersEditComponent } from './views/admin/users/edit/edit.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
@@ -40,10 +42,10 @@ import { MediaService } from './services/media.service';
 import { ProjectService } from './services/project.service';
 import { SplashService } from './services/splash.service';
 import { ToastService } from './services/toast.service';
+import { UserService } from './services/user.service';
 
 import { MomentDirective } from './directives/moment.directive';
 
-import { KeysPipe } from './pipes/keys.pipe';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 import { GlobalRequestOptions } from './request-options';
@@ -77,7 +79,10 @@ const routes: Routes = [
       { path: 'projects/:id/edit', component: AdminProjectsEditComponent, data: { title: "Edit project" } },
       { path: 'posts', component: AdminPostsComponent, data: { title: "Blog posts" } },
       { path: 'posts/create', component: AdminPostsEditComponent, data: { title: "Create blog post" } },
-      { path: 'posts/:id/edit', component: AdminPostsEditComponent, data: { title: "Edit blog post" } }
+      { path: 'posts/:id/edit', component: AdminPostsEditComponent, data: { title: "Edit blog post" } },
+      { path: 'users', component: AdminUsersComponent, data: { title: "Users" } },
+      { path: 'users/create', component: AdminUsersEditComponent, data: { title: "Create user" } },
+      { path: 'users/:id/edit', component: AdminUsersEditComponent, data: { title: "Edit user" } }
     ]
   },
   { path: 'contact', component: ContactComponent, data: { title: "How do you do?" } },
@@ -96,7 +101,6 @@ const routes: Routes = [
     ProjectsDocsComponent,
     BlogComponent,
     MomentDirective,
-    KeysPipe,
     SafeHtmlPipe,
     PostDetailComponent,
     AdminComponent,
@@ -104,7 +108,9 @@ const routes: Routes = [
     AdminProjectsCategoriesEditComponent,
     AdminProjectsEditComponent,
     AdminPostsComponent,
-    AdminPostsEditComponent
+    AdminPostsEditComponent,
+    AdminUsersComponent,
+    AdminUsersEditComponent
   ],
   imports: [
     BrowserModule,
@@ -129,6 +135,7 @@ const routes: Routes = [
     ProjectService,
     SplashService,
     ToastService,
+    UserService,
     { provide: RequestOptions, useClass: GlobalRequestOptions }
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<section class="container grid-960">
+<section class="container grid-960" [ngBusy]="loading">
   <form (ngSubmit)="login()">
     <div *ngIf="error" class="toast toast-warning">
       {{error}}
@@ -14,7 +14,7 @@
     </div>
 
     <div class="text-center">
-      <button [disabled]="loading" class="btn btn-lg btn-primary">Log in</button>
+      <button class="btn btn-lg btn-primary">Log in</button>
     </div>
   </form>
 </section>

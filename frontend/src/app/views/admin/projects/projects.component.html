@@ -1,4 +1,4 @@
-<section class="container grid-960">
+<section class="container grid-960" [ngBusy]="[loadingCategories, loadingProjects]">
   <div class="text-center">
     <h2>Categories</h2>
     <button class="btn btn-primary btn-lg" [routerLink]="['/admin/projects/categories/create']">
@@ -14,9 +14,7 @@
     </thead>
     <tbody>
       <tr *ngIf="!categories || categories.length == 0">
-        <td colspan="5">
-          No categories
-        </td>
+        <td colspan="5">No categories</td>
       </tr>
       <tr *ngFor="let category of categories">
         <td>
@@ -28,7 +26,9 @@
             *ngIf="!category.projects.length"
             class="link danger"
             (click)="deleteCategory(category)"
-          >Delete</span>
+          >
+            Delete
+          </span>
         </td>
       </tr>
     </tbody>

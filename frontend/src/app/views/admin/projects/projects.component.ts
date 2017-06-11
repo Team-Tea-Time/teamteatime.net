@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Subscription } from 'rxjs';
+
 import { Project } from 'app/models/project.model';
 import { ProjectCategory } from 'app/models/project-category.model';
 import { MediaService } from 'app/services/media.service';
@@ -12,6 +14,8 @@ import { ToastService } from 'app/services/toast.service';
   styleUrls: ['./projects.component.less']
 })
 export class AdminProjectsComponent implements OnInit {
+  loadingCategories: Subscription;
+  loadingProjects: Subscription;
   projects: Project[];
   categories: ProjectCategory[];
   page: number = 1;
@@ -26,19 +30,20 @@ export class AdminProjectsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCategories();
-    this.getProjects();
+    this.loadingCategories = this.getCategories();
+    this.loadingProjects = this.getProjects();
   }
 
-  getCategories(): void {
-    this.projectService.getCategories().subscribe(categories => this.categories = categories);
+  getCategories(): Subscription {
+    return this.projectService.getCategories().subscribe(categories => this.categories = categories);
   }
 
-  getProjects(): void {
-    this.projectService.getProjects(this.page).subscribe(data => {
-      this.total = data.total;
-      this.projects = data.projects;
-    });
+  getProjects(): Subscription {
+    return this.projectService.getProjects(this.page)
+      .subscribe(data => {
+        this.total = data.total;
+        this.projects = data.projects;
+      });
   }
 
   goToPage(page: number) {

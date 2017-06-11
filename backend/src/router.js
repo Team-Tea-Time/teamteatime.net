@@ -23,8 +23,11 @@ let cache = apicache.options({
 
 router.post('/auth', AuthController.auth);
 
-router.get('/users', UsersController.list);
+router.get('/users', authorize, UsersController.list);
 router.get('/users/:id', authorize, UsersController.get);
+router.post('/users', authorize, UsersController.create);
+router.put('/users/:id', authorize, UsersController.update);
+router.delete('/users/:id', authorize, UsersController.delete);
 
 router.post('/media/signed-url', authorize, MediaController.getSignedURL);
 router.delete('/media/:key', authorize, MediaController.delete);
