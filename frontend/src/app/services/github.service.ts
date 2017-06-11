@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { Service } from './service';
+
 @Injectable()
-export class GitHubService {
+export class GitHubService extends Service {
   private url = '/api/github';
 
-  constructor(private http: Http) {}
-
   getBranches(repo: string) {
-    return this.http.get(`${this.url}/${repo}/branches`)
-      .map(this.extractData);
+    return this.get(`${this.url}/${repo}/branches`);
   }
 
   getTree(repo: string, sha: string) {
-    return this.http.get(`${this.url}/${repo}/tree/${sha}`)
-      .map(this.extractData);
+    return this.get(`${this.url}/${repo}/tree/${sha}`);
   }
 
   getBlob(repo: string, sha: string, render: boolean = false) {
     let query = (render) ? '?rendered=1' : '';
-    return this.http.get(`${this.url}/${repo}/blob/${sha}${query}`)
-      .map(this.extractData);
-  }
-
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
+    return this.get(`${this.url}/${repo}/blob/${sha}${query}`);
   }
 }

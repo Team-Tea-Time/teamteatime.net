@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+
+import { Service } from './service';
 
 @Injectable()
-export class AuthService {
+export class AuthService extends Service {
   auth = null;
 
-  constructor(private http: Http) {}
-
   login(identity: string, password: string) {
-    return this.http.post('/api/auth', { identity, password })
+    return this.client().post('/api/auth', { identity, password })
      .map(response => {
        localStorage.setItem('auth', response.text());
        return response.json();
@@ -17,7 +16,7 @@ export class AuthService {
 
   verify() {
     let token = this.auth.token;
-    return this.http.post('/api/auth/verify', { token });
+    return this.post('/api/auth/verify', { token });
   }
 
   clear() {

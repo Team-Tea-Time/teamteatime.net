@@ -1,81 +1,63 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Project } from 'app/models/project.model';
 import { ProjectCategory } from 'app/models/project-category.model';
+import { Service } from './service';
 
 @Injectable()
-export class ProjectService {
+export class ProjectService extends Service {
   private urlCategories = '/api/project-categories';
   private urlProjects = '/api/projects';
-
-  constructor(private http: Http) {}
 
   getCategories(withProjects: Boolean = false): Observable<ProjectCategory[]> {
     let url = withProjects
       ? `${this.urlCategories}?withProjects=true`
       : this.urlCategories;
 
-    return this.http.get(url)
-      .map(this.extractData);
+    return this.get(url);
   }
 
   getProjects(page = null) {
     let url = (page) ? `${this.urlProjects}?page=${page}` : this.urlProjects;
-    return this.http.get(url)
-      .map(this.extractData);
+    return this.get(url);
   }
 
   getCategory(id: string): Observable<ProjectCategory> {
-    return this.http.get(`${this.urlCategories}/${id}`)
-      .map(this.extractData);
+    return this.get(`${this.urlCategories}/${id}`);
   }
 
   getProject(id: string): Observable<Project> {
-    return this.http.get(`${this.urlProjects}/${id}`)
-      .map(this.extractData);
+    return this.get(`${this.urlProjects}/${id}`);
   }
 
   getProjectBySlug(slug: string): Observable<Project> {
-    return this.http.get(`${this.urlProjects}/slug/${slug}`)
-      .map(this.extractData);
+    return this.get(`${this.urlProjects}/slug/${slug}`);
   }
 
   createCategory(category: ProjectCategory): Observable<ProjectCategory> {
-    return this.http.post(this.urlCategories, category)
-      .map(this.extractData);
+    return this.post(this.urlCategories, category);
   }
 
   createProject(project: Project): Observable<Project> {
-    return this.http.post(this.urlProjects, project)
-      .map(this.extractData);
+    return this.post(this.urlProjects, project);
   }
 
   updateCategory(category: ProjectCategory): Observable<Project> {
-    return this.http.put(`${this.urlCategories}/${category._id}`, category)
-      .map(this.extractData);
+    return this.put(`${this.urlCategories}/${category._id}`, category);
   }
 
   updateProject(project: Project): Observable<Project> {
-    return this.http.put(`${this.urlProjects}/${project._id}`, project)
-      .map(this.extractData);
+    return this.put(`${this.urlProjects}/${project._id}`, project);
   }
 
   deleteCategory(id: string): Observable<ProjectCategory> {
-    return this.http.delete(`${this.urlCategories}/${id}`)
-      .map(this.extractData);
+    return this.delete(`${this.urlCategories}/${id}`);
   }
 
   deleteProject(id: string): Observable<Project> {
-    return this.http.delete(`${this.urlProjects}/${id}`)
-      .map(this.extractData);
-  }
-
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
+    return this.delete(`${this.urlProjects}/${id}`);
   }
 }
