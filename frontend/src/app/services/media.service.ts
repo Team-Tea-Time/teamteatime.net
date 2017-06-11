@@ -12,8 +12,8 @@ export class MediaService extends Service {
     return this.post(`${this.url}/signed-url`, { filename: file.name, mimetype: file.type });
   }
 
-  completeS3Request(object): Observable<any> {
-    return this.put(object.requestURL, object.file);
+  completeS3Request(object) {
+    return this.client().put(object.requestURL, object.file);
   }
 
   deleteObject(key: String): Observable<any> {

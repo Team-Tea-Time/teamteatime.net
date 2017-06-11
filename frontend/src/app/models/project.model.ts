@@ -6,7 +6,7 @@ export class Project {
   slug: string;
   category_id: string;
   category: ProjectCategory;
-  images: string[];
+  images: string[] = [];
   summary: string;
   url: string;
   source_repo: string;
