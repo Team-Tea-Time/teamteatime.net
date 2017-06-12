@@ -6,7 +6,7 @@
       </a>
     </h2>
     <p class="created">
-      Published <span moment [datetime]="post.datetime"></span>
+      Published <span moment [datetime]="post.created_at"></span>
     </p>
     <div class="body">
       <span [innerHtml]="post.body | truncate : 600 : ''"></span>
