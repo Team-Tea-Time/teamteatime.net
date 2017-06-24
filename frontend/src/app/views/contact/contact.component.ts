@@ -18,7 +18,6 @@ export class ContactComponent {
   };
   errors = {
     email_address: null,
-    email: null,
     message: null
   };
 
@@ -29,6 +28,11 @@ export class ContactComponent {
   ) {}
 
   submit() {
+    this.errors = {
+      email_address: null,
+      message: null
+    };
+
     this.sending = this.contactService.sendMessage(
       this.model.email_address,
       this.model.email,
@@ -39,7 +43,11 @@ export class ContactComponent {
         this.router.navigate(['/']);
       },
       error => {
-        this.errors = error.json();
+        if (error.status == 429) {
+          this.toastService.add('warning', 'You already sent a message! Please try again later.');
+        } else {
+          this.errors = error.json();
+        }
       }
     );
   }

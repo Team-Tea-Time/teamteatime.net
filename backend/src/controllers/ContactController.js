@@ -12,9 +12,9 @@ class ContactController {
     this.sendMessage = this.sendMessage.bind(this);
   }
 
-  sendMessage(req, res) {
+  validate(req, res, next) {
     req.checkBody('email', 'No email address!').isEmpty();
-    req.checkBody('email_address', 'Please provide an email address').notEmpty();
+    req.checkBody('email_address', 'Please provide an email address').isEmail();
     req.checkBody('message', 'Write something!').notEmpty();
 
     req.getValidationResult().then(result => {
@@ -23,17 +23,21 @@ class ContactController {
         return;
       }
 
-      let email = {
-        from: req.body.email_address,
-        to: process.env.CONTACT_EMAIL,
-        subject: '[TTT] Message',
-        text: req.body.message
-      };
+      next();
+    });
+  }
 
-      this.client.sendMail(email, (error, info) => {
-        if (error) throw error;
-        res.json(info);
-      });
+  sendMessage(req, res) {
+    let email = {
+      from: req.body.email_address,
+      to: process.env.CONTACT_EMAIL,
+      subject: '[TTT] Message',
+      text: req.body.message
+    };
+
+    this.client.sendMail(email, (error, info) => {
+      if (error) throw error;
+      res.json(info);
     });
   }
 }

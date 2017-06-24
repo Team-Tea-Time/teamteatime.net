@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'docs/:slug', component: ProjectsDocsComponent },
   { path: 'docs/:slug/:branch', component: ProjectsDocsComponent },
   { path: 'docs/:slug/:branch/:object', component: ProjectsDocsComponent },
-  { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog" } },
+  { path: 'blog', component: BlogComponent, data: { title: "Tea Time Blog." } },
   { path: 'blog/tag/:tag', component: BlogComponent },
   { path: 'blog/:slug', component: PostDetailComponent },
   {

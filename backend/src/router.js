@@ -1,6 +1,7 @@
 import express from 'express';
 import redis from 'redis';
 import apicache from 'apicache';
+import throttle from 'express-throttle';
 
 import authorize from './middleware/authorize';
 
@@ -57,6 +58,6 @@ router.get('/github/:owner/:repo/branches', cache('1 day'), GitHubController.get
 router.get('/github/:owner/:repo/tree/:sha', cache('1 day'), GitHubController.getTree);
 router.get('/github/:owner/:repo/blob/:sha', cache('1 day'), GitHubController.getBlob);
 
-router.post('/contact', ContactController.sendMessage);
+router.post('/contact', ContactController.validate, throttle({ "rate": "1/m" }), ContactController.sendMessage);
 
 export default router;
