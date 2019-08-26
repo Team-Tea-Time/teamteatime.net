@@ -17,15 +17,15 @@
 
           .current-version {
             padding: .3em .5em;
-            background: $color-brand-blue;
+            background: $color-accent;
             font-size: .9rem;
-            color: lighten($color-brand-blue, 45%);
+            color: lighten($color-accent, 35%);
             text-align: center;
             cursor: pointer;
             transition: background .2s;
 
             &:hover {
-              background: darken($color-brand-blue, 5%);
+              background: darken($color-accent, 5%);
             }
 
             span {
@@ -66,11 +66,11 @@
 
                 &.active {
                   font-weight: 600;
-                  color: $color-brand-blue;
+                  color: $color-accent;
                 }
     
                 &:hover {
-                  color: $color-link;
+                  color: $color-accent;
                 }
               }
             }
