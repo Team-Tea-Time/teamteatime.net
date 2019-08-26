@@ -17,11 +17,11 @@ It makes as few assumptions as possible about your application and as a general 
 
 ### Source
 
-The repository is hosted on github at [https://github.com/Riari/laravel-forum](https://github.com/Riari/laravel-forum).
+The repository is hosted on GitHub at [https://github.com/Riari/laravel-forum](https://github.com/Riari/laravel-forum).
 
 ### Demo
 
-You can view a simple demo of 3.x online at [http://laravel-forum.teamteatime.net/](http://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).
+You can view a simple demo of 4.x online at [http://laravel-forum.teamteatime.net/](http://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).
 
 ### Project Scope
 
