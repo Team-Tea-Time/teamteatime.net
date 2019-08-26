@@ -17,7 +17,7 @@ It makes as few assumptions as possible about your application and as a general 
 
 ### Source
 
-The repository is hosted on github at [https://github.com/Riari/laravel-forum](https://github.com/Riari/laravel-forum).
+The repository is hosted on GitHub at [https://github.com/Riari/laravel-forum](https://github.com/Riari/laravel-forum).
 
 ### Demo
 
