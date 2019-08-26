@@ -1,0 +1,59 @@
+{{ partial "header.html" . }}
+
+<div class="documentation">
+  {{ partial "top.html" . }}
+
+  <section class="header">
+    <h1>{{ .Params.Projects }} {{ .Params.Versions }} Documentation</h1>
+    <h2>{{ substr .Params.Topics 3 }} - {{ .Title }}</h2>
+  </section>
+
+  <section class="content">
+    <div class="wrapper">
+      <aside>
+        <div class="version-select">
+          {{ $projectPage := .Site.GetPage (printf "/docs/%s" ($.Params.projects | lower | urlize)) }}
+
+          {{ $versions := slice }}
+          {{ range ($projectPage.Pages.ByParam "versions").Reverse }}
+            {{ $versions = $versions | append .Params.versions }}
+          {{ end }}
+          
+          <div class="current-version">Version: <span>{{ .Params.versions }}</span> <img src="/images/caret_down.svg"></div>
+
+          <ul class="versions">
+            {{ range $versions | uniq }}
+              <li><a href="{{ $projectPage.Permalink }}{{ . }}/" {{ if eq . $.Params.versions }}class="active"{{ end }}>{{ . }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+
+        <input type="checkbox" id="toggle-topic-select">
+        <label for="toggle-topic-select">table of contents</label>
+        <ul class="topic-select">
+          {{ range .Site.Taxonomies.topics }}
+            {{ $pages := where (where .Pages.ByWeight ".Params.projects" $.Params.projects) ".Params.versions" $.Params.versions }}
+          
+            {{ if gt (len $pages) 0 }}
+              <li class="separator" data-content="{{ substr .Page.Title 3 }}"></li>
+
+              {{ range $page := $pages }}
+                <li>
+                  <a href="{{ $page.Permalink }}" {{ if eq $page.Permalink $.Permalink }}class="active"{{ end }}>
+                    {{ $page.Title }}
+                  </a>
+                </li>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </ul>
+      </aside>
+
+      <main>
+        {{ .Content }}
+      </main>
+    </div>
+  </section>
+</div>
+
+{{ partial "footer.html" . }}

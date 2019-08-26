@@ -1,0 +1,174 @@
+.documentation {
+  .content {
+    .wrapper {
+      display: flex;
+
+      aside {
+        min-width: 200px;
+
+        .version-select {
+          position: relative;
+
+          &:hover {
+            ul {
+              display: block;
+            }
+          }
+
+          .current-version {
+            padding: .3em .5em;
+            background: $color-brand-blue;
+            font-size: .9rem;
+            color: lighten($color-brand-blue, 45%);
+            text-align: center;
+            cursor: pointer;
+            transition: background .2s;
+
+            &:hover {
+              background: darken($color-brand-blue, 5%);
+            }
+
+            span {
+              display: inline-block;
+              margin-left: .2em;
+              color: #fff;
+            }
+
+            img {
+              float: right;
+              margin: .4em .2em 0 0;
+              width: .6em;
+            }
+          }
+
+          ul {
+            display: none;
+            position: absolute;
+            top: 1.8em;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            list-style: none;
+            margin: 0;
+            padding: 1em;
+            box-shadow: 0 0 .5em rgba(0, 0, 0, .1);
+            background: #fff;
+
+            li {
+              a {
+                display: block;
+                font-size: .9rem;
+                color: #415468;
+                text-decoration: none;
+                line-height: 1.8;
+                outline: none;
+                transition: color .2s;
+
+                &.active {
+                  font-weight: 600;
+                  color: $color-brand-blue;
+                }
+    
+                &:hover {
+                  color: $color-link;
+                }
+              }
+            }
+          }
+        }
+
+        #toggle-topic-select,
+        #toggle-topic-select + label {
+          display: none;
+        }
+
+        ul.topic-select {
+          list-style: none;
+          margin: 1em 0 0 0;
+          padding: .5em 1em 1em 1em;
+          box-shadow: 0 0 .5em rgba(0, 0, 0, .1);
+
+          li.separator {
+            display: block;
+            position: relative;
+            border-top: .1rem solid #e3e8ed;
+            height: .1rem;
+            margin: 1rem 0;
+
+            &:after {
+              background: #fff;
+              color: #b4bdc7;
+              content: attr(data-content);
+              display: inline-block;
+              font-size: .8rem;
+              padding: 0 .8rem 0 0;
+              transform: translateY(-.8rem);
+            }
+          }
+
+          a {
+            display: block;
+            margin: .5em 0;
+            font-size: .8rem;
+            color: #415468;
+            text-decoration: none;
+            outline: none;
+            transition: color .2s;
+
+            &.active {
+              font-weight: 600;
+              color: $color-brand-blue;
+            }
+
+            &:hover {
+              color: $color-brand-blue;
+            }
+          }
+        }
+      }
+
+      main {
+        flex: 1;
+        padding: 0 0 0 2em;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-small-max) {
+  .documentation {
+    .content {
+      .wrapper {
+        flex-direction: column;
+        
+        aside {
+          #toggle-topic-select { display: none; }
+          #toggle-topic-select:checked + label + ul { display: block; }
+          #toggle-topic-select + label + ul { display: none; }
+          #toggle-topic-select + label:before { content: "Show "; }
+          #toggle-topic-select:checked + label:before { content: "Hide "; }
+          #toggle-topic-select + label {
+            display: block;
+            margin: .5em 0 0 0;
+            padding: .3em .5em;
+            background: $color-brand-blue;
+            font-size: .9rem;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: background .2s;
+  
+            &:active,
+            &:hover {
+              background: darken($color-brand-blue, 5%);
+            }
+          }
+        }
+
+        main {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

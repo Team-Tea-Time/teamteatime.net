@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Team Tea Time</title>
+  {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>

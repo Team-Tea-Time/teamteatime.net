@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:500,600|Roboto&display=swap');
+
+$color-base-light: #faf8f6;
+$color-base-dark: #374758;
+$color-brand-green: #6fe3ab;
+$color-brand-blue: #005dad;
+$color-link: #1391ff;
+
+$breakpoint-small-max: 560px;
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+}
+
+a {
+  color: $color-link;
+
+  &:hover {
+    color: darken($color-link, 10%);
+  }
+}
+
+code {
+  padding: 1px 3px;
+  background: #ffecf4;
+  font-size: .9rem;
+  color: #ff558d;
+}
+
+pre {
+  padding: 1em;
+  border-radius: .2em;
+  background: $color-base-dark;
+  color: lighten($color-base-dark, 60%);
+
+  code {
+    padding: 0;
+    background: none;
+    color: inherit;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    th, td {
+      padding: .5em;
+      border: 1px solid lighten($color-base-dark, 60%);
+    }
+  }
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.top {
+  padding: 1em .5em;
+  background: #fff;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .brand {
+      a {
+        font-size: 1.4em;
+        color: $color-base-dark;
+        text-decoration: none;
+  
+        img {
+          width: 2.4rem;
+          margin-right: .2em;
+          vertical-align: middle;
+        }
+      }
+    }
+  
+    nav {
+      margin-top: 2px;
+    
+      a {
+        font-size: 1.4rem;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.header {
+  padding: 4em;
+  background: linear-gradient(135deg, $color-brand-green, $color-brand-blue);
+  text-align: center;
+
+  h1 {
+    margin: 0;
+    font-size: 2.6em;
+    color: #fff;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.4em;
+    color: rgba(255, 255, 255, .5);
+  }
+}
+
+.content {
+  padding: 2em 0;
+  font-family: 'Roboto', sans-serif;
+  color: lighten($color-base-dark, 10%);
+  line-height: 1.5;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media only screen and (max-width: $breakpoint-small-max) {
+  .wrapper {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .header {
+    padding: 3em 1em;
+    font-size: .8em;
+  }
+
+  .content {
+    padding: 1rem 0;
+  }
+}
+
+@import 'layouts/documentation.scss';
+@import 'layouts/home.scss';
+@import 'layouts/list.scss';
+@import 'layouts/single.scss';

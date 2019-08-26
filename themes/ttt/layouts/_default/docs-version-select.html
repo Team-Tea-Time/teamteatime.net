@@ -1,0 +1,25 @@
+{{ partial "header.html" . }}
+
+<div class="list">
+  {{ partial "top.html" . }}
+
+  <section class="header">
+    <h1>{{ .Title }}</h1>
+  </section>
+
+  <section class="content">
+    <div class="wrapper">
+      {{ .Content }}
+
+      <ul class="pages">
+      {{ range where .Pages ".Params.root" true }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Params.versions }}</a>
+        </li>
+      {{ end }}
+      </ul>
+    </div>
+  </section>
+</div>
+
+{{ partial "footer.html" . }}

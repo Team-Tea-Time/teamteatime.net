@@ -1,0 +1,8 @@
+baseURL = "https://teamteatime.net"
+languageCode = "en-gb"
+title = "Team Tea Time website"
+theme = "ttt"
+[taxonomies]
+  project = "projects"
+  version = "versions"
+  topic = "topics"

@@ -1,0 +1,25 @@
+{{ partial "header.html" . }}
+
+<div class="list">
+  {{ partial "top.html" . }}
+
+  <section class="header">
+    <h1>{{ .Title }}</h1>
+  </section>
+
+  <section class="content">
+    <div class="wrapper">
+      {{ .Content }}
+
+      <ul class="pages">
+      {{ range .Pages }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+      {{ end }}
+      </ul>
+    </div>
+  </section>
+</div>
+
+{{ partial "footer.html" . }}
