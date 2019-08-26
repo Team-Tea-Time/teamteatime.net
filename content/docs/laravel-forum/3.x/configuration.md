@@ -3,7 +3,7 @@ layout: "docs"
 projects: "Laravel Forum"
 versions: "3.x"
 topics: "01:General"
-title: "Features"
+title: "Configuration"
 weight: 5
 ---
 
