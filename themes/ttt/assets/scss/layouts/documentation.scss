@@ -7,71 +7,30 @@
         min-width: 200px;
 
         .version-select {
-          position: relative;
+          font-size: .9rem;
 
-          &:hover {
-            ul {
-              display: block;
-            }
+          .label {
+            font-weight: bold;
           }
 
-          .current-version {
-            padding: .3em .5em;
-            background: $color-accent;
-            font-size: .9rem;
-            color: lighten($color-accent, 35%);
-            text-align: center;
-            cursor: pointer;
-            transition: background .2s;
+          .versions {
+            margin-top: .4em;
 
-            &:hover {
-              background: darken($color-accent, 5%);
-            }
-
-            span {
+            a {
               display: inline-block;
-              margin-left: .2em;
-              color: #fff;
-            }
+              padding: .1em .8em;
+              border-radius: 2em;
+              color: $color-accent;
+              text-decoration: none;
 
-            img {
-              float: right;
-              margin: .4em .2em 0 0;
-              width: .6em;
-            }
-          }
+              &.active {
+                background: $color-accent;
+                font-weight: bold;
+                color: #fff;
+              }
 
-          ul {
-            display: none;
-            position: absolute;
-            top: 1.8em;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            list-style: none;
-            margin: 0;
-            padding: 1em;
-            box-shadow: 0 0 .5em rgba(0, 0, 0, .1);
-            background: #fff;
-
-            li {
-              a {
-                display: block;
-                font-size: .9rem;
-                color: #415468;
-                text-decoration: none;
-                line-height: 1.8;
-                outline: none;
-                transition: color .2s;
-
-                &.active {
-                  font-weight: 600;
-                  color: $color-accent;
-                }
-    
-                &:hover {
-                  color: $color-accent;
-                }
+              &:hover:not(.active) {
+                background: lighten($color-accent, 30%);
               }
             }
           }

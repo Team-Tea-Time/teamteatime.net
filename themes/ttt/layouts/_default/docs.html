@@ -18,14 +18,13 @@
           {{ range ($projectPage.Pages.ByParam "versions").Reverse }}
             {{ $versions = $versions | append .Params.versions }}
           {{ end }}
-          
-          <div class="current-version">Version: <span>{{ .Params.versions }}</span> <img src="/images/caret_down.svg"></div>
 
-          <ul class="versions">
+          <div class="label">Version</div>
+          <div class="versions">
             {{ range $versions | uniq }}
-              <li><a href="{{ $projectPage.Permalink }}{{ . }}/" {{ if eq . $.Params.versions }}class="active"{{ end }}>{{ . }}</a></li>
+              <a href="{{ $projectPage.Permalink }}{{ . }}/" {{ if eq . $.Params.versions }}class="active"{{ end }}>{{ . }}</a>
             {{ end }}
-          </ul>
+          </div>
         </div>
 
         <input type="checkbox" id="toggle-topic-select">
