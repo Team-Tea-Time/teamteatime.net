@@ -45,6 +45,18 @@ pre {
   }
 }
 
+blockquote {
+  margin: 0;
+  padding: 1.4em 2em;
+  border-radius: .2em;
+  background: $color-base-light;
+  color: lighten($color-base-dark, 30%);
+
+  p {
+    margin: 0;
+  }
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
