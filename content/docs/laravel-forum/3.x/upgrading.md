@@ -11,7 +11,7 @@ weight: 4
 
 ### From 2.x
 
-Upgrading from 2.x is possible using the [standard installation steps](docs/laravel-forum/3.x/installation.md). Before you start, you *must* move any published forum config and views out of your project; this will make way for new versions of the files. Without doing this, you may run into errors when the package attempts to load old files with naming conventions matching new ones.
+Upgrading from 2.x is possible using the [standard installation steps](/docs/laravel-forum/3.x/installation/). Before you start, you *must* move any published forum config and views out of your project; this will make way for new versions of the files. Without doing this, you may run into errors when the package attempts to load old files with naming conventions matching new ones.
 
 Once you've done that and completed the standard installation, you should have up to date schema and all of the new config, translation and view files. You'll need to go through those to make any necessary changes for your project.
 

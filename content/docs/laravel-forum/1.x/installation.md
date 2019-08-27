@@ -11,7 +11,7 @@ weight: 2
 
 ### Compatibility
 
-This version is written for Laravel 4.x. See [2.x](2.x/installation.md) or [3.x](3.x/installation.md) for Laravel 5.x.
+This version is written for Laravel 4.x. See [2.x](2.x/installation/) or [3.x](3.x/installation/) for Laravel 5.x.
 
 ### Step 1: Install the package
 

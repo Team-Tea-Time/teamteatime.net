@@ -36,6 +36,7 @@ pre {
   border-radius: .2em;
   background: $color-base-dark;
   color: lighten($color-base-dark, 60%);
+  overflow-x: auto;
 
   code {
     padding: 0;

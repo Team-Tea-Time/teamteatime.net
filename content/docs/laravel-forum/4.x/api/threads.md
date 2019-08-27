@@ -15,7 +15,7 @@ weight: 4
 GET <root>/api/thread
 ```
 
-Returns a collection of threads, optionally narrowed down by [request scopes](docs/laravel-forum/4.x/api.request-scopes.md) and/or `category_id`.
+Returns a collection of threads, optionally narrowed down by [request scopes](/docs/laravel-forum/4.x/api/request-scopes/) and/or `category_id`.
 
 ### Index New
 

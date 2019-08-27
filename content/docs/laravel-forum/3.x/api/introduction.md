@@ -10,7 +10,7 @@ weight: 1
 
 ## Introduction
 
-[laravel-forum 3.x](https://github.com/Riari/laravel-forum) provides a RESTful API that can be consumed over HTTP or [internally](docs/laravel-forum/3.x/api.internal-dispatching.md). It supports multiple [authentication](docs/laravel-forum/3.x/api.authentication.md) methods and offers endpoints for creating, querying, modifying and deleting [categories](docs/laravel-forum/3.x/api.categories.md), [threads](docs/laravel-forum/3.x/api.threads.md) and [posts](docs/laravel-forum/3.x/api.posts.md).
+[laravel-forum 3.x](https://github.com/Riari/laravel-forum) provides a RESTful API that can be consumed over HTTP or [internally](/docs/laravel-forum/3.x/api/internal-dispatching/). It supports multiple [authentication](/docs/laravel-forum/3.x/api/authentication/) methods and offers endpoints for creating, querying, modifying and deleting [categories](/docs/laravel-forum/3.x/api/categories/), [threads](/docs/laravel-forum/3.x/api/threads/) and [posts](/docs/laravel-forum/3.x/api/posts/).
 
 ### Responses
 

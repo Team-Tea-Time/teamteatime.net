@@ -33,7 +33,7 @@ In this case, `$receiver` should be an instance of a class implementing `\Riari\
     }
 ```
 
-As an example, the optional [front-end](docs/laravel-forum/4.x/front-end.introduction.md) package uses the following:
+As an example, the optional [front-end](/docs/laravel-forum/4.x/front-end/) package uses the following:
 
 ```
     /**

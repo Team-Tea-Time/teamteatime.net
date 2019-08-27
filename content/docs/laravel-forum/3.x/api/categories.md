@@ -15,7 +15,7 @@ weight: 3
 GET <root>/api/category
 ```
 
-Returns a collection of categories, optionally narrowed down by [request scopes](docs/laravel-forum/3.x/api.request-scopes.md).
+Returns a collection of categories, optionally narrowed down by [request scopes](/docs/laravel-forum/3.x/api/request-scopes/).
 
 ### Store
 

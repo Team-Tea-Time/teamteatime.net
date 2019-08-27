@@ -31,4 +31,4 @@ Run the vendor:publish command to publish the package config and views to your a
 
 ---
 
-That's it; refer to [configuration](docs/laravel-forum/4.x/front-end.configuration.md) or [management](docs/laravel-forum/4.x/front-end.management.md) for further steps.
+That's it; refer to [configuration](/docs/laravel-forum/4.x/front-end/configuration/) or [management](/docs/laravel-forum/4.x/front-end/management/) for further steps.
