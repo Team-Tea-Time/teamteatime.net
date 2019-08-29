@@ -80,7 +80,7 @@
 </script>
 
 <script>
-  var SEPARATION = 350, AMOUNTX = 50, AMOUNTY = 50;
+  var SEPARATION = 300, AMOUNTX = 50, AMOUNTY = 50;
 
   var container;
   var camera, scene, renderer;
@@ -175,8 +175,8 @@
     render();
   }
   function render() {
-    camera.position.x = (mouseX * .1);
-    camera.position.y = 1000 + ((-mouseY) * .5);
+    camera.position.x = mouseX * .1;
+    camera.position.y = 1000 + (-mouseY) * .3;
     camera.lookAt(scene.position);
     var positions = particles.geometry.attributes.position.array;
     var scales = particles.geometry.attributes.scale.array;
