@@ -101,6 +101,8 @@
     document.getElementsByClassName('home')[0].prepend(container);
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 1000;
+    camera.position.y = 1000;
+
     scene = new THREE.Scene();
     //
     var numParticles = AMOUNTX * AMOUNTY;
@@ -173,8 +175,8 @@
     render();
   }
   function render() {
-    camera.position.x += (mouseX - camera.position.x) * .05;
-    camera.position.y += (- mouseY - camera.position.y) * .05;
+    camera.position.x = (mouseX * .1);
+    camera.position.y = 1000 + ((-mouseY) * .5);
     camera.lookAt(scene.position);
     var positions = particles.geometry.attributes.position.array;
     var scales = particles.geometry.attributes.scale.array;
