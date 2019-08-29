@@ -87,6 +87,7 @@
 
   var particles, count = 0;
 
+  var startX = 0, startY = 1000, startZ = 1000;
   var mouseX = 0, mouseY = 0;
 
   var windowHalfX = window.innerWidth / 2;
@@ -100,8 +101,9 @@
     container.className = 'waves';
     document.getElementsByClassName('home')[0].prepend(container);
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-    camera.position.z = 1000;
-    camera.position.y = 1000;
+    camera.position.z = startZ;
+    camera.position.y = startY;
+    camera.position.x = startX;
 
     scene = new THREE.Scene();
     //
@@ -175,8 +177,8 @@
     render();
   }
   function render() {
-    camera.position.x = mouseX * .1;
-    camera.position.y = 1000 + (-mouseY) * .3;
+    camera.position.x = startX + mouseX * .1;
+    camera.position.y = startY + -mouseY * .3;
     camera.lookAt(scene.position);
     var positions = particles.geometry.attributes.position.array;
     var scales = particles.geometry.attributes.scale.array;
