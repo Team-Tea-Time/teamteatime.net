@@ -71,9 +71,16 @@ table {
 
 .wrapper {
   width: 90%;
+  min-height: 100%;
   max-width: 1100px;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .top {
@@ -110,7 +117,7 @@ table {
 }
 
 .header {
-  padding: 4em;
+  padding: 3.6em;
   background: linear-gradient(135deg, $color-brand-green, $color-brand-blue);
   text-align: center;
 
@@ -129,7 +136,8 @@ table {
 }
 
 .content {
-  padding: 2em 0;
+  display: flex;
+  flex: 1;
   font-family: 'Roboto', sans-serif;
   color: lighten($color-base-dark, 10%);
   line-height: 1.5;
@@ -148,10 +156,6 @@ table {
   .header {
     padding: 3em 1em;
     font-size: .8em;
-  }
-
-  .content {
-    padding: 1rem 0;
   }
 }
 

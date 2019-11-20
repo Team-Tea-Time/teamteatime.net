@@ -2,9 +2,23 @@
   .content {
     .wrapper {
       display: flex;
+      flex: 1;
 
       aside {
-        min-width: 200px;
+        position: relative;
+        min-width: 240px;
+        padding: 1.4em 2em;
+        
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: -1;
+          width: 999em;
+          height: 100%;
+          background: linear-gradient(0deg, #fff, #f5f5fa);
+        }
 
         .version-select {
           font-size: .9rem;
@@ -43,23 +57,20 @@
 
         ul.topic-select {
           list-style: none;
-          margin: 1em 0 0 0;
-          padding: .5em 1em 1em 1em;
-          box-shadow: 0 0 .5em rgba(0, 0, 0, .1);
+          margin: 0;
+          padding: 1em 0;
 
           li.separator {
             display: block;
             position: relative;
-            border-top: .1rem solid #e3e8ed;
             height: .1rem;
             margin: 1rem 0;
 
             &:after {
-              background: #fff;
-              color: #b4bdc7;
               content: attr(data-content);
               display: inline-block;
-              font-size: .8rem;
+              font-size: .9rem;
+              font-weight: bold;
               padding: 0 .8rem 0 0;
               transform: translateY(-.8rem);
             }
@@ -67,20 +78,21 @@
 
           a {
             display: block;
-            margin: .5em 0;
-            font-size: .8rem;
+            margin: 0 0 0 1em;
+            font-size: .9rem;
             color: #415468;
+            line-height: 2;
             text-decoration: none;
             outline: none;
             transition: color .2s;
 
             &.active {
               font-weight: 600;
-              color: $color-brand-blue;
+              color: $color-accent;
             }
 
             &:hover {
-              color: $color-brand-blue;
+              color: $color-accent;
             }
           }
         }
@@ -101,6 +113,12 @@
         flex-direction: column;
         
         aside {
+          padding: 1em;
+
+          &::before {
+            right: -1em;
+          }
+
           #toggle-topic-select { display: none; }
           #toggle-topic-select:checked + label + ul { display: block; }
           #toggle-topic-select + label + ul { display: none; }
