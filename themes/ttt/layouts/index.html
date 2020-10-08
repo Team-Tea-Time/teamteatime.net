@@ -60,15 +60,4 @@
   </div>
 </div>
 
-<script src="/js/three.min.js"></script>
-
-<script type="x-shader/x-vertex" id="vertexshader">
-  attribute float scale;
-  void main() {
-    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-    gl_PointSize = scale * ( 300.0 / - mvPosition.z );
-    gl_Position = projectionMatrix * mvPosition;
-  }
-</script>
-
 {{ partial "footer.html" . }}
