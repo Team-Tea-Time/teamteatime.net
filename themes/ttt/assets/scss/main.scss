@@ -141,6 +141,10 @@ table {
   font-family: 'Roboto', sans-serif;
   color: lighten($color-base-dark, 10%);
   line-height: 1.5;
+
+  img {
+    max-width: 100%;
+  }
 }
 
 .text-center {
