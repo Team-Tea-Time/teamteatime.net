@@ -22,10 +22,10 @@ Install the package via composer:
 composer require riari/laravel-forum:~5.0
 ```
 
-Then add the service provider to your `config/app.php`:
+[Package Discovery](https://laravel.com/docs/8.x/packages#package-discovery) should take care of registering the service provider automatically, but if you need to do so manually, add the service provider to your `config/app.php`:
 
-```
-Riari\Forum\ForumServiceProvider::class,
+```php
+TeamTeaTime\Forum\ForumServiceProvider::class,
 ```
 
 ### Step 2: Publish the package files
