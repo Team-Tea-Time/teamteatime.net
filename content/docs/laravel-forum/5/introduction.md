@@ -21,4 +21,4 @@ The repository is hosted on GitHub at [https://github.com/Team-Tea-Time/laravel-
 
 ### Demo
 
-You can view a simple demo of version 4 online at [http://laravel-forum.teamteatime.net/](http://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).
+You can view a simple demo of version 5 online at [https://laravel-forum.teamteatime.net/](https://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).

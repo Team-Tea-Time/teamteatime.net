@@ -14,6 +14,8 @@ weight: 2
   * Weighted and nestable to any level
   * Optional "private" mode using [Laravel Authorization](http://laravel.com/docs/5.1/authorization)
   * Enable/disable threads per category
+  * Default accent colour (can be changed per category)
+* Views built on [Bootstrap 5](http://getbootstrap.com/)
 * Threads with moving, locking, pinning and deletion
 * Posts with editing and smart replying
 * Bulk modification or deletion of threads and posts
