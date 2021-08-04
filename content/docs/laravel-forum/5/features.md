@@ -25,4 +25,3 @@ weight: 2
 * JSON REST API exposing all of the functionality available via the web routes
   * Includes optional basic search endpoint
   * Supports your authentication method of choice via configurable middleware
-* Highly configurable
