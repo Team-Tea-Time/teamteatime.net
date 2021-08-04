@@ -9,6 +9,8 @@ weight: 4
 
 ## Posts
 
+Endpoint URLs are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+
 ### Search
 
 ```

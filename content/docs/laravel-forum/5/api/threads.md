@@ -9,7 +9,7 @@ weight: 3
 
 ## Threads
 
-Endpoint URLs are prefixed by `forum.router.prefix` (`/forum/api` by default).
+Endpoint URLs are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
 
 ### Recent
 
