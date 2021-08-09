@@ -22,3 +22,18 @@ The repository is hosted on GitHub at [https://github.com/Team-Tea-Time/laravel-
 ### Demo
 
 You can view a simple demo of version 5 online at [https://laravel-forum.teamteatime.net/](https://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).
+
+There are three users available, all of which can create threads and posts (replies), but have some differences in their permissions:
+
++ **DemoUser**
+  + Cannot create or manage categories
+  + Cannot view private categories
+  + Cannot use any moderation features
++ **DemoModerator**
+  + Cannot create or manage categories
+  + Cannot view private categories
+  + Can use moderation features
++ **DemoAdmin**
+  + Can create and manage categories
+  + Can view private categories
+  + Can use moderation features
