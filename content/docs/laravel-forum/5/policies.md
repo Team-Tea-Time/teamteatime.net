@@ -47,14 +47,15 @@ Methods in this policy accept `$user` and `$category` parameters.
 |---------------------|------------------------------------------------------------------|
 | `createThreads`     | Allows new thread creation in the category.                      |
 | `manageThreads`     | Encompasses thread modifying/deleting abilities in the category. |
-| `deleteThreads`     | Allows deleting threads in the category.                         |
+| `deleteThreads`     | Allows deleting threads in the category. Checked before `ThreadPolicy::delete`. |
+| `restoreThreads`    | Allows restoring threads in the category. Checked before `ThreadPolicy::restore`. |
 | `enableThreads`     | Allows enabling or disabling thread creation in the category.    |
 | `moveThreadsFrom`   | Allows moving threads from the category.                         |
 | `moveThreadsTo`     | Allows moving threads to the category.                           |
 | `lockThreads`       | Allows (un)locking of threads in the category.                   |
 | `pinThreads`        | Allows (un)pinning of threads in the category.                   |
 | `markThreadsAsRead` | Allows marking new/updated threads in this category as read.     |
-| `view`              | Allows viewing the category (if it's set to be private). Takes precedence over `ThreadPolicy::view` when browsing/viewing threads. |
+| `view`              | Allows viewing the category (if it's set to be private). Checked before `ThreadPolicy::view` when browsing/viewing threads. |
 | `delete`            | Allows deletion of the category.                                 |
 
 ### Thread
@@ -69,13 +70,13 @@ Methods in this policy accept `$user` and `$thread` parameters.
 
 | Ability        | Description                                                                        |
 |----------------|------------------------------------------------------------------------------------|
-| `view`         | Allows viewing the thread. `CategoryPolicy::view` takes precedence.                |
-| `deletePosts`  | Allows deleting posts in the thread. Takes precedence over `PostPolicy::delete`.   |
-| `restorePosts` | Allows restoring posts in the thread. Takes precedence over `PostPolicy::restore`. |
+| `view`         | Allows viewing the thread. `CategoryPolicy::view` is checked first.                |
+| `deletePosts`  | Allows deleting posts in the thread. Checked before `PostPolicy::delete`.          |
+| `restorePosts` | Allows restoring posts in the thread. Checked before `PostPolicy::restore`.        |
 | `rename`       | Allows renaming the thread.                                                        |
 | `reply`        | Allows replying to the thread (creating a new post).                               |
-| `delete`       | Allows deleting the thread.                                                        |
-| `restore`      | Allows restoring the thread.                                                       |
+| `delete`       | Allows deleting the thread. `CategoryPolicy::deleteThreads` is checked first.      |
+| `restore`      | Allows restoring the thread. `CategoryPolicy::restoreThreads` is checked first.    |
 
 ### Post
 
@@ -90,5 +91,5 @@ Methods in this policy accept `$user` and `$post` parameters.
 | Ability   | Description                                                               |
 |-----------|---------------------------------------------------------------------------|
 | `edit`    | Allows editing the post.                                                  |
-| `delete`  | Allows deleting the post. `ThreadPolicy::deletePosts` takes precedence.   |
-| `restore` | Allows restoring the post. `ThreadPolicy::restorePosts` takes precedence. |
+| `delete`  | Allows deleting the post. `ThreadPolicy::deletePosts` is checked first.   |
+| `restore` | Allows restoring the post. `ThreadPolicy::restorePosts` is checked first. |
