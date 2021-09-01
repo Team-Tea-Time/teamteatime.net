@@ -11,7 +11,7 @@ weight: 2
 
 ### Categories
 
-Once the package is installed, provided you are logged in, you can visit <your domain>/forum and start defining your category hierarchy using the 'Create category' button (also shown when viewin a category) and 'Manage' view. A category consists of the following properties:
+Once the package is installed, provided you are logged in, you can visit <your domain>/forum and start defining your category hierarchy using the 'Create category' button (also shown when viewing a category) and 'Manage' view. A category consists of the following properties:
 
 * **Title:** The name of the category, used for both display and URL slugs.
 * **Description:** A one-line description of the category. Displayed in listings and at the top of the category view.
