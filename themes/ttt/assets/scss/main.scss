@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:500,600|Roboto:400,700&display=swap');
 
-$color-base-light: #faf8f6;
+$color-base-light: #f5f5fa;
 $color-base-dark: #374758;
 $color-brand-green: #6fe3ab;
 $color-brand-blue: #005dad;
@@ -25,10 +25,11 @@ a {
 }
 
 code {
-  padding: 1px 3px;
-  background: #ffecf4;
+  padding: 1px 5px;
+  border-radius: .2em;
+  background: lighten($color-accent, 30%);
   font-size: .9rem;
-  color: #ff558d;
+  color: $color-accent;
 }
 
 pre {
@@ -46,10 +47,10 @@ pre {
 }
 
 blockquote {
-  margin: 0;
+  margin: 1em 0;
   padding: 1.4em 2em;
   border-radius: .2em;
-  background: $color-base-light;
+  background: linear-gradient(0deg, lighten($color-base-light, 1.5%), $color-base-light);
   color: lighten($color-base-dark, 30%);
 
   p {
