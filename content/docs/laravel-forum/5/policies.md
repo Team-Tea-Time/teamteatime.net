@@ -33,6 +33,10 @@ Methods in this policy accept a `$user` parameter.
 | `viewTrashedThreads`   | Allows viewing threads that have been soft-deleted. |
 | `viewTrashedPosts`     | Allows viewing posts that have been soft-deleted.   |
 
+> `manageCategories` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
+> - `moveCategories`
+> - `renameCategories`
+
 ### Category
 
 ```
@@ -55,8 +59,19 @@ Methods in this policy accept `$user` and `$category` parameters.
 | `lockThreads`       | Allows (un)locking of threads in the category.                   |
 | `pinThreads`        | Allows (un)pinning of threads in the category.                   |
 | `markThreadsAsRead` | Allows marking new/updated threads in this category as read.     |
-| `view`              | Allows viewing the category (if it's set to be private). Checked before `ThreadPolicy::view` when browsing/viewing threads. |
+| `view`              | Allows viewing the category (if it's set to be private) and anything inside it, including child categories. Checked before `ThreadPolicy::view` when browsing/viewing threads. |
 | `delete`            | Allows deletion of the category.                                 |
+
+> `manageThreads` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
+> - `deleteThreads`
+> - `restoreThreads`
+> - `enableThreads`
+> - `moveThreadsFrom`
+> - `moveThreadsTo`
+> - `lockThreads`
+> - `pinThreads`
+
+> The `view` ability cascades to descendant categories, even those set as public. A user cannot access a category if it has an inaccessible ancestor.
 
 ### Thread
 

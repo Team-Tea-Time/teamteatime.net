@@ -16,7 +16,7 @@ Once the package is installed, provided you are logged in, you can visit <your d
 * **Title:** The name of the category, used for both display and URL slugs.
 * **Description:** A one-line description of the category. Displayed in listings and at the top of the category view.
 * **Enable/disable threads:** Determines whether or not new threads can be created in the category.
-* **Private:** Determines whether or not the category is private; when enabled, the category will only be visible to authenticated users who pass authorisation.
+* **Private:** Determines whether or not the category is private; when enabled, the category will only be visible to authenticated users who pass authorisation. If a private category is determined not to be visible to a user, all of its descendant categories (if it has any) are also hidden to that user.
 * **Color:** The accent color to apply to the category.
 
 These properties can be set on creation or modified afterwards when viewing the category.
