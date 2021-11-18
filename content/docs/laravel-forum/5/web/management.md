@@ -21,6 +21,10 @@ Once the package is installed, provided you are logged in, you can visit <your d
 
 These properties can be set on creation or modified afterwards when viewing the category.
 
+> **In 5.1.0 onwards**
+>
+> The **Private** property determines access to all of the category's threads and child categories, even those set as public. A user cannot access a category if it has an ancestor with this property set to `true` and a `CategoryPolicy::view` ability check fails on that ancestor for the user.
+
 ### Threads
 
 The following actions can be applied to a single thread:

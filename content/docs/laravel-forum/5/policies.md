@@ -65,12 +65,12 @@ Methods in this policy accept `$user` and `$category` parameters.
 > `manageThreads` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
 > - `deleteThreads`
 > - `restoreThreads`
-> - `enableThreads`
 > - `moveThreadsFrom`
-> - `moveThreadsTo`
 > - `lockThreads`
 > - `pinThreads`
 
+> **In 5.1.0 onwards**
+>
 > The `view` ability cascades to descendant categories, even those set as public. A user cannot access a category if it has an inaccessible ancestor.
 
 ### Thread
