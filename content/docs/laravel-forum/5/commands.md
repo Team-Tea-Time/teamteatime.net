@@ -15,7 +15,7 @@ weight: 8
 php artisan forum:seed
 ```
 
-Seed the forum tables with example categories and content. You can run this multiple times to generate more categories and content.
+Seed the forum tables with example categories, content, and a user (to assign as author of the content). You can run this multiple times to generate more data.
 
 ### Sync stats
 
