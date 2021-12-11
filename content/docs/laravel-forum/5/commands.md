@@ -9,6 +9,14 @@ weight: 8
 
 ## Commands
 
+### Seed
+
+```
+php artisan forum:seed
+```
+
+Seed the forum tables with example categories and content. You can run this multiple times to generate more categories and content.
+
 ### Sync stats
 
 ```
