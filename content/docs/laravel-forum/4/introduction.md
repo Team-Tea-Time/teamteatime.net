@@ -19,10 +19,6 @@ It makes as few assumptions as possible about your application and as a general 
 
 The repository is hosted on GitHub at [https://github.com/Riari/laravel-forum](https://github.com/Riari/laravel-forum).
 
-### Demo
-
-You can view a simple demo of version 4 online at [http://laravel-forum.teamteatime.net/](http://laravel-forum.teamteatime.net/). The demo source is available at [https://github.com/Team-Tea-Time/laravel-forum-demo](https://github.com/Team-Tea-Time/laravel-forum-demo).
-
 ### Project Scope
 
 Laravel Forum is designed to be as lean as possible while still providing a powerful foundation for building forums with minimal effort. As such, certain types of feature won't be considered for future releases; these include text editor integrations (e.g. CKEditor), smiley support and attachments, to name a few. Much like Laravel itself, our philosophy is to avoid making assumptions about the design and purpose of the application, only providing fundamental tools with standard integrations where possible.
