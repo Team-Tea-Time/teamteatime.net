@@ -22,8 +22,17 @@ There are 4 configuration files in this version; **api**, **general**, **integra
 * `old_thread_threshold`: The minimum age of a thread before it should be considered old. This determines whether or not a thread can be considered new or unread for any user. Increasing this value to cover a longer period will increase the ultimate size of your forum_threads_read table. Must be a valid strtotime() string, or set to false to completely disable age-sensitive thread features.
 * `soft_deletes`: Whether or not to enable the soft-deletion feature for threads and posts.
 * `display_trashed_posts`: Whether or not to display trashed (soft-deleted) posts in threads. When enabled, trashed posts have their contents replaced with a "deleted" label.
-* `pagination`: "Per page" values for category, thread, and post pagination. Applies to both the web routes and API routes.
+* `pagination`: "Per page" values for thread and post pagination. Applies to both the web routes and API routes.
 * `validation`: Some basic values for validation rules.
+
+> `display_trashed_posts` works in conjunction with [Policies](/docs/laravel-forum/5/policies/) as follows:
+>
+> * If set to `true`, always display trashed posts; skip policy checks.
+> * If set to `false`, defer to the policy checks (always `false` for guests, otherwise `true` depending on what the `ForumPolicy::viewTrashedPosts` policy method returns).
+
+> Categories are not paginated anywhere due to the fact they can be defined as a tree structure and are rarely high in number, hence the `pagination` configuration value only supports threads and posts.
+>
+> In package versions prior to **5.3.7**, a `pagination.categories` value is provided, but this is unintentional and has no effect.
 
 ### Integration
 
