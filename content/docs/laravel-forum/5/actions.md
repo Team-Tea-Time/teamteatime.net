@@ -13,4 +13,6 @@ Laravel Forum 5 uses single-action classes to carry out the specific actions ass
 
 For a full list of actions, see their definitions in [src/Actions](https://github.com/Team-Tea-Time/laravel-forum/tree/5.0/src/Actions).
 
+> **Note**
+> 
 > If you wish to use server-side forum features programmatically, using actions is a good option - just keep in mind that they do not dispatch [events](/docs/laravel-forum/5/web/events/) because that responsibility is taken care of by the form requests and controllers instead.

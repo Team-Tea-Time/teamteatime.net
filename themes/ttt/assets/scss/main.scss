@@ -47,14 +47,30 @@ pre {
 }
 
 blockquote {
+  position: relative;
   margin: 1em 0;
   padding: 1.4em 2em;
   border-radius: .2em;
   background: linear-gradient(0deg, lighten($color-base-light, 1.5%), $color-base-light);
   color: lighten($color-base-dark, 30%);
 
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    background: no-repeat url('/images/icon_info.svg');
+  }
+
   p {
-    margin: 0;
+    margin: 0 0 1rem 0;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 

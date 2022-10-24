@@ -33,6 +33,8 @@ Methods in this policy accept a `$user` parameter.
 | `viewTrashedThreads`   | Allows viewing threads that have been soft-deleted. |
 | `viewTrashedPosts`     | Allows viewing posts that have been soft-deleted.   |
 
+> **Note**
+> 
 > `manageCategories` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
 > - `moveCategories`
 > - `renameCategories`
@@ -62,6 +64,8 @@ Methods in this policy accept `$user` and `$category` parameters.
 | `view`              | Allows viewing the category (if it's set to be private) and anything inside it, including child categories. Checked before `ThreadPolicy::view` when browsing/viewing threads. |
 | `delete`            | Allows deletion of the category.                                 |
 
+> **Note**
+> 
 > `manageThreads` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
 > - `deleteThreads`
 > - `restoreThreads`

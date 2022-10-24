@@ -25,11 +25,15 @@ There are 4 configuration files in this version; **api**, **general**, **integra
 * `pagination`: "Per page" values for thread and post pagination. Applies to both the web routes and API routes.
 * `validation`: Some basic values for validation rules.
 
-> `display_trashed_posts` works in conjunction with [Policies](/docs/laravel-forum/5/policies/) as follows:
+> **How `display_trashed_posts` works**
 >
-> * If set to `true`, always display trashed posts; skip policy checks.
+> This value is used in conjunction with [Policies](/docs/laravel-forum/5/policies/) as follows:
+>
+> * If set to `true`, always display trashed posts; skip the `ForumPolicy::viewTrashedPosts` policy method.
 > * If set to `false`, defer to the policy checks (always `false` for guests, otherwise `true` depending on what the `ForumPolicy::viewTrashedPosts` policy method returns).
 
+> **A note about category pagination**
+>
 > Categories are not paginated anywhere due to the fact they can be defined as a tree structure and are rarely high in number, hence the `pagination` configuration value only supports threads and posts.
 >
 > In package versions prior to **5.3.7**, a `pagination.categories` value is provided, but this is unintentional and has no effect.
