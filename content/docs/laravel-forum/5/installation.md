@@ -9,10 +9,12 @@ weight: 3
 
 ## Installation
 
-### Requirements
+### Versions
 
-+ PHP 7.4 or above
-+ Laravel 6 or above
+| **Laravel version** | **Package version** | **PHP version** |
+|---------------------|---------------------|-----------------|
+| 9                   | ^5.3                | ^8.0            |
+| 6 - 8               | ^5.0                | ^7.4            |
 
 ### Step 1: Install the package
 
