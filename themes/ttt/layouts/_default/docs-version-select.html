@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<div class="list">
+<div class="main list">
   {{ partial "top.html" . }}
 
   <section class="header">
@@ -18,6 +18,8 @@
         </li>
       {{ end }}
       </ul>
+
+      {{ partial "after-content.html" . }}
     </div>
   </section>
 </div>

@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<div class="single">
+<div class="main single">
   {{ partial "top.html" . }}
 
   <section class="header">
@@ -10,6 +10,8 @@
   <section class="content">
     <div class="wrapper">
       {{ .Content }}
+
+      {{ partial "after-content.html" . }}
     </div>
   </section>
 </div>

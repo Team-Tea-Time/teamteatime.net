@@ -1,0 +1,123 @@
+body.theme--dark {
+    $color-background: #34373e;
+    $color-foreground: #ced9eb;
+    $color-foreground-dimmed: #a7aeb8;
+    $color-accent: #976aff;
+
+    .main {
+        .top {
+            background: $color-background;
+
+            .brand a {
+                color: #fff;
+            }
+
+            nav {
+                color: $color-foreground;
+
+                span.separator {
+                    background: lighten($color-background, 20%);
+                }
+            }
+        }
+
+        .content {
+            background: $color-background;
+            color: $color-foreground-dimmed;
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: $color-foreground;
+            }
+
+            .wrapper {
+                aside {
+                    &::before {
+                        background: linear-gradient(0deg, $color-background, darken($color-background, 3%));
+                    }
+
+                    .version-select .versions {
+                        a {
+                            color: $color-accent;
+
+                            &:hover {
+                                background: transparentize($color-foreground, $amount: 0.8);
+                                color: #fff;
+                            }
+
+                            &.active {
+                                background: $color-accent;
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                    ul.topic-select {
+                        li.separator {
+                            color: $color-foreground;
+                        }
+
+                        a {
+                            color: $color-foreground-dimmed;
+
+                            &.active {
+                                color: $color-accent;
+                            }
+
+                            &:hover {
+                                color: $color-accent;
+                            }
+                        }
+                    }
+                }
+
+                main {
+                    code {
+                        background: transparentize($color-accent, 0.3);
+                        color: lighten($color-accent, 30%);
+                    }
+
+                    pre {
+                        background: lighten($color-background, 10%);
+
+                        code {
+                            background: none;
+                        }
+                    }
+
+                    table {
+
+                        thead tr th,
+                        tbody tr td {
+                            border-color: lighten($color-background, 10%);
+                        }
+                    }
+
+                    blockquote {
+                        background: linear-gradient(0deg, lighten($color-background, 2%), lighten($color-background, 4%));
+                        color: $color-foreground-dimmed
+                    }
+                }
+
+                ul.pages {
+                    li {
+                        a {
+                            background: lighten($color-background, 10%);
+
+                            &:hover {
+                                background: lighten($color-background, 15%);
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .after-content {
+        color: $color-foreground-dimmed;
+    }
+}

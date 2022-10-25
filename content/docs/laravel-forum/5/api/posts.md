@@ -23,6 +23,8 @@ Returns a collection of posts matching the given term. Valid attributes are:
 |--------|-------------------|------------------------|---------|
 | `term` | String (required) | The term to search for | *N/A*   |
 
+> **Note**
+> 
 > This endpoint uses a basic search implementation that works out of the box with no external dependencies, making it a good option for implementing XHR-based search on a small forum. However, due to its rudimentary nature, it's not designed to scale well and you may wish to disable the endpoint (by setting `forum.api.enable_search` to `false`) to implement your own solution with [Laravel Scout](https://laravel.com/docs/8.x/scout) or similar.
 
 ### Recent

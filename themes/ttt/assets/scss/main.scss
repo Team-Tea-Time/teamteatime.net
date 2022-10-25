@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:500,600|Roboto:400,700&display=swap');
 
+
 $color-base-light: #f5f5fa;
 $color-base-dark: #374758;
 $color-brand-green: #6fe3ab;
@@ -125,6 +126,7 @@ table {
   
     nav {
       margin-top: 2px;
+      color: $color-base-dark;
     
       a {
         font-size: 1.4rem;
@@ -170,6 +172,68 @@ table {
   text-align: center;
 }
 
+.after-content {
+  margin-top: 2rem;
+  text-align: right;
+
+  .theme-toggler {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+    vertical-align: -6px;
+    margin-right: .3rem;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 2rem;
+      background-color: #ccc;
+      transition: .1s;
+
+      &:before {
+        position: absolute;
+        content: "";
+        height: 8px;
+        width: 8px;
+        left: 4px;
+        bottom: 4px;
+        border-radius: 50%;
+        background-color: white;
+        transition: .1s;
+      }
+    }
+  
+    input:checked + .slider {
+      background-color: $color-accent;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px $color-accent;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(14px);
+    }
+  }
+
+  .theme-toggler-label {
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.6;
+  }
+}
+
 @media only screen and (max-width: $breakpoint-small-max) {
   .wrapper {
     width: 100%;
@@ -186,3 +250,4 @@ table {
 @import 'layouts/home.scss';
 @import 'layouts/list.scss';
 @import 'layouts/single.scss';
+@import 'themes/dark.scss';
