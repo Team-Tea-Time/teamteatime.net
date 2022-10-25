@@ -46,12 +46,12 @@
             {{ end }}
           {{ end }}
         </ul>
+
+        {{ partial "theme-toggler.html" . }}
       </aside>
 
       <main>
         {{ .Content }}
-
-        {{ partial "after-content.html" . }}
       </main>
     </div>
   </section>

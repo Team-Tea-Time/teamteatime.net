@@ -26,8 +26,8 @@ function setDarkModeCookie(value) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    let checkbox = document.querySelector('.after-content .theme-toggler input');
-    let label = document.querySelector('.after-content .theme-toggler-label');
+    let checkbox = document.querySelector('.theme-toggler input');
+    let label = document.querySelector('.theme-toggler-label');
 
     if (getCookie('dark') == '1') {
         setDarkMode(true, false);

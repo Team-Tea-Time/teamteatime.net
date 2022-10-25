@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:500,600|Roboto:400,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600&display=swap');
 
 $color-base-light: #f5f5fa;
 $color-base-dark: #374758;
 $color-brand-green: #6fe3ab;
 $color-brand-blue: #005dad;
-$color-accent: #9273db;
+$color-accent: #44c59e;
 $color-link: #1391ff;
 
 $breakpoint-small-max: 560px;
@@ -19,6 +19,7 @@ body, html {
 
 a {
   color: $color-link;
+  text-decoration: none;
 
   &:hover {
     color: darken($color-link, 10%);
@@ -28,16 +29,17 @@ a {
 code {
   padding: 1px 5px;
   border-radius: .2em;
-  background: lighten($color-accent, 30%);
-  font-size: .9rem;
-  color: $color-accent;
+  background: lighten($color-accent, 40%);
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: .8rem;
+  color: darken($color-accent, 10%);
 }
 
 pre {
   padding: 1em;
-  border-radius: .2em;
-  background: $color-base-dark;
-  color: lighten($color-base-dark, 60%);
+  border-radius: .3em;
+  background: $color-base-light;
+  color: $color-base-dark;
   overflow-x: auto;
 
   code {
@@ -51,9 +53,9 @@ blockquote {
   position: relative;
   margin: 1em 0;
   padding: 1.4em 2em;
-  border-radius: .2em;
+  border-radius: .3em;
   background: linear-gradient(0deg, lighten($color-base-light, 1.5%), $color-base-light);
-  color: lighten($color-base-dark, 30%);
+  color: lighten($color-base-dark, 20%);
 
   &::before {
     content: "";
@@ -151,7 +153,7 @@ table {
     margin: 0;
     font-weight: 400;
     font-size: 1.4em;
-    color: rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, .65);
   }
 }
 
@@ -172,16 +174,20 @@ table {
   text-align: center;
 }
 
-.after-content {
-  margin-top: 2rem;
+.text-right {
   text-align: right;
+}
+
+.theme-toggler-container {
+  position: relative;
+  z-index: 1;
 
   .theme-toggler {
     position: relative;
     display: inline-block;
     width: 30px;
     height: 16px;
-    vertical-align: -6px;
+    vertical-align: -5px;
     margin-right: .3rem;
 
     input {
@@ -198,7 +204,7 @@ table {
       right: 0;
       bottom: 0;
       border-radius: 2rem;
-      background-color: #ccc;
+      background-color: darken($color-base-light, 10%);
       transition: .1s;
 
       &:before {
@@ -230,7 +236,7 @@ table {
   .theme-toggler-label {
     cursor: pointer;
     user-select: none;
-    opacity: 0.6;
+    color: $color-base-dark;
   }
 }
 

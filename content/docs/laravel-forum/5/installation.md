@@ -50,6 +50,8 @@ Assuming this succeeds, you can now define your forum categories in the `forum_c
 
 Several configuration files are published to your application's config directory, each prefixed with `forum.`. Refer to these for a variety of options for changing the behaviour of the forum and how it integrates with key parts of your application code.
 
+> **Note**
+>
 > You may need to modify the `forum.integration.user_model` config option according to the location of your user model. By default, it matches the default namespace for the user model in Laravel 8. Additionally, you may need to modify the `forum.integration.user_name` option; this specifies which attribute on the user model should be used as a display name in the forum views.
 
 #### Policies

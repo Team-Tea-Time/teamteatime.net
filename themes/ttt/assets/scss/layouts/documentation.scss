@@ -46,7 +46,8 @@
               }
 
               &:hover:not(.active) {
-                background: lighten($color-accent, 30%);
+                background: transparentize($color-accent, 0.8);
+                color: $color-base-dark;
               }
             }
           }
@@ -82,9 +83,10 @@
 
           a {
             display: block;
+            position: relative;
             margin: 0 0 0 1em;
             font-size: .9rem;
-            color: #415468;
+            color: lighten($color-base-dark, 20%);
             line-height: 2;
             text-decoration: none;
             outline: none;
@@ -92,7 +94,20 @@
 
             &.active {
               font-weight: 600;
-              color: $color-accent;
+              color: $color-base-dark;
+
+              &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: -15px;
+                transform: translateY(-50%);
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: $color-accent;
+              }
             }
 
             &:hover {
