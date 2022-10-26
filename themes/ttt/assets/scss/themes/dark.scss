@@ -22,7 +22,7 @@ body.theme--dark {
 
     .content {
       background: $color-background;
-      color: $color-foreground-dimmed;
+      color: transparentize($color-foreground, 0.2);
 
       h1,
       h2,
