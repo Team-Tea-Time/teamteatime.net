@@ -10,7 +10,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="text/javascript" src="/scripts/theme-handler.js"></script>
+  {{ $script := resources.Get "js/main.js" | minify | fingerprint }}
+  <script type="text/javascript" src="{{ $script.Permalink }}"></script>
 </head>
 
 <body>
