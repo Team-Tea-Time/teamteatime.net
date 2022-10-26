@@ -7,6 +7,7 @@
       aside {
         position: relative;
         min-width: 240px;
+        height: fit-content;
         padding: 1.4em 2em;
         
         &::before {
@@ -30,7 +31,7 @@
           }
 
           .versions {
-            margin-top: .4em;
+            margin: 1rem 0;
 
             a {
               display: inline-block;
@@ -56,29 +57,22 @@
         #toggle-topic-select,
         #toggle-topic-select + label {
           display: none;
+          user-select: none;
         }
 
         ul.topic-select {
           position: relative;
           z-index: 2;
           list-style: none;
-          margin: 0;
-          padding: 1em 0;
+          margin: 1rem 0;
+          padding: 0;
 
           li.separator {
             display: block;
             position: relative;
-            height: .1rem;
-            margin: 1rem 0;
-
-            &:after {
-              content: attr(data-content);
-              display: inline-block;
-              font-size: .9rem;
-              font-weight: bold;
-              padding: 0 .8rem 0 0;
-              transform: translateY(-.8rem);
-            }
+            margin: .5rem 0;
+            font-size: .9rem;
+            font-weight: bold;
           }
 
           a {
@@ -119,7 +113,7 @@
 
       main {
         flex: 1;
-        padding: 0 0 0 2em;
+        padding: 2em 0 0 2em;
       }
     }
   }
@@ -132,7 +126,7 @@
         flex-direction: column;
         
         aside {
-          padding: 1em;
+          padding: 1em 0;
 
           &::before {
             right: -1em;

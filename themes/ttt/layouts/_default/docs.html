@@ -34,7 +34,7 @@
             {{ $pages := where (where .Pages.ByWeight ".Params.projects" $.Params.projects) ".Params.versions" $.Params.versions }}
           
             {{ if gt (len $pages) 0 }}
-              <li class="separator" data-content="{{ substr .Page.Title 3 }}"></li>
+              <li class="separator">{{ substr .Page.Title 3 }}</li>
 
               {{ range $page := $pages }}
                 <li>
@@ -45,6 +45,9 @@
               {{ end }}
             {{ end }}
           {{ end }}
+          <li class="separator">External links</li>
+          <li><a href="https://github.com/Team-Tea-Time/laravel-forum" target="_blank">GitHub</a></li>
+          <li><a href="https://laravel-forum.teamteatime.net/" target="_blank">Live demo</a></li>
         </ul>
 
         {{ partial "theme-toggler.html" . }}

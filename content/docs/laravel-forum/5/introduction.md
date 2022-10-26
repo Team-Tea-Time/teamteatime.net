@@ -25,17 +25,17 @@ You can view a simple demo of version 5 online at [https://laravel-forum.teamtea
 
 There are three users available, all of which can create threads and posts (replies), but have some differences in their permissions:
 
-**DemoUser**
+#### DemoUser
 + Cannot create or manage categories
 + Cannot view private categories
 + Cannot use any moderation features
 
-**DemoModerator**
+#### DemoModerator
 + Cannot create or manage categories
 + Cannot view private categories
 + Can use moderation features
 
-**DemoAdmin**
+#### DemoAdmin
 + Can create and manage categories
 + Can view private categories
 + Can use moderation features

@@ -37,18 +37,24 @@ body.theme--dark {
             background: linear-gradient(0deg, $color-background, darken($color-background, 3%));
           }
 
-          .version-select .versions {
-            a {
-              color: $color-accent;
+          .version-select {
+            .label {
+              color: $color-foreground;
+            }
 
-              &:hover {
-                background: transparentize($color-foreground, $amount: 0.8);
-                color: #fff;
-              }
-
-              &.active {
-                background: $color-accent;
-                color: #fff;
+            .versions {
+              a {
+                color: $color-accent;
+  
+                &:hover {
+                  background: transparentize($color-foreground, $amount: 0.8);
+                  color: #fff;
+                }
+  
+                &.active {
+                  background: $color-accent;
+                  color: #fff;
+                }
               }
             }
           }
@@ -118,6 +124,6 @@ body.theme--dark {
   }
 
   .theme-toggler-label {
-    color: $color-foreground;
+    color: $color-foreground-dimmed;
   }
 }
