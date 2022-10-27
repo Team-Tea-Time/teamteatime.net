@@ -9,109 +9,100 @@ weight: 4
 
 ## Posts
 
-Endpoint URLs are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
 
-### Search
+{{< api-endpoint 
+    name="Search"
+    method="POST"
+    path="/post/search"
+    returns="a collection of posts matching the given term. See parameter list below." >}}
 
-```
-POST /post/search
-```
+#### Parameters
 
-Returns a collection of posts matching the given term. Valid attributes are:
-
-| Name   | Type              | Description            | Default |
-|--------|-------------------|------------------------|---------|
-| `term` | String (required) | The term to search for | *N/A*   |
+| Name   | Type              | Description            |
+|--------|-------------------|------------------------|
+| `term` | String (required) | The term to search for |
 
 > **Note**
 > 
 > This endpoint uses a basic search implementation that works out of the box with no external dependencies, making it a good option for implementing XHR-based search on a small forum. However, due to its rudimentary nature, it's not designed to scale well and you may wish to disable the endpoint (by setting `forum.api.enable_search` to `false`) to implement your own solution with [Laravel Scout](https://laravel.com/docs/8.x/scout) or similar.
 
-### Recent
+{{< api-endpoint 
+    name="Fetch recent"
+    method="GET"
+    path="/post/recent"
+    returns="a collection of posts updated since `forum.general.old_thread_threshold`." >}}
 
-```
-GET /post/recent
-```
+{{< api-endpoint 
+    name="Fetch unread"
+    method="GET"
+    path="/post/unread"
+    returns="a collection of threads that are updated or unread for the authenticated user." >}}
 
-Returns a collection of posts updated since `forum.general.old_thread_threshold`.
+{{< api-endpoint 
+    name="Fetch"
+    method="GET"
+    path="/post/{id:int}"
+    returns="the post specified by `{id}`." >}}
 
-### Unread
+{{< api-endpoint 
+    name="Update"
+    method="PATCH"
+    path="/post/{id:int}"
+    description="Updates the post specified by `{id}`. See parameter list below."
+    returns="the updated post object if successful." >}}
 
-```
-GET /post/unread
-```
+#### Parameters
 
-Returns a collection of threads that are updated or unread for the authenticated user.
+| Name      | Type              | Description      |
+|-----------|-------------------|------------------|
+| `content` | String (required) | The post content |
 
-### Fetch
+{{< api-endpoint 
+    name="Delete"
+    method="DELETE"
+    path="/post/{id:int}"
+    description="Deletes the post specified by `{id}`. See parameter list below."
+    returns="the deleted post object if successful." >}}
 
-```
-GET /post/{id}
-```
-
-Returns a specified post.
-
-### Update
-
-```
-PATCH /post/{id}
-```
-
-Updates a specified post. Valid attributes are:
-
-| Name      | Type              | Description      | Default |
-|-----------|-------------------|------------------|---------|
-| `content` | String (required) | The post content | *N/A*   |
-
-### Delete
-
-```
-DELETE /post/{id}
-```
-
-Deletes a specified post. Valid attributes are:
+#### Parameters
 
 | Name          | Type               | Description         | Default                                                        |
 |---------------|--------------------|---------------------|----------------------------------------------------------------|
-| `permadelete` | Boolean (required) | Force hard-deletion | Always `true` if soft-deletion is disabled, otherwise `false`  |
+| `permadelete` | Boolean            | Force hard-deletion | Always `true` if soft-deletion is disabled, otherwise `false`  |
 
-Returns the deleted post if successful.
+{{< api-endpoint 
+    name="Restore"
+    method="POST"
+    path="/post/{id:int}/restore"
+    description="Restores the soft-deleted post specified by `{id}`."
+    returns="the restored post object if successful." >}}
 
-### Restore
+{{< api-endpoint 
+    name="Bulk delete"
+    method="DELETE"
+    path="/bulk/post"
+    description="Deletes a selection of one or more posts. Any posts not eligible for selection are left unchanged. See parameter list below."
+    returns="a generic 'success' response if successful." >}}
 
-```
-POST /post/{id}/restore
-```
-
-Restores a specified soft-deleted post.
-
-Returns the restored post if successful.
-
-### Bulk delete
-
-```
-DELETE /bulk/post
-```
-
-Deletes a selection of one or more posts. Valid attributes are:
+#### Parameters
 
 | Name          | Type                     | Description               | Default                                                        |
 |---------------|--------------------------|---------------------------|----------------------------------------------------------------|
 | `posts`       | Integer array (required) | IDs of posts to delete    | *N/A*                                                          |
-| `permadelete` | Boolean (required)       | Force hard-deletion       | Always `true` if soft-deletion is disabled, otherwise `false`  |
+| `permadelete` | Boolean                  | Force hard-deletion       | Always `true` if soft-deletion is disabled, otherwise `false`  |
 
 Returns a "success" response if successful.
 
-### Bulk restore
+{{< api-endpoint 
+    name="Bulk restore"
+    method="Post"
+    path="/bulk/post/restore"
+    description="Restores a selection of one or more posts. Any posts not eligible for selection are left unchanged. See parameter list below."
+    returns="a generic 'success' response if successful." >}}
 
-```
-POST /bulk/post/restore
-```
+#### Parameters
 
-Restores a selection of one or more posts. Valid attributes are:
-
-| Name    | Type                     | Description             | Default |
-|---------|--------------------------|-------------------------|---------|
-| `posts` | Integer array (required) | IDs of posts to restore | *N/A*   |
-
-Returns a "success" response if successful.
+| Name    | Type                     | Description             |
+|---------|--------------------------|-------------------------|
+| `posts` | Integer array (required) | IDs of posts to restore |

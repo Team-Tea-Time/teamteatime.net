@@ -9,31 +9,28 @@ weight: 2
 
 ## Categories
 
-Endpoint URLs are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
 
-### Index
+{{< api-endpoint 
+    name="Index"
+    method="GET"
+    path="/category"
+    returns="a flat collection of categories (including their nested set properties)." >}}
 
-```
-GET /category
-```
+{{< api-endpoint 
+    name="Fetch"
+    method="GET"
+    path="/category/{id:int}"
+    returns="the category specified by `{id}` if found and accessible, otherwise a 404 error." >}}
 
-Returns a flat collection of categories (including their nested set properties).
+{{< api-endpoint 
+    name="Store"
+    method="POST"
+    path="/category"
+    description="Creates a category with the specified parameters (see list below)."
+    returns="the created category object if successful." >}}
 
-### Fetch
-
-```
-GET /category/{id}
-```
-
-Returns a specified category.
-
-### Store
-
-```
-POST /category
-```
-
-Creates a category with the given attributes. Valid attributes are:
+#### Parameters
 
 | Name             | Type               | Description             | Default                                      |
 |------------------|--------------------|-------------------------|----------------------------------------------|
@@ -43,60 +40,58 @@ Creates a category with the given attributes. Valid attributes are:
 | `enable_threads` | Boolean            | Enable/disable threads  | `false`                                      |
 | `is_private`     | Boolean            | Make private or public  | `false`                                      |
 
-Returns the created category if successful.
+{{< api-endpoint 
+    name="Update"
+    method="PATCH"
+    path="/category/{id:int}"
+    description="Updates a category with the specified parameters (see list below)."
+    returns="the updated category object if successful." >}}
 
-### Update
+#### Parameters
 
-```
-PATCH /category/{id}
-```
+| Name             | Type               | Description             |
+|------------------|--------------------|-------------------------|
+| `title`          | String             | Title                   |
+| `description`    | String             | Description             |
+| `color`          | String             | Accent color            |
+| `enable_threads` | Boolean            | Enable/disable threads  |
+| `is_private`     | Boolean            | Make private or public  |
 
-Updates a category with the given attributes. See **Store** endpoint above for valid attributes.
+{{< api-endpoint 
+    name="Delete"
+    method="DELETE"
+    path="/category/{id:int}"
+    description="Deletes a category. The deletion is soft by default if the soft-deletion feature is enabled. Include `force: true` in the request body to hard-delete the category."
+    returns="the created category object if successful." >}}
 
-Returns the updated category if successful.
+{{< api-endpoint 
+    name="Thread index"
+    method="GET"
+    path="/category/{id:int}/thread"
+    returns="a paginated collection of threads belonging to the specified category." >}}
 
-### Delete
+{{< api-endpoint 
+    name="Store thread"
+    method="POST"
+    path="/category/{id:int}/thread"
+    description="Creates a new thread in the category specified by `{id}` with the specified parameters (see list below)."
+    returns="the created post if successful." >}}
 
-```
-DELETE /category/{id}
-```
+#### Parameters
 
-Deletes a category. The deletion is soft by default if the soft-deletion feature is enabled. Include `force: true` in the request body to hard-delete the category.
+| Name             | Type               | Description             |
+|------------------|--------------------|-------------------------|
+| `title`          | String (required)  | Thread title            |
+| `content`        | String (required)  | Post content            |
 
-Returns a "success" response if successful.
+{{< api-endpoint 
+    name="Bulk manage"
+    method="POST"
+    path="/bulk/category/manage"
+    description="Bulk updates categories, including their hierarchy, based on the order and nesting of category data in the request body. Uses the [rebuild tree method of kalnoy/nestedset](https://github.com/lazychaser/laravel-nestedset#rebuilding-a-tree-from-array). See example payload below."
+    returns="a generic 'success' response if successful." >}}
 
-### Thread index
-
-```
-GET /category/{id}/thread
-```
-
-Returns a paginated collection of threads belonging to the specified category.
-
-### Store thread
-
-```
-POST /category/{id}/thread
-```
-
-Creates a new thread in the specified category. Valid attributes are:
-
-| Name             | Type               | Description             | Default                                      |
-|------------------|--------------------|-------------------------|----------------------------------------------|
-| `title`          | String (required)  | Thread title            | *N/A*                                        |
-| `content`        | String (required)  | Post content            | *N/A*                                        |
-
-Returns the created post if successful.
-
-### Bulk manage
-
-```
-POST /bulk/category/manage
-```
-
-Bulk updates categories, including their hierarchy, based on the order and nesting of category data in the request body. Uses the [rebuild tree method of kalnoy/nestedset](https://github.com/lazychaser/laravel-nestedset#rebuilding-a-tree-from-array).
-
-Example payload:
+#### Example payload
 
 ```
 {
@@ -113,5 +108,3 @@ Example payload:
   ]
 }
 ```
-
-Returns a "success" response if successful.

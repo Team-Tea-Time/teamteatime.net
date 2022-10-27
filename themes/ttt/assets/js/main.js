@@ -22,7 +22,7 @@ function setDarkMode(enabled, setCookie) {
 }
 
 function setDarkModeCookie(value) {
-    document.cookie = `dark=${value}; path=/; SameSite=None; Secure`;
+    document.cookie = `dark=${value}; path=/; SameSite=None; Secure; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {

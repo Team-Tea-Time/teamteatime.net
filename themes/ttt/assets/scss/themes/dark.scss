@@ -107,6 +107,17 @@ body.theme--dark {
           }
         }
 
+        .api-endpoint {
+          &--heading {
+            border-color: transparentize($color-foreground, 0.8);
+
+            code {
+              background: none;
+              color: $color-foreground;
+            }
+          }
+        }
+
         ul.pages {
           li {
             a {

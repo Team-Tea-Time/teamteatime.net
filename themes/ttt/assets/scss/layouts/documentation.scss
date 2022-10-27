@@ -114,6 +114,38 @@
       main {
         flex: 1;
         padding: 2em 0 0 2em;
+
+        .api-endpoint {
+          position: relative;
+          margin: 2em 0 0 0;
+
+          &--anchor {
+            position: absolute;
+            top: 0;
+            left: -1em;
+          }
+
+          &--heading {
+            display: flex;
+            padding-bottom: .5em;
+            border-bottom: 1px solid transparentize($color-base-dark, 0.8);
+
+            h3 {
+              display: inline-block;
+              flex: 1;
+              margin: 0;
+            }
+
+            code {
+              display: inline-block;
+              padding: .5rem 0 0 0;
+              line-height: 1;
+              background: none;
+              font-size: 0.9rem;
+              color: $color-base-dark;
+            }
+          }
+        }
       }
     }
   }
@@ -159,6 +191,10 @@
 
         main {
           padding-left: 0;
+        }
+
+        .api-endpoint--heading {
+          flex-direction: column;
         }
       }
     }
