@@ -15,6 +15,7 @@ There are 4 configuration files in this version; **api**, **general**, **integra
 
 * `enable`: Whether or not to enable the JSON REST API.
 * `enable_search`: Whether or not to enable the post search endpoint. Useful if you'd prefer to use your own search implementation.
+* `resources`: Fully qualified names for the resource classes to use for API responses.
 * `router`: Router config for the API, including `prefix`, `as` (alias), `namespace`, and `middleware`.
 
 ### General
