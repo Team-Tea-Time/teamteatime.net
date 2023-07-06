@@ -49,7 +49,7 @@ As of 5.6.0, a `forum:install` command is available for installing UI presets. T
 
 `php artisan forum:install tailwind`
 
-After completing this step, you can define your forum categories in the `forum_categories` table, or authenticate with a user that has the `createCategories` ability (granted to all users by default) and use the 'Create category' panel displayed on the forum index (`/forum`).
+After completing this step, you can define your forum categories in the `forum_categories` table, or authenticate with a user that has the `createCategories` ability (granted to all users by default) and use the 'Create category' button displayed on the forum index (`/forum`).
 
 ### Additional steps
 
