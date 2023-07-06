@@ -43,6 +43,12 @@ Run your migrations:
 
 `php artisan migrate`
 
+### Step 4: Install a UI preset
+
+As of 5.6.0, a `forum:install` command is available for installing UI presets. The available preset options are `bootstrap` (for a Bootstrap 5 UI) and `tailwind` (for a Tailwind CSS UI). You must install one of these to publish the corresponding views to your application. For example:
+
+`php artisan forum:install tailwind`
+
 Assuming this succeeds, you can now define your forum categories in the `forum_categories` table, or authenticate with a user that has the `createCategories` ability (granted to all users by default) and use the 'Create category' panel displayed on the forum index (`/forum`).
 
 ### Additional steps
