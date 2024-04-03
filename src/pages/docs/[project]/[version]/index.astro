@@ -1,0 +1,28 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    
+    const paths: any = [];
+    projects.forEach(project => {
+        project.data.versions.forEach(version => {
+            paths.push({ params: { project: project.id, version }});
+        });
+    });
+
+    console.log(paths);
+    
+    return paths;
+}
+
+const { project, version } = Astro.params;
+
+const data = (await getEntry('projects', project)).data;
+---
+
+<Layout title={data.title}>
+    <h1>{data.title}</h1>
+    <h2>{data.description}</h2>
+</Layout>
