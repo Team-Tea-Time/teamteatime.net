@@ -1,0 +1,268 @@
+---
+import Layout from './Layout.astro';
+import { Navigation, type NavItem } from '../navigation/Navigation';
+
+interface Props {
+    title: string;
+    heading: string;
+    versions: Array<NavItem>,
+    navigation: Navigation;
+}
+
+const { title, heading, versions, navigation } = Astro.props;
+---
+
+<Layout title={title}>
+    <div class="wrap">
+        <header>
+            <a href="/" class="logo">
+                <img src="/logo.svg" />
+                <span>
+                    Team Tea Time
+                </span>
+            </a>
+            <div class="other">
+                <div class="inner">
+                    <div class="search">
+                        <button>
+                            <i data-lucide="search"></i>
+                            <span>
+                                Search
+                            </span>
+                        </button>
+                    </div>
+                    <div class="external">
+                        <a href="https://github.com/Team-Tea-Time" target="_blank" rel="noopener" class="icon-link">
+                            <i data-lucide="github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <nav class="side-nav">
+            {navigation.groups.map((group) => (
+                <div class="group">
+                    <div class="heading">
+                        {group.heading}
+                    </div>
+                    <div class="items">
+                        {group.items.map((item) => (
+                            <a href={item.url} class:list={[ { active: item.isActive }]}>{item.label}</a>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </nav>
+
+        <main>
+            <div class="container">
+                <div class="content">
+                    <h1>{heading}</h1>
+                    <select data-version-select>
+                        {versions.map(version => (
+                            <option value={version.url} selected={version.isActive}>{version.label}</option>
+                        ))}
+                    </select>
+                    <slot />
+                </div>
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<style lang="scss">
+    :root {
+        --height-top-bar: 70px;
+        --width-side-bar: 300px;
+        --max-content-width: 800px;
+    }
+
+    .wrap {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: #3d79d3;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        height: var(--height-top-bar);
+        background: var(--background-3);
+
+        a.logo {
+            display: flex;
+            align-items: center;
+            width: var(--width-side-bar);
+            padding: .8rem 1.2rem;
+            box-sizing: border-box;
+            font-family: "Rajdhani", sans-serif;
+            font-weight: 500;
+            font-size: 2rem;
+            color: var(--foreground-2);
+            text-decoration: none;
+
+            &:hover {
+                background: var(--background-hover);
+                color: var(--foreground-1);
+            }
+
+            img {
+                width: 48px;
+                height: 48px;
+                margin-right: 1rem;
+            }
+        }
+
+        .other {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            .inner {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 1rem;
+                max-width: var(--max-content-width);
+
+                .search {
+                    flex: 1;
+
+                    button {
+                        display: flex;
+                        align-items: center;
+                        min-width: 300px;
+                        background: var(--background-1);
+                        border: 1px solid var(--border-3);
+                        border-radius: .5rem;
+                        padding: .4rem .6rem;
+                        color: var(--foreground-3);
+                        cursor: pointer;
+
+                        &:hover {
+                            border-color: var(--foreground-2);
+                            color: var(--foreground-2);
+                        }
+
+                        svg {
+                            width: 16px;
+                            margin-right: .5rem;
+                        }
+                    }
+                }
+
+                .external {
+                    padding: .6rem;
+
+                    a {
+                        display: flex;
+                        justify-items: center;
+                        text-decoration: none;
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        color: var(--foreground-3);
+                        padding: .4rem;
+
+                        &:hover {
+                            color: var(--foreground-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    nav.side-nav {
+        position: fixed;
+        top: var(--height-top-bar);
+        left: 0;
+        bottom: 0;
+        width: var(--width-side-bar);
+        padding: 1rem 1.2rem;
+        border-top: 1px solid var(--background-1);
+        background: var(--background-3);
+        box-sizing: border-box;
+        color: var(--foreground-1);
+
+        .group {
+            .heading {
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-bottom: .2rem;
+            }
+
+            .items {
+                a {
+                    position: relative;
+                    display: block;
+                    color: var(--foreground-3);
+                    text-decoration: none;
+                    border-radius: 5px;
+                    padding: .3rem .8rem;
+                    margin-left: .4rem;
+                    font-weight: 500;
+                    transition: color .1s;
+
+                    &.active {
+                        color: var(--foreground-1);
+                        
+                        &:hover {
+                            color: inherit;
+                        }
+
+                        &::before {
+                            content: "";
+                            display: block;
+                            position: absolute;
+                            top: 50%;
+                            left: -3px;
+                            transform: translateY(-50%);
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 3px;
+                            background: var(--accent-1);
+                        }
+                    }
+
+                    &:hover {
+                        color: var(--accent-1);
+                    }
+                }
+            }
+        }
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        padding-top: var(--height-top-bar);
+        padding-left: var(--width-side-bar);
+        color: var(--foreground-1);
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            .content {
+                flex: 1;
+                max-width: var(--max-content-width);
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+        }
+    }
+</style>
+
+<script>
+document.querySelector('[data-version-select]')
+    ?.addEventListener('change', event => {
+        window.location.pathname = event.target!.value;
+    });
+</script>

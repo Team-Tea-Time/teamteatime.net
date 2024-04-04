@@ -33,6 +33,18 @@ const { title } = Astro.props;
 			var(--accent-2) 30%,
 			white 60%
 		);
+        --background-1: #13151a;
+        --background-2: #1a1e25;
+        --background-3: #23262f;
+        --background-hover: #ffffff0c;
+        --border-1: #383e4d;
+        --border-2: #414855;
+        --border-3: #5a6479;
+        --foreground-1: #f7fcff;
+        --foreground-2: #d3d9e6;
+        --foreground-3: #a0a9bd;
+        --link: #1c86ff;
+        --link-hover: #fff;
 	}
 
 	html {
@@ -40,7 +52,7 @@ const { title } = Astro.props;
 		font-optical-sizing: auto;
 		font-weight: 400;
 		font-style: normal;
-		background: #13151a;
+		background: var(--background-1);
 		background-size: 224px;
 	}
 
@@ -65,4 +77,28 @@ const { title } = Astro.props;
 			Courier New,
 			monospace;
 	}
+
+    a {
+        text-decoration: none;
+        color: var(--link);
+
+        &:hover {
+            color: var(--link-hover);
+        }
+    }
 </style>
+
+<script>
+import {
+    createIcons,
+    Search,
+    Github,
+} from 'lucide';
+
+createIcons({
+    icons: {
+        Search,
+        Github
+    }
+});
+</script>
