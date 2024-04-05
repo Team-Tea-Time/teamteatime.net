@@ -35,10 +35,13 @@ const viewingLatest = versions[0].isActive;
                             </span>
                         </button>
                     </div>
-                    <div class="external">
+                    <div class="links">
                         <a href="https://github.com/Team-Tea-Time" target="_blank" rel="noopener" class="icon-link">
                             <i data-lucide="github"></i>
                         </a>
+                        <span class="toggle-nav">
+                            <i data-lucide="menu"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -124,6 +127,7 @@ const viewingLatest = versions[0].isActive;
             color: var(--foreground-2);
             text-decoration: none;
             transition: background .1s;
+            white-space: nowrap;
 
             &:hover {
                 background: var(--background-highlight);
@@ -176,9 +180,12 @@ const viewingLatest = versions[0].isActive;
                     }
                 }
 
-                .external {
+                .links {
+                    display: flex;
+                    align-items: center;
                     padding: .6rem;
 
+                    span,
                     a {
                         display: flex;
                         justify-items: center;
@@ -187,10 +194,15 @@ const viewingLatest = versions[0].isActive;
                         font-weight: 600;
                         color: var(--foreground-3);
                         padding: .4rem;
+                        cursor: pointer;
 
                         &:hover {
                             color: var(--foreground-1);
                         }
+                    }
+
+                    .toggle-nav {
+                        display: none;
                     }
                 }
             }
@@ -315,11 +327,57 @@ const viewingLatest = versions[0].isActive;
             }
         }
     }
+
+    @media only screen and (max-width: 768px) {
+        header {
+            a.logo {
+                width: auto;
+                
+                span {
+                    display: none;
+                }
+
+                img {
+                    margin-right: 0;
+                }
+            }
+
+            .other .inner {
+                .search button {
+                    min-width: auto;
+                    width: 100%;
+                }
+                
+                .links .toggle-nav {
+                    display: flex;
+                }
+            }
+        }
+
+        nav.side-nav {
+            right: 0;
+            width: auto;
+            display: none;
+
+            &.show {
+                display: flex;
+            }
+        }
+
+        main {
+            padding-left: 0;
+        }   
+    }
 </style>
 
 <script>
 document.querySelector('.version-select select')
     ?.addEventListener('change', event => {
         window.location.pathname = event.target!.value;
+    });
+
+document.querySelector('.toggle-nav')
+    ?.addEventListener('click', event => {
+        document.querySelector('nav.side-nav')?.classList.toggle('show');
     });
 </script>
