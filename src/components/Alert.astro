@@ -1,0 +1,62 @@
+---
+interface Props {
+	type: string;
+}
+
+const { type } = Astro.props;
+
+let icon = '';
+switch (type) {
+    case 'warning':
+        icon = 'triangle-alert';
+        break;
+    case 'info':
+        icon = 'info';
+        break;
+}
+---
+
+<div class:list={[ 'alert', type ]}>
+    <span class="icon">
+        <i data-lucide={icon} />
+    </span>
+    <span>
+        <slot />
+    </span>
+</div>
+
+<style>
+    .alert {
+        display: flex;
+        align-items: center;
+        background: var(--background-2);
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 5px;
+        color: var(--foreground-2);
+
+        span.icon {
+            min-width: 48px;
+            height: 24px;
+            margin-right: 1rem;
+            text-align: center;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &.warning svg {
+            color: #ff7f17;
+        }
+
+        &.info svg {
+            color: #328bff;
+        }
+
+        code {
+            background-color: var(--background-highlight);
+        }
+    }
+</style>

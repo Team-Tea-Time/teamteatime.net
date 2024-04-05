@@ -1,15 +1,19 @@
 ---
 import Layout from './Layout.astro';
+import Alert from '../components/Alert.astro';
 import { Navigation, type NavItem } from '../navigation/Navigation';
 
 interface Props {
+    project: string;
     title: string;
     heading: string;
     versions: Array<NavItem>,
     navigation: Navigation;
 }
 
-const { title, heading, versions, navigation } = Astro.props;
+const { project, title, heading, versions, navigation } = Astro.props;
+
+const viewingLatest = versions[0].isActive;
 ---
 
 <Layout title={title}>
@@ -41,29 +45,42 @@ const { title, heading, versions, navigation } = Astro.props;
         </header>
 
         <nav class="side-nav">
-            {navigation.groups.map((group) => (
-                <div class="group">
-                    <div class="heading">
-                        {group.heading}
+            <div class="section version-select">
+                <strong>{project}</strong>
+
+                <select>
+                    {versions.map(version => (
+                        <option value={version.url} selected={version.isActive}>{version.label}</option>
+                    ))}
+                </select>
+            </div>
+
+            <div class="docs-nav">
+                {navigation.groups.map((group) => (
+                    <div class="group">
+                        <div class="heading">
+                            {group.heading}
+                        </div>
+                        <div class="items">
+                            {group.items.map((item) => (
+                                <a href={item.url} class:list={[ { active: item.isActive }]}>{item.label}</a>
+                            ))}
+                        </div>
                     </div>
-                    <div class="items">
-                        {group.items.map((item) => (
-                            <a href={item.url} class:list={[ { active: item.isActive }]}>{item.label}</a>
-                        ))}
-                    </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </nav>
 
         <main>
             <div class="container">
                 <div class="content">
+                    {!viewingLatest &&
+                        <Alert type="warning">
+                            You're viewing the docs for an old version of this package. Go to the <a href={versions[0].url}>latest version</a>?
+                        </Alert>}
+
                     <h1>{heading}</h1>
-                    <select data-version-select>
-                        {versions.map(version => (
-                            <option value={version.url} selected={version.isActive}>{version.label}</option>
-                        ))}
-                    </select>
+
                     <slot />
                 </div>
             </div>
@@ -93,6 +110,7 @@ const { title, heading, versions, navigation } = Astro.props;
         display: flex;
         height: var(--height-top-bar);
         background: var(--background-3);
+        box-shadow: 0px -10px 20px 20px var(--background-1);
 
         a.logo {
             display: flex;
@@ -105,9 +123,10 @@ const { title, heading, versions, navigation } = Astro.props;
             font-size: 2rem;
             color: var(--foreground-2);
             text-decoration: none;
+            transition: background .1s;
 
             &:hover {
-                background: var(--background-hover);
+                background: var(--background-highlight);
                 color: var(--foreground-1);
             }
 
@@ -183,55 +202,92 @@ const { title, heading, versions, navigation } = Astro.props;
         top: var(--height-top-bar);
         left: 0;
         bottom: 0;
+        display: flex;
+        flex-direction: column;
         width: var(--width-side-bar);
-        padding: 1rem 1.2rem;
         border-top: 1px solid var(--background-1);
         background: var(--background-3);
         box-sizing: border-box;
         color: var(--foreground-1);
 
-        .group {
-            .heading {
-                font-size: 1.1rem;
-                font-weight: 600;
-                margin-bottom: .2rem;
+        .section {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--background-1);
+            font-size: 1.1rem;
+        }
+
+        .version-select {
+            display: flex;
+            align-items: center;
+
+            strong {
+                flex: 1;
+                margin-right: .5rem;
             }
 
-            .items {
-                a {
-                    position: relative;
-                    display: block;
-                    color: var(--foreground-3);
-                    text-decoration: none;
-                    border-radius: 5px;
-                    padding: .3rem .8rem;
-                    margin-left: .4rem;
-                    font-weight: 500;
-                    transition: color .1s;
+            select {
+                padding: .2rem .4rem;
+                background: var(--background-1);
+                border-radius: 5px;
+                border: 1px solid var(--border-3);
+                color: var(--foreground-3);
 
-                    &.active {
-                        color: var(--foreground-1);
-                        
+                &:hover {
+                    border-color: var(--foreground-2);
+                    color: var(--foreground-1);
+                }
+            }
+        }
+
+        .docs-nav {
+            padding: 1rem 1.2rem;
+            overflow-y: scroll;
+
+            .group {
+                margin-bottom: .5rem;
+
+                .heading {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    margin-bottom: .2rem;
+                }
+
+                .items {
+                    a {
+                        position: relative;
+                        display: block;
+                        color: var(--foreground-3);
+                        text-decoration: none;
+                        border-radius: 5px;
+                        padding: .3rem .8rem;
+                        margin-left: .4rem;
+                        font-weight: 500;
+                        transition: color .1s;
+
+                        &.active {
+                            color: var(--foreground-1);
+                            
+                            &:hover {
+                                color: inherit;
+                            }
+
+                            &::before {
+                                content: "";
+                                display: block;
+                                position: absolute;
+                                top: 50%;
+                                left: -3px;
+                                transform: translateY(-50%);
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 3px;
+                                background: var(--accent-1);
+                            }
+                        }
+
                         &:hover {
-                            color: inherit;
+                            color: var(--accent-1);
                         }
-
-                        &::before {
-                            content: "";
-                            display: block;
-                            position: absolute;
-                            top: 50%;
-                            left: -3px;
-                            transform: translateY(-50%);
-                            width: 6px;
-                            height: 6px;
-                            border-radius: 3px;
-                            background: var(--accent-1);
-                        }
-                    }
-
-                    &:hover {
-                        color: var(--accent-1);
                     }
                 }
             }
@@ -255,13 +311,14 @@ const { title, heading, versions, navigation } = Astro.props;
                 max-width: var(--max-content-width);
                 padding: 1rem;
                 font-size: 1.1rem;
+                color: var(--foreground-3);
             }
         }
     }
 </style>
 
 <script>
-document.querySelector('[data-version-select]')
+document.querySelector('.version-select select')
     ?.addEventListener('change', event => {
         window.location.pathname = event.target!.value;
     });

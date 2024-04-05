@@ -15,10 +15,19 @@ export function getPartsFromDocsID(docsID: string): Array<string> {
     return [ project, version, slug ];
 }
 
-export function urlPartToTitle(slug: string): string {
-    return slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+export function slugToTitle(slug: string): string {
+    switch (slug) {
+        case 'api':
+            return 'API';
+        default:
+            return slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
 }
 
-export function absolutePathFromParts(project: string, version: string, slug: string): string {
+export function titleToSlug(title: string): string {
+    return title.toLowerCase().replace(/\s/g, '-');
+}
+
+export function getAbsolutePathFromParts(project: string, version: string, slug: string): string {
     return `/docs/${project}/${version}/${slug}`;
 }

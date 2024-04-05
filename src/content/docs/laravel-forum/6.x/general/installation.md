@@ -1,6 +1,6 @@
 ---
 title: "Installation"
-group: "General"
+order: 1
 ---
 
 2
