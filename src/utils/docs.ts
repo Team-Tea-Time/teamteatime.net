@@ -19,6 +19,8 @@ export function slugToTitle(slug: string): string {
     switch (slug) {
         case 'api':
             return 'API';
+        case 'front-end':
+            return 'Front-end';
         default:
             return slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }

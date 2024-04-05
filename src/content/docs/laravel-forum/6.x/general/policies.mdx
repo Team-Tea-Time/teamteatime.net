@@ -4,7 +4,7 @@ order: 5
 ---
 import Alert from '../../../../../components/Alert.astro';
 
-Four [Authorization Policies](http://laravel.com/docs/8.x/authorization) are defined to provide default permission checks. You can override them and change the corresponding namespaces specified in the `forum.integration.policies` config value to allow or deny forum abilities to different users.
+Four [Authorization Policies](http://laravel.com/docs/11.x/authorization) are defined to provide default permission checks. You can override them and change the corresponding namespaces specified in the `forum.integration.policies` config value to allow or deny forum abilities to different users.
 
 Note that every policy method must return a boolean (`true` to allow or `false` to deny).
 
@@ -69,7 +69,7 @@ Methods in this policy accept `$user` and `$category` parameters.
 </Alert>
 
 <Alert type="info">
-    **In 5.1.0 onwards**, the `view` ability cascades to descendant categories, even those set as public. A user cannot access a category if it has an inaccessible ancestor.
+    The `view` ability cascades to descendant categories, even those set as public. A user cannot access a category if it has an inaccessible ancestor.
 </Alert>
 
 ### Thread
