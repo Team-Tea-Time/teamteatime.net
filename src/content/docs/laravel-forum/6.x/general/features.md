@@ -3,10 +3,12 @@ title: "Features"
 order: 1
 ---
 
+Below is a non-exhaustive list of Laravel Forum's features.
+
 * Threads with support for moving, locking, pinning, and deletion
 * Categories
     * Weighted and nestable to any level
-    * Optional "private" mode per category using [Laravel Authorization](https://laravel.com/docs/8.x/authorization)
+    * Optional "private" mode per category using [Laravel Authorization](https://laravel.com/docs/11.x/authorization)
     * Enable/disable threads per category
 * Events for all types of forum interaction (see [events](https://github.com/Team-Tea-Time/laravel-forum/tree/6.x/src/Events))
     * All events implement [broadcasting](https://laravel.com/docs/11.x/broadcasting)
@@ -17,9 +19,9 @@ order: 1
     * Allows third-party UI presets to be contributed easily via packages
     * Three presets available out of the box
 * Seamless integration with Laravel authentication via configurable middleware and user model
-* Permission handling via [Laravel Authorization](https://laravel.com/docs/8.x/authorization)
+* Permission handling via [Laravel Authorization](https://laravel.com/docs/11.x/authorization)
 * Multilingual (see [translations](https://github.com/Team-Tea-Time/laravel-forum/tree/5.0/translations) for a current list)
-* JSON REST API exposing all of the functionality available via the web routes
+* JSON REST API exposing all of the functionality available via the front-end routes
     * Includes optional basic search endpoint
     * Supports your authentication method of choice via configurable middleware
 * Highly configurable

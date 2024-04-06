@@ -19,7 +19,7 @@ Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum
     | `term` | String (required) | The term to search for |
 
     <Alert type="info">
-        This endpoint uses a basic search implementation that works out of the box with no external dependencies, making it a good option for implementing XHR-based search on a small forum. However, due to its rudimentary nature, it's not designed to scale well and you may wish to disable the endpoint (by setting `forum.api.enable_search` to `false`) to implement your own solution with [Laravel Scout](https://laravel.com/docs/8.x/scout) or similar.
+        This endpoint uses a basic search implementation that works out of the box with no external dependencies, making it a good option for implementing XHR-based search on a small forum. However, due to its rudimentary nature, it's not designed to scale well and you may wish to disable the endpoint (by setting `forum.api.enable_search` to `false`) to implement your own solution with [Laravel Scout](https://laravel.com/docs/11.x/scout) or similar.
     </Alert>
 
     **Returns:** a collection of posts matching the given term. See parameter list below.

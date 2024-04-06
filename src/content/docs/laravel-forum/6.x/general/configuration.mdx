@@ -4,7 +4,7 @@ order: 4
 ---
 import Alert from '../../../../../components/Alert.astro';
 
-There are 4 configuration files in this version; **api**, **frontend**, **general**, and **integration**. They should be published to `app/config/forum.{config key}.php` after running `php artisan vendor:publish` as part of the installation.
+There are 4 configuration files in this version; **api**, **frontend**, **general**, and **integration**. They should be published to `app/config/forum` after running `php artisan vendor:publish` as part of the installation.
 
 ### API
 
@@ -13,9 +13,9 @@ There are 4 configuration files in this version; **api**, **frontend**, **genera
 * `router`: Router config for the API.
 * `resources`: Fully qualified names for the resource classes to use for API responses.
 
-### Frontend
+### Front-end
 
-* `enable`: Whether or not to enable the frontend routes.
+* `enable`: Whether or not to enable the front-end routes.
 * `preset`: The UI preset to use. See [UI Presets](/docs/laravel-forum/6.x/front-end/ui-presets).
 * `router` Router config for the front-end.
 * `route_prefixes`: Prefixes to use in category, thread, and post URLs.

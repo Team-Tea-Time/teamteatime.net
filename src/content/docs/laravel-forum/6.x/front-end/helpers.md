@@ -13,7 +13,7 @@ Laravel Forum provides a utility class (specified in the `forum.web.utility_clas
 Forum::alert('success', 'categories.updated', $categories->count());
 ```
 
-Flashes alert messages to the session to be displayed on the next request. Note that validation messages, which follow [Laravel's convention](https://laravel.com/docs/8.x/validation#working-with-error-messages) are separate from this feature; in this context, alerts are forum-specific 'success' or 'warning' messages.
+Flashes alert messages to the session to be displayed on the next request. Note that validation messages, which follow [Laravel's convention](https://laravel.com/docs/11.x/validation#working-with-error-messages) are separate from this feature; in this context, alerts are forum-specific 'success' or 'warning' messages.
 
 ### Render
 
