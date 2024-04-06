@@ -1,8 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { getPartsFromDocsID, slugToTitle, getAbsolutePathFromParts } from '../../../../../utils/docs';
-import { Navigation, type NavItem } from '../../../../../navigation/Navigation';
-import DocsLayout from '../../../../../layouts/DocsLayout.astro';
+import { getPartsFromDocsID, slugToTitle, getAbsolutePathFromParts } from '../../../../utils/docs';
+import { Navigation, type NavItem } from '../../../../navigation/Navigation';
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
 
 export async function getStaticPaths() {
     const docs = await getCollection('docs');
@@ -62,13 +62,15 @@ docs
 const originalSlug = `${project}/${(version as string).replace('.', '')}/${slug}`;
 const entry = (await getEntry('docs', originalSlug))!;
 const { Content } = await entry.render();
+const projectTitle = slugToTitle(project);
 ---
 
 <DocsLayout
-    project={slugToTitle(project)}
-    title={`${entry!.data.title} - ${slugToTitle(project as string)} ${version} - Team Tea Time`}
-    heading={entry.data.title}
+    project={projectTitle}
+    version={version}
     versions={Array.from(versions)}
+    title={`${entry!.data.title} - ${projectTitle} ${version} - Team Tea Time`}
+    heading={entry.data.title}
     navigation={navigation}>
     <Content />
 </DocsLayout>

@@ -37,6 +37,7 @@ const { title } = Astro.props;
         --background-2: #1a1e25;
         --background-3: #23262f;
         --background-highlight: #ffffff0c;
+        --background-dim: #1d222748;
         --border-1: #383e4d;
         --border-2: #414855;
         --border-3: #5a6479;
@@ -49,6 +50,10 @@ const { title } = Astro.props;
 
     :target {
         scroll-margin-top: 80px;
+    }
+
+    .hidden {
+        display: none;
     }
 
 	html {
@@ -125,6 +130,31 @@ const { title } = Astro.props;
             padding: .4rem .6rem;
         }
     }
+
+    input[type=text] {
+        margin: .6rem 0 .2rem 0;
+        padding: .8rem 1rem;
+        border: 1px solid var(--border-3);
+        border-radius: .5rem;
+        background: var(--background-1);
+        color: var(--foreground-3);
+        outline: none;
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        &:focus,
+        &:focus:hover {
+            border-color: var(--foreground-2);
+            color: var(--foreground-2);
+        }
+
+        &:hover {
+            border-color: var(--foreground-3);
+            color: var(--foreground-3);
+        }
+    }
 </style>
 
 <script>
@@ -135,6 +165,7 @@ import {
     TriangleAlert,
     Info,
     Menu,
+    X,
 } from 'lucide';
 
 createIcons({
@@ -144,6 +175,7 @@ createIcons({
         TriangleAlert,
         Info,
         Menu,
+        X,
     }
 });
 </script>

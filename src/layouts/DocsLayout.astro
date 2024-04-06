@@ -5,20 +5,21 @@ import { Navigation, type NavItem } from '../navigation/Navigation';
 
 interface Props {
     project: string;
+    version: string;
+    versions: Array<NavItem>,
     title: string;
     heading: string;
-    versions: Array<NavItem>,
     navigation: Navigation;
 }
 
-const { project, title, heading, versions, navigation } = Astro.props;
+const { project, version, versions, title, heading, navigation } = Astro.props;
 
 const viewingLatest = versions[0].isActive;
 ---
 
 <Layout title={title}>
     <div class="wrap">
-        <header>
+        <header data-pagefind-ignore>
             <a href="/" class="logo">
                 <img src="/logo.svg" />
                 <span>
@@ -28,7 +29,7 @@ const viewingLatest = versions[0].isActive;
             <div class="other">
                 <div class="inner">
                     <div class="search">
-                        <button>
+                        <button onclick="openSearch()">
                             <i data-lucide="search"></i>
                             <span>
                                 Search
@@ -47,7 +48,7 @@ const viewingLatest = versions[0].isActive;
             </div>
         </header>
 
-        <nav class="side-nav">
+        <nav class="side-nav" data-pagefind-ignore>
             <div class="section version-select">
                 <strong>{project}</strong>
 
@@ -78,16 +79,39 @@ const viewingLatest = versions[0].isActive;
             <div class="container">
                 <div class="content">
                     {!viewingLatest &&
-                        <Alert type="warning">
-                            You're viewing the docs for an old version of this package. Go to the <a href={versions[0].url}>latest version</a>?
-                        </Alert>}
+                        <div data-pagefind-ignore>
+                            <Alert type="warning">
+                                You're viewing the docs for an old version of this package. Go to the <a href={versions[0].url}>latest version</a>?
+                            </Alert>
+                        </div>}
 
-                    <h1>{heading}</h1>
+                    <!-- For PageFind results -->
+                    <h1 class="hidden">{heading} ({project} {version})</h1>
+
+                    <h1 data-pagefind-ignore>{heading}</h1>
 
                     <slot />
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="search" class="overlay" data-pagefind-ignore>
+        <div class="panel">
+            <div class="header">
+                <div class="heading">
+                    <h2>Search</h2>
+
+                    <span class="close" onclick="closeSearch()">
+                        <i data-lucide="x" />
+                    </span>
+                </div>
+                <input type="text" placeholder="Search..." autocomplete="off" />
+            </div>
+            <div class="content">
+                <div class="results" />
+            </div>
+        </div>
     </div>
 </Layout>
 
@@ -328,6 +352,71 @@ const viewingLatest = versions[0].isActive;
         }
     }
 
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+        justify-content: center;
+        align-items: middle;
+        background: var(--background-dim);
+        z-index: 100;
+
+        &.show {
+            display: flex;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            max-height: 700px;
+            border-radius: 7px;
+            background: var(--background-3);
+            color: var(--foreground-1);
+            box-shadow: 0 15px 30px var(--background-1);
+
+            .header {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-1);
+
+                .heading {
+                    display: flex;
+                    align-items: center;
+
+                    h2 {
+                        flex: 1;
+                        margin: 0;
+                    }
+
+                    svg {
+                        color: var(--foreground-3);
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--foreground-1);
+                        }
+                    }
+                }
+            }
+
+            .content {
+                padding: 1rem;
+                overflow-y: scroll;
+            }
+        }
+    }
+
+    #search input[type=text] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     @media only screen and (max-width: 768px) {
         header {
             a.logo {
@@ -370,14 +459,81 @@ const viewingLatest = versions[0].isActive;
     }
 </style>
 
-<script>
-document.querySelector('.version-select select')
-    ?.addEventListener('change', event => {
-        window.location.pathname = event.target!.value;
-    });
+<style is:inline>
+    #search .results a {
+        display: block;
+        margin: .5rem 0;
+        border-bottom: 1px solid var(--border-1);
+        text-decoration: none;
+    }
 
-document.querySelector('.toggle-nav')
-    ?.addEventListener('click', event => {
-        document.querySelector('nav.side-nav')?.classList.toggle('show');
-    });
+    #search .results a:last-of-type {
+        border-bottom: none;
+    }
+
+    #search .results a h3 {
+        margin: .8rem 0;
+    }
+
+    #search .results mark {
+        background-color: #ffba60;
+        color: var(--background-1);
+    }
+</style>
+
+<script>
+</script>
+
+<script is:inline>
+const search = document.querySelector('#search');
+const searchInput = document.querySelector('#search input');
+const searchResults = document.querySelector('#search .results');
+const toggleNav = document.querySelector('.toggle-nav');
+const versionSelect = document.querySelector('.version-select select');
+
+function openSearch() {
+    search.classList.add('show');
+    searchInput.focus();
+}
+
+function closeSearch() {
+    search.classList.remove('show');
+}
+
+document.body.addEventListener('keydown', event => {
+    if (event.key == 'Escape') closeSearch();
+});
+
+search.addEventListener('click', event => {
+    if (event.target.id != 'search') return;
+    event.target.classList.remove('show');
+});
+
+searchInput.addEventListener('input', async (e) => {
+    if (e.target.dataset.loaded !== 'true') {
+        e.target.dataset.loaded = 'true';
+        window.pagefind = await import('/pagefind/pagefind.js');
+    }
+
+    const search = await window.pagefind.search(e.target.value);
+    searchResults.innerHTML = '';
+
+    for (const result of search.results) {
+      const data = await result.data();
+      console.log(data.meta);
+      searchResults.innerHTML += `
+        <a href="${data.url}">
+          <h3>${data.meta.title}</h3>
+          <p>${data.excerpt}</p>
+        </a>`
+    }
+});
+
+toggleNav.addEventListener('click', event => {
+    document.querySelector('nav.side-nav')?.classList.toggle('show');
+});
+
+versionSelect.addEventListener('change', event => {
+    window.location.pathname = event.target.value;
+});
 </script>
