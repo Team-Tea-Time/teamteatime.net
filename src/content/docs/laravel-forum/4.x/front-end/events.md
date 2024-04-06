@@ -3,9 +3,9 @@ title: "Events"
 order: 11
 ---
 
-Events provided by the front-end cover some basic user interaction scenarios and implement standard [Laravel Events](http://laravel.com/docs/5.1/events).
+Events provided by the front-end cover some basic user interaction scenarios and implement standard [Laravel Events](https://laravel.com/docs/5.1/events).
 
-If you need to perform an action when a category, thread or post is being created, updated or deleted in the database, take a look at [Eloquent Events](http://laravel.com/docs/5.1/eloquent#events).
+If you need to perform an action when a category, thread or post is being created, updated or deleted in the database, take a look at [Eloquent Events](https://laravel.com/docs/5.1/eloquent#events).
 
 These events are all namespaced under `Riari\Forum\Frontend\Events`.
 

@@ -5,7 +5,7 @@ order: 18
 
 ## Request Scopes
 
-Request scopes take advantage of regular [Eloquent Query Scopes](http://laravel.com/docs/5.1/eloquent#query-scopes) to provide an easy way of adjusting API requests.
+Request scopes take advantage of regular [Eloquent Query Scopes](https://laravel.com/docs/5.1/eloquent#query-scopes) to provide an easy way of adjusting API requests.
 
 Refer to the [front-end source](https://github.com/Riari/laravel-forum-frontend) for examples of these scopes being implemented programmatically.
 
@@ -15,7 +15,7 @@ Refer to the [front-end source](https://github.com/Riari/laravel-forum-frontend)
 GET <endpoint>?where[column]=value
 ```
 
-Add a simple [WHERE clause](http://laravel.com/docs/5.1/queries#where-clauses) to the query.
+Add a simple [WHERE clause](https://laravel.com/docs/5.1/queries#where-clauses) to the query.
 
 ### With
 
@@ -23,7 +23,7 @@ Add a simple [WHERE clause](http://laravel.com/docs/5.1/queries#where-clauses) t
 GET <endpoint>?with[]=relationship
 ```
 
-Include the specified relationship(s) in the response. Useful for [Eager Loading](http://laravel.com/docs/5.1/eloquent-relationships#eager-loading).
+Include the specified relationship(s) in the response. Useful for [Eager Loading](https://laravel.com/docs/5.1/eloquent-relationships#eager-loading).
 
 ### Append
 
@@ -39,4 +39,4 @@ Include the specified attribute(s) in the response.
 GET <endpoint>?orderBy=column&orderDir=desc
 ```
 
-Add a simple [ORDER BY](http://laravel.com/docs/5.1/queries#ordering-grouping-limit-and-offset) to the query.
+Add a simple [ORDER BY](https://laravel.com/docs/5.1/queries#ordering-grouping-limit-and-offset) to the query.

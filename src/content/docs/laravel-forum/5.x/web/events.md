@@ -3,7 +3,7 @@ title: "Events"
 order: 10
 ---
 
-Events cover all user interactions and are implemented as standard [Laravel Events](http://laravel.com/docs/8.x/events).
+Events cover all user interactions and are implemented as standard [Laravel Events](https://laravel.com/docs/8.x/events).
 
 These events are all namespaced under `TeamTeaTime\Forum\Events`. Note that while they cover every CRUD action, you can still use [Eloquent Observers](https://laravel.com/docs/8.x/eloquent#observers) to react to events at the model level.
   

@@ -23,7 +23,7 @@ Install the package via composer:
 composer require riari/laravel-forum:^6.0
 ```
 
-[Package Discovery](https://laravel.com/docs/11.x/packages#package-discovery) should take care of registering the service provider automatically, but if you need to do so manually, add the service provider to your `config/app.php`:
+[Package Discovery](https://laravel.com/docs/11.x/packages#package-discovery) should take care of registering the service provider automatically, but if you need to do so manually, add the service provider to your application's `bootstrap/providers.php` file:
 
 ```
 TeamTeaTime\Forum\ForumServiceProvider::class,
@@ -33,13 +33,17 @@ TeamTeaTime\Forum\ForumServiceProvider::class,
 
 Run the vendor:publish command to publish the package config, translations and migrations to your app's directories:
 
-`php artisan vendor:publish`
+```
+php artisan vendor:publish
+```
 
 ### Step 3: Update your database
 
 Run your migrations:
 
-`php artisan migrate`
+```
+php artisan migrate
+```
 
 ### Step 4: Install a UI preset
 
@@ -50,6 +54,10 @@ php artisan forum:preset-install livewire-tailwind
 ```
 
 After completing this step, you can define your forum categories in the `forum_categories` table, or authenticate with a user that has the `createCategories` ability (granted to all users by default) and use the 'Create category' button displayed on the forum index (`/forum`).
+
+<Alert type="info">
+    By default, the `livewire-tailwind` preset is set as the active one in the `forum.frontend.preset` config value. This preset requires Livewire and a few other dependencies. Refer to [UI Presets](/docs/laravel-forum/6.x/front-end/ui-presets) for details.
+</Alert>
 
 ### Additional steps
 

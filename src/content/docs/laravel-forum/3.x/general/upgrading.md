@@ -11,6 +11,6 @@ Once you've done that and completed the standard installation, you should have u
 
 ### From version 1
 
-Upgrading from version 1 is unsupported due to major differences in the package architecture and the supported Laravel versions. If you want to tackle this anyway, start by following the [Laravel upgrade guide](http://laravel.com/docs/5.1/upgrade) to upgrade your project to Laravel 5.1; you can then upgrade laravel-forum to the latest 2 release via composer and manually adjust your schema, views and config to match the new versions.
+Upgrading from version 1 is unsupported due to major differences in the package architecture and the supported Laravel versions. If you want to tackle this anyway, start by following the [Laravel upgrade guide](https://laravel.com/docs/5.1/upgrade) to upgrade your project to Laravel 5.1; you can then upgrade laravel-forum to the latest 2 release via composer and manually adjust your schema, views and config to match the new versions.
 
 Once that's complete, you can move onto upgrading from version 2.

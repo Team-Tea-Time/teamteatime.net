@@ -3,7 +3,7 @@ title: "Policies"
 order: 5
 ---
 
-Four [Authorization Policies](http://laravel.com/docs/5.1/authorization#policies) are defined to provide default permission checks. You can override them and change the corresponding namespaces specified in the `forum.integration.policies` config value to allow or deny forum abilities to different users.
+Four [Authorization Policies](https://laravel.com/docs/5.1/authorization#policies) are defined to provide default permission checks. You can override them and change the corresponding namespaces specified in the `forum.integration.policies` config value to allow or deny forum abilities to different users.
 
 Note that every policy method must return a boolean (`true` to allow or `false` to deny).
 
