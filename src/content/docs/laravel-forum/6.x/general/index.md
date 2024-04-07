@@ -5,7 +5,7 @@ order: 0
 
 Aside from compatibility with Laravel 11, Laravel Forum 6 comes with a number of improvements such as a more robust iteration of the UI presets feature introduced in 5.6.0. It also ships with a brand new Livewire integration and accompanying Tailwind-styled UI preset.
 
-This version continues the philosophy of previous ones: a lean foundation for building forums on top of Laravel.
+This version continues the philosophy of previous ones: it delivers a lean foundation for building forums on top of Laravel.
 
 If you're looking for a more feature-complete forum solution built on Illuminate (the collection of components that power Laravel), take a look at [Flarum](http://flarum.org/) as an alternative.
 
