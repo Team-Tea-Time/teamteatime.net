@@ -1,0 +1,256 @@
+---
+title: "Threads"
+order: 14
+---
+import ApiEndpoint from '../../../../../components/ApiEndpoint.astro';
+
+Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+
+<ApiEndpoint
+    name="Fetch recent"
+    method="GET"
+    path="/thread/recent">
+    **Returns:** a collection of threads updated since `forum.general.old_thread_threshold`.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch unread"
+    method="GET"
+    path="/thread/unread">
+    **Returns:** a collection of threads that are updated or unread for the authenticated user.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Mark as read"
+    method="PATCH"
+    path="/thread/unread/mark-as-read">
+    Marks the authenticated user's unread/updated threads as read.
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch"
+    method="GET"
+    path="/thread/{id:int}">
+    **Returns:** the thread specified by `{id}` if found and accessible, otherwise a 404 error.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Lock"
+    method="POST"
+    path="/thread/{id:int}/lock">
+    Locks the thread specified by `{id}`.
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Unlock"
+    method="POST"
+    path="/thread/{id:int}/unlock">
+    Unlocks the thread specified by `{id}`.
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Pin"
+    method="POST"
+    path="/thread/{id:int}/pin">
+    Pins the thread specified by `{id}`.
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Unpin"
+    method="POST"
+    path="/thread/{id:int}/unpin">
+    Unpins the thread specified by `{id}`.
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Rename"
+    method="POST"
+    path="/thread/{id:int}/rename">
+    Renames the thread specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name             | Type               | Description             |
+    |------------------|--------------------|-------------------------|
+    | `title`          | String (required)  | Thread title            |
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Move"
+    method="POST"
+    path="/thread/{id:int}/move">
+    Moves the thread specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name             | Type               | Description             |
+    |------------------|--------------------|-------------------------|
+    | `category_id`    | Integer (required) | Destination category ID |
+
+    **Returns:** the updated thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Delete"
+    method="DELETE"
+    path="/thread/{id:int}">
+    Deletes the thread specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type               | Description         | Default                                                        |
+    |---------------|--------------------|---------------------|----------------------------------------------------------------|
+    | `permadelete` | Boolean            | Force hard-deletion | Always `true` if soft-deletion is disabled, otherwise `false`  |
+
+    **Returns:** the deleted thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Restore"
+    method="POST"
+    path="/thread/{id:int}/restore">
+    Restores the soft-deleted thread specified by `{id}`.
+
+    **Returns:** the restored thread object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch posts"
+    method="GET"
+    path="/thread/{id:int}/posts">
+    **Returns:** a paginated collection of posts belonging to the thread specified by `{id}`.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Store post"
+    method="POST"
+    path="/thread/{id:int}/posts">
+    Creates a post in the thread specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name      | Type              | Description  |
+    |-----------|-------------------|--------------|
+    | `content` | String (required) | Post content |
+
+    **Returns:** the created post object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk move"
+    method="POST"
+    path="/bulk/thread/move">
+    Moves a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description             |
+    |---------------|--------------------------|-------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to move  |
+    | `category_id` | Integer (required)       | Destination category ID |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk lock"
+    method="POST"
+    path="/bulk/thread/lock">
+    Locks a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description            |
+    |---------------|--------------------------|------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to lock |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk unlock"
+    method="POST"
+    path="/bulk/thread/unlock">
+    Unlocks a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description              |
+    |---------------|--------------------------|--------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to unlock |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk pin"
+    method="POST"
+    path="/bulk/thread/pin">
+    Pins a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description              |
+    |---------------|--------------------------|--------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to pin    |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk unpin"
+    method="POST"
+    path="/bulk/thread/unpin">
+    Unpins a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description              |
+    |---------------|--------------------------|--------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to unpin  |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk delete"
+    method="DELETE"
+    path="/bulk/thread">
+    Deletes a selection of one or more threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description               | Default                                                        |
+    |---------------|--------------------------|---------------------------|----------------------------------------------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to delete  | *N/A*                                                          |
+    | `permadelete` | Boolean                  | Force hard-deletion       | Always `true` if soft-deletion is disabled, otherwise `false`  |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk restore"
+    method="POST"
+    path="/bulk/thread/restore">
+    Restores a selection of one or more soft-deleted threads. Any threads not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description               |
+    |---------------|--------------------------|---------------------------|
+    | `threads`     | Integer array (required) | IDs of threads to restore |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>

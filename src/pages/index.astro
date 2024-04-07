@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Team Tea Time">
+    <main>
+        <h1><span class="text-gradient">Team Tea Time</span></h1>
+
+        <h2>Laravel Forum</h2>
+
+        <ul role="list" class="link-card-grid">
+            <Card
+                href="/docs/laravel-forum/6.x/"
+                title="Documentation"
+                body="Docs and API reference pages."
+            />
+            <Card
+                href="https://astro.build/integrations/"
+                title="Demo"
+                body="A live demo. Resets every weekend."
+            />
+            <Card
+                href="https://github.com/Team-Tea-Time/laravel-forum"
+                title="Source"
+                body="The package repository on GitHub."
+            />
+        </ul>
+
+        <img src="/logo.svg" class="logo" />
+    </main>
+</Layout>
+
+<style lang="scss">
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 1rem;
+        width: 800px;
+        min-height: 100vh;
+        max-width: calc(100% - 2rem);
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .logo {
+        width: 96px;
+        margin-top: 2rem;
+    }
+
+    h1 {
+        font-family: "Rajdhani", sans-serif;
+        font-size: 6rem;
+        font-weight: 500;
+        line-height: 1;
+        text-align: center;
+    }
+
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+
+    .link-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+        gap: 2rem;
+        padding: 0;
+    }
+</style>

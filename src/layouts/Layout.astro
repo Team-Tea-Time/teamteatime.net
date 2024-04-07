@@ -1,0 +1,180 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style lang="scss" is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+	:root {
+		--accent-1: #6fe3ab;
+		--accent-2: #005dad;
+		--accent-gradient: linear-gradient(
+			135deg,
+			var(--accent-1) 0%,
+			var(--accent-2) 25%
+		);
+        --background-1: #13151a;
+        --background-2: #1a1e25;
+        --background-3: #23262f;
+        --background-highlight: #ffffff0c;
+        --background-dim: #1d222748;
+        --border-1: #383e4d;
+        --border-2: #414855;
+        --border-3: #5a6479;
+        --foreground-1: #f7fcff;
+        --foreground-2: #d3d9e6;
+        --foreground-3: #a0a9bd;
+        --link: #7cc4ff;
+        --link-hover: #fff;
+	}
+
+    :target {
+        scroll-margin-top: 80px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+	html {
+		font-family: "Source Sans 3", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+		background: var(--background-1);
+		background-size: 224px;
+	}
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+	h1, h2, h3, h4 {
+        margin: .6rem 0;
+        color: var(--foreground-1);
+	}
+
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+        font-size: 1rem;
+        margin: 0 .1rem;
+        padding: .1rem .4rem;
+        border-radius: 3px;
+        background: #293035;
+        color: #94e8ee;
+	}
+
+    .astro-code {
+        padding: 1rem;
+        border-radius: 7px;
+
+        code {
+            padding: 0;
+            margin: 0;
+            background: none;
+            color: var(--foreground-2);
+        }
+    }
+
+    blockquote {
+        border-left: 3px solid var(--accent-1);
+        margin: 1rem 0;
+        padding: 0 1rem;
+    }
+
+    a {
+        text-decoration: underline;
+        color: var(--link);
+
+        &:hover {
+            color: var(--link-hover);
+        }
+    }
+    
+    table {
+        border-collapse: collapse;
+        margin: 1rem 0;
+    
+        th,
+        td {
+            border: 1px solid var(--border-1);
+            padding: .4rem .6rem;
+        }
+    }
+
+    input[type=text] {
+        margin: .6rem 0 .2rem 0;
+        padding: .8rem 1rem;
+        border: 1px solid var(--border-3);
+        border-radius: .5rem;
+        background: var(--background-1);
+        color: var(--foreground-3);
+        outline: none;
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        &:focus,
+        &:focus:hover {
+            border-color: var(--foreground-2);
+            color: var(--foreground-2);
+        }
+
+        &:hover {
+            border-color: var(--foreground-3);
+            color: var(--foreground-3);
+        }
+    }
+</style>
+
+<script>
+import {
+    createIcons,
+    Search,
+    Github,
+    TriangleAlert,
+    Info,
+    Menu,
+    X,
+} from 'lucide';
+
+createIcons({
+    icons: {
+        Search,
+        Github,
+        TriangleAlert,
+        Info,
+        Menu,
+        X,
+    }
+});
+</script>

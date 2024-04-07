@@ -1,0 +1,538 @@
+---
+import Layout from './Layout.astro';
+import Alert from '../components/Alert.astro';
+import { Navigation, type NavItem } from '../navigation/Navigation';
+
+interface Props {
+    project: string;
+    version: string;
+    versions: Array<NavItem>,
+    title: string;
+    heading: string;
+    navigation: Navigation;
+}
+
+const { project, version, versions, title, heading, navigation } = Astro.props;
+
+const viewingLatest = versions[0].isActive;
+---
+
+<Layout title={title}>
+    <div class="wrap">
+        <header data-pagefind-ignore>
+            <a href="/" class="logo">
+                <img src="/logo.svg" />
+                <span>
+                    Team Tea Time
+                </span>
+            </a>
+            <div class="other">
+                <div class="inner">
+                    <div class="search">
+                        <button onclick="openSearch()">
+                            <i data-lucide="search"></i>
+                            <span>
+                                Search
+                            </span>
+                        </button>
+                    </div>
+                    <div class="links">
+                        <a href="https://github.com/Team-Tea-Time" target="_blank" rel="noopener" class="icon-link">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <span class="toggle-nav">
+                            <i data-lucide="menu"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <nav class="side-nav" data-pagefind-ignore>
+            <div class="section version-select">
+                <strong>{project}</strong>
+
+                <select>
+                    {versions.map(version => (
+                        <option value={version.url} selected={version.isActive}>{version.label}</option>
+                    ))}
+                </select>
+            </div>
+
+            <div class="docs-nav">
+                {navigation.groups.map((group) => (
+                    <div class="group">
+                        <div class="heading">
+                            {group.heading}
+                        </div>
+                        <div class="items">
+                            {group.items.map((item) => (
+                                <a href={item.url} class:list={[ { active: item.isActive }]}>{item.label}</a>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </nav>
+
+        <main>
+            <div class="container">
+                <div class="content">
+                    {!viewingLatest &&
+                        <div data-pagefind-ignore>
+                            <Alert type="warning">
+                                You're viewing the docs for an old version of this package. Go to the <a href={versions[0].url}>latest version</a>?
+                            </Alert>
+                        </div>}
+
+                    <!-- For PageFind results -->
+                    <h1 class="hidden">{heading} ({project} {version})</h1>
+
+                    <h1 data-pagefind-ignore>{heading}</h1>
+
+                    <slot />
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="search" class="overlay" data-pagefind-ignore>
+        <div class="panel">
+            <div class="header">
+                <div class="heading">
+                    <h2>Search</h2>
+
+                    <span class="close" onclick="closeSearch()">
+                        <i data-lucide="x" />
+                    </span>
+                </div>
+                <input type="text" placeholder="Search..." autocomplete="off" />
+            </div>
+            <div class="content">
+                <div class="results" />
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss">
+    :root {
+        --height-top-bar: 70px;
+        --width-side-bar: 300px;
+        --max-content-width: 800px;
+    }
+
+    .wrap {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: #3d79d3;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        height: var(--height-top-bar);
+        background: var(--background-3);
+        box-shadow: 0px -10px 20px 20px var(--background-1);
+
+        a.logo {
+            display: flex;
+            align-items: center;
+            width: var(--width-side-bar);
+            padding: .8rem 1.2rem;
+            box-sizing: border-box;
+            font-family: "Rajdhani", sans-serif;
+            font-weight: 500;
+            font-size: 2rem;
+            color: var(--foreground-2);
+            text-decoration: none;
+            transition: background .1s;
+            white-space: nowrap;
+
+            &:hover {
+                background: var(--background-highlight);
+                color: var(--foreground-1);
+            }
+
+            img {
+                width: 48px;
+                height: 48px;
+                margin-right: 1rem;
+            }
+        }
+
+        .other {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            .inner {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 1rem;
+                max-width: var(--max-content-width);
+
+                .search {
+                    flex: 1;
+
+                    button {
+                        display: flex;
+                        align-items: center;
+                        min-width: 300px;
+                        background: var(--background-1);
+                        border: 1px solid var(--border-3);
+                        border-radius: .5rem;
+                        padding: .4rem .6rem;
+                        color: var(--foreground-3);
+                        cursor: pointer;
+
+                        &:hover {
+                            border-color: var(--foreground-2);
+                            color: var(--foreground-2);
+                        }
+
+                        svg {
+                            width: 16px;
+                            margin-right: .5rem;
+                        }
+                    }
+                }
+
+                .links {
+                    display: flex;
+                    align-items: center;
+                    padding: .6rem;
+
+                    span,
+                    a {
+                        display: flex;
+                        justify-items: center;
+                        text-decoration: none;
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        color: var(--foreground-3);
+                        padding: .4rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--foreground-1);
+                        }
+                    }
+
+                    .toggle-nav {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    nav.side-nav {
+        position: fixed;
+        top: var(--height-top-bar);
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        width: var(--width-side-bar);
+        border-top: 1px solid var(--background-1);
+        background: var(--background-3);
+        box-sizing: border-box;
+        color: var(--foreground-1);
+
+        .section {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--background-1);
+            font-size: 1.1rem;
+        }
+
+        .version-select {
+            display: flex;
+            align-items: center;
+
+            strong {
+                flex: 1;
+                margin-right: .5rem;
+            }
+
+            select {
+                padding: .2rem .4rem;
+                background: var(--background-1);
+                border-radius: 5px;
+                border: 1px solid var(--border-3);
+                color: var(--foreground-3);
+
+                &:hover {
+                    border-color: var(--foreground-2);
+                    color: var(--foreground-1);
+                }
+            }
+        }
+
+        .docs-nav {
+            padding: 1rem 1.2rem;
+            overflow-y: scroll;
+
+            .group {
+                margin-bottom: .5rem;
+
+                .heading {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    margin-bottom: .2rem;
+                }
+
+                .items {
+                    a {
+                        position: relative;
+                        display: block;
+                        color: var(--foreground-3);
+                        text-decoration: none;
+                        border-radius: 5px;
+                        padding: .3rem .8rem;
+                        margin-left: .4rem;
+                        font-weight: 500;
+                        transition: color .1s;
+
+                        &.active {
+                            color: var(--foreground-1);
+                            
+                            &:hover {
+                                color: inherit;
+                            }
+
+                            &::before {
+                                content: "";
+                                display: block;
+                                position: absolute;
+                                top: 50%;
+                                left: -3px;
+                                transform: translateY(-50%);
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 3px;
+                                background: var(--accent-1);
+                            }
+                        }
+
+                        &:hover {
+                            color: var(--accent-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        padding-top: var(--height-top-bar);
+        padding-left: var(--width-side-bar);
+        color: var(--foreground-1);
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            .content {
+                flex: 1;
+                max-width: var(--max-content-width);
+                padding: 1rem;
+                font-size: 1.1rem;
+                color: var(--foreground-3);
+            }
+        }
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+        justify-content: center;
+        align-items: middle;
+        background: var(--background-dim);
+        z-index: 100;
+
+        &.show {
+            display: flex;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            width: 100%;
+            max-width: 500px;
+            max-height: 700px;
+            border-radius: 7px;
+            background: var(--background-3);
+            color: var(--foreground-1);
+            box-shadow: 0 15px 30px var(--background-1);
+
+            .header {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-1);
+
+                .heading {
+                    display: flex;
+                    align-items: center;
+
+                    h2 {
+                        flex: 1;
+                        margin: 0;
+                    }
+
+                    svg {
+                        color: var(--foreground-3);
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--foreground-1);
+                        }
+                    }
+                }
+            }
+
+            .content {
+                padding: 1rem;
+                overflow-y: scroll;
+            }
+        }
+    }
+
+    #search input[type=text] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    @media only screen and (max-width: 768px) {
+        header {
+            a.logo {
+                width: auto;
+                
+                span {
+                    display: none;
+                }
+
+                img {
+                    margin-right: 0;
+                }
+            }
+
+            .other .inner {
+                .search button {
+                    min-width: auto;
+                    width: 100%;
+                }
+                
+                .links .toggle-nav {
+                    display: flex;
+                }
+            }
+        }
+
+        nav.side-nav {
+            right: 0;
+            width: auto;
+            display: none;
+
+            &.show {
+                display: flex;
+            }
+        }
+
+        main {
+            padding-left: 0;
+        }   
+    }
+</style>
+
+<style is:inline>
+    #search .results a {
+        display: block;
+        margin: .5rem 0;
+        border-bottom: 1px solid var(--border-1);
+        text-decoration: none;
+    }
+
+    #search .results a:last-of-type {
+        border-bottom: none;
+    }
+
+    #search .results a h3 {
+        margin: .8rem 0;
+    }
+
+    #search .results mark {
+        background-color: #ffba60;
+        color: var(--background-1);
+    }
+</style>
+
+<script>
+</script>
+
+<script is:inline>
+const search = document.querySelector('#search');
+const searchInput = document.querySelector('#search input');
+const searchResults = document.querySelector('#search .results');
+const toggleNav = document.querySelector('.toggle-nav');
+const versionSelect = document.querySelector('.version-select select');
+
+function openSearch() {
+    search.classList.add('show');
+    searchInput.focus();
+}
+
+function closeSearch() {
+    search.classList.remove('show');
+}
+
+document.body.addEventListener('keydown', event => {
+    if (event.key == 'Escape') closeSearch();
+});
+
+search.addEventListener('click', event => {
+    if (event.target.id != 'search') return;
+    event.target.classList.remove('show');
+});
+
+searchInput.addEventListener('input', async (e) => {
+    if (e.target.dataset.loaded !== 'true') {
+        e.target.dataset.loaded = 'true';
+        window.pagefind = await import('/pagefind/pagefind.js');
+    }
+
+    const search = await window.pagefind.search(e.target.value);
+    searchResults.innerHTML = '';
+
+    for (const result of search.results) {
+      const data = await result.data();
+      console.log(data.meta);
+      searchResults.innerHTML += `
+        <a href="${data.url}">
+          <h3>${data.meta.title}</h3>
+          <p>${data.excerpt}</p>
+        </a>`
+    }
+});
+
+toggleNav.addEventListener('click', event => {
+    document.querySelector('nav.side-nav')?.classList.toggle('show');
+});
+
+versionSelect.addEventListener('change', event => {
+    window.location.pathname = event.target.value;
+});
+</script>

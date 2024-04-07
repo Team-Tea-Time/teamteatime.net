@@ -1,0 +1,109 @@
+---
+title: "Policies"
+order: 5
+---
+import Alert from '../../../../../components/Alert.astro';
+
+Four [Authorization Policies](https://laravel.com/docs/8.x/authorization) are defined to provide default permission checks. You can override them and change the corresponding namespaces specified in the `forum.integration.policies` config value to allow or deny forum abilities to different users.
+
+Note that every policy method must return a boolean (`true` to allow or `false` to deny).
+
+### Forum
+
+```
+TeamTeaTime\Forum\Policies\ForumPolicy
+```
+
+This policy defines a few top-level abilities that don't apply to a specific category, thread or post.
+
+Methods in this policy accept a `$user` parameter.
+
+| Ability                | Description                                         |
+|------------------------|-----------------------------------------------------|
+| `createCategories`     | Allows creating categories at any level.            |
+| `manageCategories`     | Encompasses category modifying/deleting abilities.  |
+| `moveCategories`       | Allows relocating and reordering categories.        |
+| `renameCategories`     | Allows changing a category's title and description. |
+| `markThreadsAsRead`    | Allows marking new/updated threads as read.         |
+| `viewTrashedThreads`   | Allows viewing threads that have been soft-deleted. |
+| `viewTrashedPosts`     | Allows viewing posts that have been soft-deleted.   |
+
+<Alert type="info">
+    `manageCategories` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
+    * `moveCategories`
+    * `renameCategories`
+</Alert>
+
+### Category
+
+```
+TeamTeaTime\Forum\Policies\CategoryPolicy
+```
+
+This policy defines abilities pertaining to individual categories.
+
+Methods in this policy accept `$user` and `$category` parameters.
+
+| Ability             | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| `createThreads`     | Allows new thread creation in the category.                      |
+| `manageThreads`     | Encompasses thread modifying/deleting abilities in the category. |
+| `deleteThreads`     | Allows deleting threads in the category. Checked before `ThreadPolicy::delete`. |
+| `restoreThreads`    | Allows restoring threads in the category. Checked before `ThreadPolicy::restore`. |
+| `enableThreads`     | Allows enabling or disabling thread creation in the category.    |
+| `moveThreadsFrom`   | Allows moving threads from the category.                         |
+| `moveThreadsTo`     | Allows moving threads to the category.                           |
+| `lockThreads`       | Allows (un)locking of threads in the category.                   |
+| `pinThreads`        | Allows (un)pinning of threads in the category.                   |
+| `markThreadsAsRead` | Allows marking new/updated threads in this category as read.     |
+| `view`              | Allows viewing the category (if it's set to be private) and anything inside it, including child categories. Checked before `ThreadPolicy::view` when browsing/viewing threads. |
+| `delete`            | Allows deletion of the category.                                 |
+
+<Alert type="info">
+    `manageThreads` is a shortcut that checks for any of the following abilities and should not need to be overridden in most cases:
+    - `deleteThreads`
+    - `restoreThreads`
+    - `moveThreadsFrom`
+    - `lockThreads`
+    - `pinThreads`
+</Alert>
+
+<Alert type="info">
+    **In 5.1.0 onwards**, the `view` ability cascades to descendant categories, even those set as public. A user cannot access a category if it has an inaccessible ancestor.
+</Alert>
+
+### Thread
+
+```
+TeamTeaTime\Forum\Policies\ThreadPolicy
+```
+
+This policy defines abilities pertaining to individual threads.
+
+Methods in this policy accept `$user` and `$thread` parameters.
+
+| Ability        | Description                                                                        |
+|----------------|------------------------------------------------------------------------------------|
+| `view`         | Allows viewing the thread. `CategoryPolicy::view` is checked first.                |
+| `deletePosts`  | Allows deleting posts in the thread. Checked before `PostPolicy::delete`.          |
+| `restorePosts` | Allows restoring posts in the thread. Checked before `PostPolicy::restore`.        |
+| `rename`       | Allows renaming the thread.                                                        |
+| `reply`        | Allows replying to the thread (creating a new post).                               |
+| `delete`       | Allows deleting the thread. `CategoryPolicy::deleteThreads` is checked first.      |
+| `restore`      | Allows restoring the thread. `CategoryPolicy::restoreThreads` is checked first.    |
+
+### Post
+
+```
+TeamTeaTime\Forum\Policies\PostPolicy
+```
+
+This policy defines abilities pertaining to individual posts.
+
+Methods in this policy accept `$user` and `$post` parameters.
+
+| Ability   | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+| `edit`    | Allows editing the post.                                                  |
+| `delete`  | Allows deleting the post. `ThreadPolicy::deletePosts` is checked first.   |
+| `restore` | Allows restoring the post. `ThreadPolicy::restorePosts` is checked first. |

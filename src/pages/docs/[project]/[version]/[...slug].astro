@@ -1,0 +1,76 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { getPartsFromDocsID, slugToTitle, getAbsolutePathFromParts } from '../../../../utils/docs';
+import { Navigation, type NavItem } from '../../../../navigation/Navigation';
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+
+export async function getStaticPaths() {
+    const docs = await getCollection('docs');
+    
+    const paths: any = [];
+    docs.forEach(entry => {
+        const [project, version, slug] = getPartsFromDocsID(entry.id);
+        const params = {
+            project,
+            version,
+            slug
+        };
+        paths.push({ params });
+    });
+    
+    return paths;
+}
+
+const { project, version, slug } = Astro.params;
+
+const docs = await getCollection('docs');
+
+let navigation = new Navigation();
+let versions: Array<NavItem> = [];
+let seen: Set<string> = new Set();
+
+docs
+    .sort((a, b) => a.data.order - b.data.order)
+    .forEach(entry => {
+        const [entryProject, entryVersion, entrySlug] = getPartsFromDocsID(entry.id);
+
+        const versionNavItem: NavItem = {
+            label: entryVersion,
+            url: `/docs/${entryProject}/${entryVersion}/general`,
+            isActive: entryVersion == version,
+        };
+
+        if (!seen.has(versionNavItem.url)) {
+            versions.unshift(versionNavItem);
+            seen.add(versionNavItem.url);
+        }
+
+        if (project != entryProject || version != entryVersion) {
+            return;
+        }
+        
+        let url = getAbsolutePathFromParts(entryProject, entryVersion, entrySlug);
+        const slugParts = entrySlug.split('/');
+
+        navigation.addToGroup(slugToTitle(slugParts[0]), {
+            label: entry.data.title,
+            url,
+            isActive: url == getAbsolutePathFromParts(project, version, slug)
+        });
+    });
+
+const originalSlug = `${project}/${(version as string).replace('.', '')}/${slug}`;
+const entry = (await getEntry('docs', originalSlug))!;
+const { Content } = await entry.render();
+const projectTitle = slugToTitle(project);
+---
+
+<DocsLayout
+    project={projectTitle}
+    version={version}
+    versions={Array.from(versions)}
+    title={`${entry!.data.title} - ${projectTitle} ${version} - Team Tea Time`}
+    heading={entry.data.title}
+    navigation={navigation}>
+    <Content />
+</DocsLayout>

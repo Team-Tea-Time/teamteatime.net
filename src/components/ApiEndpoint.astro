@@ -1,0 +1,56 @@
+---
+import { titleToSlug } from '../utils/docs';
+
+interface Props {
+    name: string;
+    method: string;
+    path: string;
+    description: string;
+    returns: string;
+}
+
+const { name, method, path } = Astro.props;
+const slug = titleToSlug(name);
+---
+
+<div id={slug} class="api-endpoint">
+    <div class="header">
+        <h2><a href={`#${slug}`}>#</a> {name}</h2>
+        <code>
+            {method} <strong>{path}</strong>
+        </code>
+    </div>
+    <div>
+        <slot />
+    </div>
+</div>
+
+<style>
+.api-endpoint {
+    margin: 1rem 0;
+
+    .header {
+        display: flex;
+        align-items: center;
+        padding-bottom: .35rem;
+        border-bottom: 1px solid var(--border-1);
+
+        h2 {
+            flex: 1;
+            margin-left: -1rem;
+            margin-bottom: 0;
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+        code {
+            background: none;
+            padding: 0;
+            margin: 0;
+            color: var(--foreground-3);
+        }
+    }
+}
+</style>

@@ -1,0 +1,82 @@
+---
+title: "Installation"
+order: 2
+---
+import Alert from '../../../../../components/Alert.astro';
+
+### Versions
+
+| **Laravel version** | **Package version** | **PHP version** |
+|---------------------|---------------------|-----------------|
+| 11                  | ^6.0                | ^8.2            |
+| 10                  | ^5.5                | ^8.1            |
+
+Please note that older package versions not listed above are no longer maintained or supported.
+
+See the [support policy in the Laravel docs](https://laravel.com/docs/11.x/releases#support-policy) for more information about Laravel release versions, their supported PHP versions, and how long they receive bug & security fixes.
+
+### Step 1: Install the package
+
+Install the package via composer:
+
+```
+composer require riari/laravel-forum:^6.0
+```
+
+[Package Discovery](https://laravel.com/docs/11.x/packages#package-discovery) should take care of registering the service provider automatically, but if you need to do so manually, add the service provider to your application's `bootstrap/providers.php` file:
+
+```
+TeamTeaTime\Forum\ForumServiceProvider::class,
+```
+
+### Step 2: Publish the package files
+
+Run the vendor:publish command to publish the package config, translations and migrations to your app's directories:
+
+```
+php artisan vendor:publish
+```
+
+### Step 3: Update your database
+
+Run your migrations:
+
+```
+php artisan migrate
+```
+
+### Step 4: Install a UI preset
+
+A `forum:preset-install {name}` command is available for installing UI presets. Run `forum:preset-list` to see a list of available presets. You must install one of these to publish the corresponding views to your application. For example:
+
+```
+php artisan forum:preset-install livewire-tailwind
+```
+
+After completing this step, you can define your forum categories in the `forum_categories` table, or authenticate with a user that has the `createCategories` ability (granted to all users by default) and use the 'Create category' button displayed on the forum index (`/forum`).
+
+<Alert type="info">
+    By default, the `livewire-tailwind` preset is set as the active one in the `forum.frontend.preset` config value. This preset requires Livewire and a few other dependencies. Refer to [UI Presets](/docs/laravel-forum/6.x/front-end/ui-presets) for details.
+</Alert>
+
+### Additional steps
+
+#### Configuration
+
+Several configuration files are published to your application's config directory, each prefixed with `forum.`. Refer to these for a variety of options for changing the behaviour of the forum and how it integrates with key parts of your application code.
+
+<Alert type="info">
+    You may need to modify the `forum.integration.user_model` config option according to the location of your user model. By default, it matches the default namespace for the user model in Laravel 11. Additionally, you may need to modify the `forum.integration.user_name` option; this specifies which attribute on the user model should be used as a display name in the forum views.
+</Alert>
+
+#### Policies
+
+You will likely wish to modify the default policies to integrate them with whatever permission system you may be using; see [Policies](/docs/laravel-forum/6.x/general/policies) for further details.
+
+#### Translations
+
+Laravel Forum 5 currently supports 13 languages: German, English, Spanish, French, Italian, Dutch, Romanian, Russian, Thai, Turkish, Serbian, Portuguese (Brazil) and Swedish. The translation files are published to `resources/lang/vendor/forum/{locale}`.
+
+<Alert type="info">
+    Some new language strings have been introduced in 6.0 but not yet translated; PRs to translate these would be greatly appreciated.
+</Alert>
