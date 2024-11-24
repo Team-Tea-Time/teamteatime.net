@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "pagefind": "^1.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
