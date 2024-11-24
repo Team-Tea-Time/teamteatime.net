@@ -302,7 +302,7 @@ const viewingLatest = versions[0].isActive;
 
                         &.active {
                             color: var(--foreground-1);
-                            
+
                             &:hover {
                                 color: inherit;
                             }
@@ -341,10 +341,12 @@ const viewingLatest = versions[0].isActive;
             flex: 1;
             display: flex;
             justify-content: center;
+            min-width: 0;
 
             .content {
                 flex: 1;
                 max-width: var(--max-content-width);
+                min-width: 0;
                 padding: 1rem;
                 font-size: 1.1rem;
                 color: var(--foreground-3);
@@ -420,7 +422,7 @@ const viewingLatest = versions[0].isActive;
         header {
             a.logo {
                 width: auto;
-                
+
                 span {
                     display: none;
                 }
@@ -435,7 +437,7 @@ const viewingLatest = versions[0].isActive;
                     min-width: auto;
                     width: 100%;
                 }
-                
+
                 .links .toggle-nav {
                     display: flex;
                 }
@@ -479,9 +481,6 @@ const viewingLatest = versions[0].isActive;
         color: var(--background-1);
     }
 </style>
-
-<script>
-</script>
 
 <script is:inline>
 const search = document.querySelector('#search');

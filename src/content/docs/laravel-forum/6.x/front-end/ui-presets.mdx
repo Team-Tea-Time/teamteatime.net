@@ -40,6 +40,10 @@ After a preset is installed, it will list the NPM packages it requires along wit
     Presets are published to exclusive paths in your application's resources directory. You can find them under `resources/forum`. This enables you to publish multiple presets without causing them to overwrite each other, and you can switch between them by changing the `forum.frontend.preset` config value.
 </Alert>
 
+<Alert type="info">
+    Presets that use Tailwind CSS require it to be installed and configured (the preset installer does not handle this for you). You can set it up either by following the [Tailwind CSS Laravel guide](https://tailwindcss.com/docs/guides/laravel) or by installing a Laravel starter kit that includes it, such as [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits#laravel-breeze).
+</Alert>
+
 ## Contributing Presets
 
 If you'd like to contribute a UI preset, or simply write one to encapsulate your own views and components for the forum, you can do so by following the steps below.

@@ -1,6 +1,6 @@
 ---
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -8,30 +8,30 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Web & software projects from the UK" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Web & software projects from the UK" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
 </html>
 <style lang="scss" is:global>
-	@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
-	@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
-	:root {
-		--accent-1: #6fe3ab;
-		--accent-2: #005dad;
-		--accent-gradient: linear-gradient(
-			135deg,
-			var(--accent-1) 0%,
-			var(--accent-2) 25%
-		);
+    :root {
+        --accent-1: #6fe3ab;
+        --accent-2: #005dad;
+        --accent-gradient: linear-gradient(
+            135deg,
+            var(--accent-1) 0%,
+            var(--accent-2) 25%
+        );
         --background-1: #13151a;
         --background-2: #1a1e25;
         --background-3: #23262f;
@@ -45,7 +45,7 @@ const { title } = Astro.props;
         --foreground-3: #a0a9bd;
         --link: #7cc4ff;
         --link-hover: #fff;
-	}
+    }
 
     :target {
         scroll-margin-top: 80px;
@@ -55,42 +55,42 @@ const { title } = Astro.props;
         display: none;
     }
 
-	html {
-		font-family: "Source Sans 3", sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		background: var(--background-1);
-		background-size: 224px;
-	}
+    html {
+        font-family: "Source Sans 3", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        background: var(--background-1);
+        background-size: 224px;
+    }
 
     body {
         padding: 0;
         margin: 0;
     }
 
-	h1, h2, h3, h4 {
+    h1, h2, h3, h4 {
         margin: .6rem 0;
         color: var(--foreground-1);
-	}
+    }
 
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+    code {
+        font-family:
+            Menlo,
+            Monaco,
+            Lucida Console,
+            Liberation Mono,
+            DejaVu Sans Mono,
+            Bitstream Vera Sans Mono,
+            Courier New,
+            monospace;
         font-size: 1rem;
         margin: 0 .1rem;
         padding: .1rem .4rem;
         border-radius: 3px;
         background: #293035;
         color: #94e8ee;
-	}
+    }
 
     .astro-code {
         padding: 1rem;
@@ -118,11 +118,11 @@ const { title } = Astro.props;
             color: var(--link-hover);
         }
     }
-    
+
     table {
         border-collapse: collapse;
         margin: 1rem 0;
-    
+
         th,
         td {
             border: 1px solid var(--border-1);
