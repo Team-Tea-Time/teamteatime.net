@@ -1,0 +1,117 @@
+---
+title: "Posts"
+order: 15
+---
+import ApiEndpoint from '../../../../../components/ApiEndpoint.astro';
+import Alert from '../../../../../components/Alert.astro';
+
+Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+
+<ApiEndpoint
+    name="Search"
+    method="POST"
+    path="/post/search">
+
+    ### Parameters
+
+    | Name   | Type              | Description            |
+    |--------|-------------------|------------------------|
+    | `term` | String (required) | The term to search for |
+
+    <Alert type="info">
+        This endpoint uses a basic search implementation that works out of the box with no external dependencies, making it a good option for implementing XHR-based search on a small forum. However, due to its rudimentary nature, it's not designed to scale well and you may wish to disable the endpoint (by setting `forum.api.enable_search` to `false`) to implement your own solution with [Laravel Scout](https://laravel.com/docs/11.x/scout) or similar.
+    </Alert>
+
+    **Returns:** a collection of posts matching the given term. See parameter list below.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch recent"
+    method="GET"
+    path="/post/recent">
+    **Returns:** a collection of posts updated since `forum.general.old_thread_threshold`.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch unread"
+    method="GET"
+    path="/post/unread">
+    **Returns:** a collection of threads that are updated or unread for the authenticated user.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch"
+    method="GET"
+    path="/post/{id:int}">
+    **Returns:** the post specified by `{id}`.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Update"
+    method="PATCH"
+    path="/post/{id:int}">
+    Updates the post specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name      | Type              | Description      |
+    |-----------|-------------------|------------------|
+    | `content` | String (required) | The post content |
+
+    **Returns:** the updated post object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Delete"
+    method="DELETE"
+    path="/post/{id:int}">
+    Deletes the post specified by `{id}`. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type               | Description         | Default                                                        |
+    |---------------|--------------------|---------------------|----------------------------------------------------------------|
+    | `permadelete` | Boolean            | Force hard-deletion | Always `true` if soft-deletion is disabled, otherwise `false`  |
+
+    **Returns:** the deleted post object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Restore"
+    method="POST"
+    path="/post/{id:int}/restore">
+    Restores the soft-deleted post specified by `{id}`.
+
+    **Returns:** the restored post object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk delete"
+    method="DELETE"
+    path="/bulk/post">
+    Deletes a selection of one or more posts. Any posts not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name          | Type                     | Description               | Default                                                        |
+    |---------------|--------------------------|---------------------------|----------------------------------------------------------------|
+    | `posts`       | Integer array (required) | IDs of posts to delete    | *N/A*                                                          |
+    | `permadelete` | Boolean                  | Force hard-deletion       | Always `true` if soft-deletion is disabled, otherwise `false`  |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk restore"
+    method="Post"
+    path="/bulk/post/restore">
+    Restores a selection of one or more posts. Any posts not eligible for selection are left unchanged. See parameter list below.
+
+    ### Parameters
+
+    | Name    | Type                     | Description             |
+    |---------|--------------------------|-------------------------|
+    | `posts` | Integer array (required) | IDs of posts to restore |
+
+    **Returns:** a "success" response if successful.
+</ApiEndpoint>

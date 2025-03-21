@@ -1,0 +1,138 @@
+---
+title: "UI Presets"
+order: 8
+---
+import Alert from '../../../../../components/Alert.astro';
+
+Laravel Forum's UI presets are similar to Laravel's [Starter Kits](https://laravel.com/docs/11.x/starter-kits), but instead of publishing the back-end elements (route definitions, actions, controllers, etc) along with the front-end ones (views, JS, etc), they only publish the latter to your application. The package implements supporting stacks internally and presets can specify which one they require.
+
+## Available Stacks
+
+Currently, two stacks are supported: **Blade** and **Livewire**.
+
+### Blade
+
+This stack uses conventional controller-backed routes that return Blade views. It doesn't require any special dependencies.
+
+### Livewire
+
+This stack, which is built on top of Blade, uses a separate set of routes that are backed by full-page Livewire components. These full-page components are defined by the stack itself, but any presets using it may register additional components to use in views. Views for both the full-page components and any additionally registered ones can be overridden.
+
+Using this stack requires a few dependencies that aren't installed by default in new Laravel projects. The simplest way to install them is to install Laravel's [Breeze and Livewire Starter Kit](https://laravel.com/docs/11.x/starter-kits#breeze-and-livewire).
+
+Refer to the [Livewire website](https://livewire.laravel.com/) for more details about Livewire itself.
+
+## Available Presets
+
+Currently, the package ships with three UI presets: **livewire-tailwind**, **blade-tailwind**, and **blade-bootstrap**. By default, it specifies **livewire-tailwind** as the active preset via the `forum.frontend.preset` config option.
+
+To list available presets along with summaries of what they are, run `php artisan forum:preset-list`.
+
+Alternatively, run `php artisan forum:preset-install` to choose a preset to install. You may also pass the name directly as the first argument - for example:
+
+```
+php artisan forum:preset-install livewire-tailwind
+```
+
+After a preset is installed, it will list the NPM packages it requires along with the `npm install` command to install them for convenience.
+
+<Alert type="info">
+    Presets are published to exclusive paths in your application's resources directory. You can find them under `resources/forum`. This enables you to publish multiple presets without causing them to overwrite each other, and you can switch between them by changing the `forum.frontend.preset` config value.
+</Alert>
+
+<Alert type="info">
+    Presets that use Tailwind CSS require it to be installed and configured (the preset installer does not handle this for you). You can set it up either by following the [Tailwind CSS Laravel guide](https://tailwindcss.com/docs/guides/laravel) or by installing a Laravel starter kit that includes it, such as [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits#laravel-breeze).
+</Alert>
+
+## Contributing Presets
+
+If you'd like to contribute a UI preset, or simply write one to encapsulate your own views and components for the forum, you can do so by following the steps below.
+
+### Step 1: Implement `AbstractPreset`
+
+Define a class that extends `TeamTeaTime\Forum\Frontend\Presets\AbstractPreset`. This specifies several methods that are required for registering and using a preset. At a minimum, the `getName`, `getSummary`, and `getRequiredStack` methods must be implemented, but there are default implementations for other methods that can be overridden if necessary. See [AbstractPreset](https://github.com/Team-Tea-Time/laravel-forum/blob/6.x/src/Frontend/Presets/AbstractPreset.php) for specifics.
+
+As an example, here's the implementation for the `blade-tailwind` preset that ships with the package:
+
+```php
+<?php
+
+namespace TeamTeaTime\Forum\Frontend\Presets;
+
+use TeamTeaTime\Forum\{
+    Config\FrontendStack,
+    Frontend\Traits\RegistersBladeComponents,
+};
+
+class BladeTailwindPreset extends AbstractPreset
+{
+    use RegistersBladeComponents;
+
+    public static function getName(): string
+    {
+        return 'blade-tailwind';
+    }
+
+    public static function getSummary(): string
+    {
+        return "Blade with Vue and Tailwind CSS.";
+    }
+
+    public static function getRequiredStack(): FrontendStack
+    {
+        return FrontendStack::BLADE;
+    }
+
+    public static function getRequiredPackages(): array
+    {
+        return [
+            '@simonwep/pickr',
+            'axios',
+            'feather-icons',
+            'tailwindcss',
+            'vue',
+            'vuedraggable',
+        ];
+    }
+
+    public function register(): void
+    {
+        $this->bladeComponentNamespace("TeamTeaTime\\Forum\\Frontend\\Presets\\BladeTailwind\\Components");
+    }
+}
+```
+
+### Step 2: Register the Preset
+
+In order for the package to pick up your preset and use it, you must register it via the preset registry.
+
+To do this, in the `register()` method of one of your service providers, resolve the preset registry and use it to register your preset:
+
+```php
+<?php
+
+namespace App\Providers;
+
+use App\Forum\CustomPreset;
+use Illuminate\Support\ServiceProvider;
+use TeamTeaTime\Forum\Frontend\Presets\PresetRegistry;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $presets = $this->app->make(PresetRegistry::class);
+        $presets->register(new CustomPreset);
+    }
+}
+```
+
+<Alert type="warning">
+    Whichever service provider you use to do this must come **after** the forum service provider in `bootstrap/providers.php`.
+</Alert>
+
+At this point, your preset should be listed when you run `php artisan forum:preset-list` or `php artisan forum:preset-install`. If it doesn't, check your logs for errors from the package's service provider.
+
+### Step 3: Activate the Preset
+
+To make the package use your preset, simply set the `forum.frontend.preset` config value to the preset's name.

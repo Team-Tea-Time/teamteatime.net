@@ -1,0 +1,44 @@
+---
+title: "Commands"
+order: 7
+---
+import Alert from '../../../../../components/Alert.astro';
+
+### List UI presets
+
+```
+php artisan forum:preset-list
+```
+
+List the available UI presets. See [UI Presets](/docs/laravel-forum/6.x/front-end/ui-presets).
+
+### Install a UI preset
+
+```
+php artisan forum:preset-install {name}
+```
+
+Install the specified preset (or select from a list if not specified). See [UI Presets](/docs/laravel-forum/6.x/front-end/ui-presets).
+
+### Seed
+
+```
+php artisan forum:seed
+```
+
+Seed the forum tables with example categories, content, and a user (to assign as author of the content). You can run this multiple times to generate more data.
+
+### Sync stats
+
+```
+php artisan forum:sync
+```
+
+Synchronize forum category and thread statistics. Available options:
+
+* `--model=`: Limit the process to a specific model (`Category` or `Thread`).
+* `--range=`: Limit the process to a specific range in the format `skip:take` (e.g. `10:50` would skip 10 rows and take 50). Useful for batching on a large forum.
+
+<Alert type="info">
+    Using this command should not be necessary with ordinary use of the forum; it's designed to correct errors inadvertently caused by bugs or modifications.
+</Alert>
