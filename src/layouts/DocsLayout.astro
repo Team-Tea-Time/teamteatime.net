@@ -12,7 +12,9 @@ interface Props {
     navigation: Navigation;
 }
 
-const { project, version, versions, title, heading, navigation } = Astro.props;
+let { project, version, versions, title, heading, navigation } = Astro.props;
+
+versions.sort((a, b) => b.label.localeCompare(a.label));
 
 const viewingLatest = versions[0].isActive;
 ---
