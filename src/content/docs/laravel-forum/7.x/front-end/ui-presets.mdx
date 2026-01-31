@@ -36,6 +36,10 @@ php artisan forum:preset-install livewire-tailwind
 
 After a preset is installed, it will list the NPM packages it requires along with the `npm install` command to install them for convenience.
 
+<Alert type="warning">
+    The `blade-bootstrap` preset is deprecated as of package version **7.0.3**. It is recommended to use the `blade-tailwind` preset instead.
+</Alert>
+
 <Alert type="info">
     Presets are published to exclusive paths in your application's resources directory. You can find them under `resources/forum`. This enables you to publish multiple presets without causing them to overwrite each other, and you can switch between them by changing the `forum.frontend.preset` config value.
 </Alert>
@@ -78,6 +82,11 @@ class BladeTailwindPreset extends AbstractPreset
         return "Blade with Vue and Tailwind CSS.";
     }
 
+    public static function isSupported(): bool
+    {
+        return true;
+    }
+
     public static function getRequiredStack(): FrontendStack
     {
         return FrontendStack::BLADE;
@@ -101,6 +110,12 @@ class BladeTailwindPreset extends AbstractPreset
     }
 }
 ```
+
+<Alert type="info">
+    **New as of 7.0.3**
+    
+    Presets can be marked as unsupported by returning `false` from the `isSupported` method. The `forum:preset-list` and `forum:preset-install` commands will mark an unsupported preset as such and ask for confirmation before installing it. You may still use unsupported presets, but they may not function correctly.
+</Alert>
 
 ### Step 2: Register the Preset
 
