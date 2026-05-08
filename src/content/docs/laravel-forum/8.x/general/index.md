@@ -3,7 +3,7 @@ title: "Introduction"
 order: 0
 ---
 
-Laravel Forum 7 brings compatibility with Laravel 12. It delivers a lean foundation for building forums on top of Laravel.
+Laravel Forum 8 is the latest release and brings compatibility with Laravel 13 and Livewire 4. It delivers a lean foundation for building forums on top of Laravel.
 
 If you're looking for a more feature-complete forum solution built on Illuminate (the collection of components that power Laravel), take a look at [Flarum](http://flarum.org/) as an alternative.
 

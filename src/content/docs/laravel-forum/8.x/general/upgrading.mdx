@@ -1,0 +1,22 @@
+---
+title: "Upgrading"
+order: 3
+---
+import Alert from '../../../../../components/Alert.astro';
+
+To upgrade from 7 to 8, run the following command:
+
+```
+composer require riari/laravel-forum:^8.0
+```
+
+Migrations have been updated, so you should publish and run them:
+
+```
+php artisan vendor:publish
+php artisan migrate
+```
+
+<Alert type="info"> 
+    If you're using one of the Livewire-based UI presets, you'll also need to update your views. This is because the pages and components are registered differently and use a `forum.` prefix instead of the `forum::` namespace. You can re-install the preset to get the latest views, or do a global search and replace in your project to replace `<livewire:forum::` with `<livewire:forum.`.
+</Alert>

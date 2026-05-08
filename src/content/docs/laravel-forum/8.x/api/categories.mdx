@@ -1,0 +1,118 @@
+---
+title: "Categories"
+order: 13
+---
+import ApiEndpoint from '../../../../../components/ApiEndpoint.astro';
+
+Endpoint paths are prefixed with the `forum.router.prefix` config value (`/forum/api` by default).
+
+<ApiEndpoint
+    name="Index"
+    method="GET"
+    path="/category">
+    **Returns:** a flat collection of categories (including their nested set properties).
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Fetch"
+    method="GET"
+    path="/category/{id:int}">
+    **Returns:** the category specified by `{id}` if found and accessible, otherwise a 404 error.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Store"
+    method="POST"
+    path="/category">
+    Creates a category with the specified parameters (see list below).
+
+    ### Parameters
+
+    | Name             | Type               | Description             | Default                                      |
+    |------------------|--------------------|-------------------------|----------------------------------------------|
+    | `title`          | String (required)  | Title                   | *N/A*                                        |
+    | `description`    | String             | Description             | `null`                                       |
+    | `color`          | String             | Accent color            | `config('forum.web.default_category_color')` |
+    | `enable_threads` | Boolean            | Enable/disable threads  | `false`                                      |
+    | `is_private`     | Boolean            | Make private or public  | `false`                                      |
+
+    **Returns:** the created category object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Update"
+    method="PATCH"
+    path="/category/{id:int}">
+    Updates a category with the specified parameters (see list below).
+
+    ### Parameters
+
+    | Name             | Type               | Description             |
+    |------------------|--------------------|-------------------------|
+    | `title`          | String             | Title                   |
+    | `description`    | String             | Description             |
+    | `color`          | String             | Accent color            |
+    | `enable_threads` | Boolean            | Enable/disable threads  |
+    | `is_private`     | Boolean            | Make private or public  |
+
+    **Returns:** the updated category object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Delete"
+    method="DELETE"
+    path="/category/{id:int}">
+    Deletes a category. The deletion is soft by default if the soft-deletion feature is enabled. Include `force: true` in the request body to hard-delete the category.
+
+    **Returns:** the created category object if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Thread index"
+    method="GET"
+    path="/category/{id:int}/thread">
+    **Returns:** a paginated collection of threads belonging to the specified category.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Store thread"
+    method="POST"
+    path="/category/{id:int}/thread">
+    Creates a new thread in the category specified by `{id}` with the specified parameters (see list below).
+
+    ### Parameters
+
+    | Name             | Type               | Description             |
+    |------------------|--------------------|-------------------------|
+    | `title`          | String (required)  | Thread title            |
+    | `content`        | String (required)  | Post content            |
+
+    **Returns:** the created post if successful.
+</ApiEndpoint>
+
+<ApiEndpoint
+    name="Bulk manage"
+    method="POST"
+    path="/bulk/category/manage">
+    Bulk updates categories, including their hierarchy, based on the order and nesting of category data in the request body. Uses the [rebuild tree method of kalnoy/nestedset](https://github.com/lazychaser/laravel-nestedset#rebuilding-a-tree-from-array). See example payload below.
+
+    ### Example payload
+
+    ```
+    {
+        "categories": [
+            {
+                "id": 1,
+                "title": "New title",
+                "children": [
+                    {
+                        "id": 2
+                    }
+                ]
+            }
+        ]
+    }
+    ```
+
+    **Returns:** a generic 'success' response if successful.
+</ApiEndpoint>
